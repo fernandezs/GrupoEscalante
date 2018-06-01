@@ -71,7 +71,7 @@ class ArticuloAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Articulo $articulo */
-        $articulo = $this->articuloRepository->findWithoutFail($id);
+        $articulo = $this->articuloRepository->with('marca')->findWithoutFail($id);
 
         if (empty($articulo)) {
             return $this->sendError('Articulo no encontrado');

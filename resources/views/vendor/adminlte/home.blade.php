@@ -18,17 +18,7 @@
 							Bienvenido
 							<b class="text-primary">{{Auth::user()->name}}</b>
 							<main>
-								<h1>@{{ texto }}</h1>
-								<h2 v-text="texto"></h2>
-
-								<input type="text" v-model="nombre">
-								<label for="nombre"> @{{ nombre}}</label>
-								<hr>
-								<ul>
-									<li v-for="(pelicula, index) in peliculas">@{{ pelicula }} <button @click="borrarPelicula(index)">Borrar pelicula </button></li>
-								</ul>
-								<input type="text" v-model="peliculaNueva">
-								<button @click="agregarPelicula()">Agregar pelicula</button>
+								
 							</main>
 							@usernoops
 							<small>No tiene ninguna opción asignada, pida a un administrador que le asigne</small>

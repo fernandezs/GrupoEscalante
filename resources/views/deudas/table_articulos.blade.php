@@ -1,4 +1,4 @@
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped" id="articulos_deudores">
         <thead>
             <tr>
                 <th>Codigo art</th>
@@ -23,7 +23,7 @@
                 <td>@{{detalle.cantidad}}</td>
                 <td>$@{{detalle.subtotal}}</td>
                 <td>
-                    <button :disabled="estado == 'PAGADO'" type="button" class="btn btn-sm btn-danger" @click="borrarArticulo(detalle.id)"><span class="fa fa-trash"></span></button>
+                    <button v-if="estado_real == 'INPAGO'" type="button" class="btn btn-sm btn-danger" @click="borrarArt(detalle.id)"><span class="fa fa-trash"></span></button>
                 </td>
             </tr>
             <tr>
@@ -54,8 +54,8 @@
                 <td></td>
                 <td></td>
                 <td><b>Importe total:</b> </td>
-                <td><b>$@{{ importe_total}}</b></td>
+                <td><b>$@{{ importe_total ? importe_total : 0 }}</b></td>
             </tr>
         </tbody>
 </table>
-<hr>
+

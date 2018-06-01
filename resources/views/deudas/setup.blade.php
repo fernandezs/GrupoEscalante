@@ -1,6 +1,8 @@
 @extends('adminlte::layouts.app')
 @include('layouts.vue')
 @include('layouts.axios')
+@include('layouts.plugins.select2')
+@include('layouts.plugins.sweetalert2')
 @section('htmlheader_title')
 	Crear Deuda
 @endsection

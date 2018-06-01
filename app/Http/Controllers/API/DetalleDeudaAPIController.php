@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateDetalleDeudaAPIRequest;
 use App\Http\Requests\API\UpdateDetalleDeudaAPIRequest;
 use App\Models\DetalleDeuda;
+use App\Repositories\ArticuloRepository;
 use App\Repositories\DetalleDeudaRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -21,10 +22,12 @@ class DetalleDeudaAPIController extends AppBaseController
 {
     /** @var  DetalleDeudaRepository */
     private $detalleDeudaRepository;
+    private $articuloRepository;
 
-    public function __construct(DetalleDeudaRepository $detalleDeudaRepo)
+    public function __construct(DetalleDeudaRepository $detalleDeudaRepo, ArticuloRepository $articuloRepo)
     {
         $this->detalleDeudaRepository = $detalleDeudaRepo;
+        $this->articuloRepository = $articuloRepo;
     }
 
     /**
@@ -62,7 +65,9 @@ class DetalleDeudaAPIController extends AppBaseController
         $input = $request->all();
 
         $detalleDeudas = $this->detalleDeudaRepository->create($input);
-
+        $articulo = $this->articuloRepository->findWithoutFail($detalleDeudas->articulo_id);
+        $articulo->cantidad = $articulo->cantidad - $detalleDeudas->cantidad;
+        $articulo->save();
         return $this->sendResponse($detalleDeudas->toArray(), 'Detalle Deuda guardado exitosamente');
     }
 

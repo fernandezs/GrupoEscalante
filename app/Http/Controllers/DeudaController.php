@@ -14,6 +14,7 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use App\Models\Deuda;
+use Carbon\Carbon;
 
 class DeudaController extends AppBaseController
 {
@@ -140,6 +141,14 @@ class DeudaController extends AppBaseController
             $importe_total = $subtotal;
         }
         $input['importe_total'] = $importe_total;
+        if($deuda->fecha_cobro == null && $request->estado == 'PAGADO' )
+        {
+            $input['fecha_cobro'] = Carbon::now();
+        }
+        if($deuda->fecha_cobro != null && $request->estado == 'INPAGO')
+        {
+            $input['fecha_cobro'] = null;
+        }
         $deuda = $this->deudaRepository->update($input, $id);
         Flash::success('Deuda actualizado exitosamente.');
 
@@ -177,10 +186,18 @@ class DeudaController extends AppBaseController
     }
 
 
+    public function importeSubTotal($id)
+    {
+        $deuda = $this->deudaRepository->findWithoutFail($id);
+        $subtotal = $deuda->detalles()->sum('subtotal');
+        return $subtotal;
+    }
     public function importeTotal($id)
     {
         $deuda = $this->deudaRepository->findWithoutFail($id);
-        $total = $deuda->detalles()->sum('subtotal');
+        $subtotal = $deuda->detalles()->sum('subtotal');
+        $total = $deuda->importe_total;
+        $deuda->interes ? $total = $subtotal + (($deuda->interes*0.01)*$subtotal) : $subtotal;
         return $total;
     }
 }

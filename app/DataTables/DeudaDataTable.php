@@ -18,7 +18,26 @@ class DeudaDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'deudas.datatables_actions');
+        return $dataTable->addColumn('action', 'deudas.datatables_actions')->editColumn('fecha_cobro', function(Deuda $deuda){
+            if($deuda->fecha_cobro != null)
+            {
+                return $deuda->fecha_cobro->format('d/m/Y');
+            }
+            else
+            {
+                return "Sin movimientos!";
+            }
+        })->editColumn('estado', function(Deuda $deuda){
+            if($deuda->estado == 'PAGADO')
+            {
+                return '<span class="label label-success">Pagado</span>';
+            }
+            else
+            {
+                return '<span class="label label-danger">Inpago</span>';
+            }
+
+        })->rawColumns(['action','estado']);
     }
 
     /**
