@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-    'nombre_negocio' => 'SYSBASE',
+    'nombre_negocio' => 'Grupo Escalante',
 
     /*
     |--------------------------------------------------------------------------

@@ -1,18 +1,17 @@
-<input type="hidden" value="{{ $deuda->id }}" id="deuda_id">
-<input type="hidden" value="{{ $deuda->cliente_id}}" name="cliente_id">
-<input type="hidden" value="{{ $deuda->estado }}" id="estado_real">
+<input type="hidden" value="{{ $reparacion->id }}" id="reparacion_id
+">
 <div class="row">
     <div class="col-md-4 col-sm-12">
-        @include('deudas.partials.cliente')
+        @include('reparaciones.revision.cliente')
 
     </div>
-    <div class="col-md-5 col-sm-12" v-if="estado_real == 'INPAGO'">
-        @include('deudas.partials.articulo-select')
+    <div class="col-md-5 col-sm-12">
+        <cliente :cliente="{{json_encode($reparacion->cliente)}}" :descripcion="{{json_encode($reparacion->descripcion)}}"></cliente>
     </div>
 
     <div class="col-md-3 col-sm-12">
-        @include('deudas.partials.estado')
-        </div>
+        
+    </div>
 
 
 
@@ -27,7 +26,7 @@
 
             <div class="box-body">
                     <div class="table table-responsive">
-                        @include('deudas.table_articulos')
+                        
                     </div>
             </div>
 </div>
@@ -48,7 +47,6 @@
 
 
 @push('scripts')
-<script src="{{ asset('/deudas/main.js')}}"></script>
 <script>
     $(document).ready(function()
     {

@@ -70,3 +70,4 @@ Route::get('detalle_deudas/deuda/{id}', 'DetalleDeudaController@detallesByDeudaI
 Route::resource('estados', 'EstadoController');
 
 Route::resource('reparaciones', 'ReparacionController');
+Route::get('reparaciones/{id}/revision', 'ReparacionController@revision')->name('reparaciones.revision');

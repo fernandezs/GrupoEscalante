@@ -69,7 +69,7 @@ class ReparacionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'cod_factura' => ['title' => 'Codigo Factura', 'width' => '5px'],
+            'cod_factura' => ['title' => 'Codigo Factura', 'width' => '10px'],
             'articulo_id' => ['data' => 'articulo.nombre','name' => 'articulo.nombre', 'title' => 'Articulo', ],
             'marca' => ['data' => 'articulo.marca.nombre', 'name' => 'articulo.marca.nombre', 'title' => 'Marca'],
             'cliente_id'=> ['data' => 'cliente.nombre','name' => 'cliente.nombre', 'title' => 'Cliente', ],

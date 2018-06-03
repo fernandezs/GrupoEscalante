@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateReparacionRequest;
 use App\Repositories\ReparacionRepository;
 use App\Repositories\ClienteRepository;
 use App\Repositories\ArticuloRepository;
+use App\Repositories\EstadoRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -19,14 +20,17 @@ class ReparacionController extends AppBaseController
     private $reparacionRepository;
     private $clienteRepository;
     private $articuloRepository;
+    private $estadoRepository;
 
     public function __construct(ReparacionRepository $reparacionRepo,
                                 ClienteRepository $clienteRepository,
-                                ArticuloRepository $articuloRepository)
+                                ArticuloRepository $articuloRepository,
+                                EstadoRepository $estadoRepository)
     {
         $this->reparacionRepository = $reparacionRepo;
         $this->clienteRepository = $clienteRepository;
         $this->articuloRepository = $articuloRepository;
+        $this->estadoRepository = $estadoRepository;
         $this->middleware('auth');
     }
 
@@ -160,5 +164,17 @@ class ReparacionController extends AppBaseController
         Flash::success('Reparacion eliminado exitosamente.');
 
         return redirect(route('reparaciones.index'));
+    }
+
+    public function revision($id)
+    {
+        $reparacion = $this->reparacionRepository->with('articulo','cliente')->findWithoutFail($id);
+        if (empty($reparacion)) {
+            Flash::error('Reparacion no encontrado');
+
+            return redirect(route('reparaciones.index'));
+        }
+        $estados = $this->estadoRepository->pluck('estado','id');
+        return view('reparaciones.revision.create', compact('reparacion','estados'));
     }
 }

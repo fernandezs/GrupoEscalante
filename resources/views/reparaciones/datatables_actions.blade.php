@@ -3,7 +3,7 @@
     <i class="glyphicon glyphicon-eye-open"></i>
 </a>
 
-<a href="{{ route('reparaciones.edit', $id) }}" class='btn btn-info btn-xs' data-toggle="tooltip" title="Editar">
+<a href="{{ route('reparaciones.revision', $id) }}" class='btn btn-info btn-xs' data-toggle="tooltip" title="Revision">
     <i class="glyphicon glyphicon-edit"></i>
 </a>
 
