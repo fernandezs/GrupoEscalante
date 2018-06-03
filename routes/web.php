@@ -66,3 +66,7 @@ Route::resource('admin/deudas', 'DeudaController');
 Route::get('admin/deudas/{deuda}/setup', 'DeudaController@setup')->name('deudas.setup');
 Route::resource('detalleDeudas', 'DetalleDeudaController');
 Route::get('detalle_deudas/deuda/{id}', 'DetalleDeudaController@detallesByDeudaID');
+
+Route::resource('estados', 'EstadoController');
+
+Route::resource('reparaciones', 'ReparacionController');

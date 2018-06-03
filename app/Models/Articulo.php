@@ -104,5 +104,11 @@ class Articulo extends Model
         return $this->belongsToMany(Proveedor::class);
     }
 
+    public function reparaciones()
+    {
+        return $this->hasMany(Reparacion::class);
+    }
+    
+
     
 }

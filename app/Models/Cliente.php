@@ -72,5 +72,14 @@ class Cliente extends Model
         'nombre' => 'required'  
     ];
 
+    public function deudas()
+    {
+        return $this->hasMany(Deuda::class);
+    }
+    public function reparaciones()
+    {
+        return $this->hasMany(Reparacion::class);
+    }
+
     
 }
