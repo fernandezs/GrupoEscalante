@@ -1,3 +1,7 @@
+Vue.filter('decimal', function(value){
+    return value.toFixed(2);
+})
+
 var vm = new Vue({
     el : '#deudas',
     data: {
@@ -33,9 +37,17 @@ var vm = new Vue({
           }, 0);
         }
     },
+    watch : {
+        selected : function(){
+            if(this.selected == 0)
+            {
+                this.articulo = { marca: {}};
+            }
+        }
+    },
     methods : {
 
-        borrarArt(index)
+        borrarArticulo(index)
         {
             Swal({
                 title: 'Estas segudo de eliminar este articulo?',
@@ -49,7 +61,6 @@ var vm = new Vue({
                     url = '/api/detalle_deudas/' + index;
                     axios.delete(url).then(response => {
                         this.detalles = this.obtenerDetalles();
-                        this.actualizarSubtotal();
                         Swal(
                             'Eliminado!',
                             'El articulo fue eliminado.',
@@ -95,8 +106,6 @@ var vm = new Vue({
                     this.articulo = {marca: {}};
                     this.selected = 0;
                     this.detalles = this.obtenerDetalles();
-                    this.actualizarSubtotal();
-                    this.actualizarImporteTotal();
                     this.descuento = 0,
                     this.cantidad = 1,
                     swal({
@@ -134,25 +143,6 @@ var vm = new Vue({
                 //toastr.error(error.response.data.message);
 
             });
-        },
-        actualizarSubtotal()
-        {
-            url = '/admin/deudas/subtotal/' + this.deuda_id;
-            axios.get(url).then(response => {
-                this.detalles_subtotal = response.data;
-                this.actualizarImporteTotal(response.data);
-            }).catch(error => {
-                console.log(error.response.data.message);
-            });
-        },
-        actualizarImporteTotal(subtotal)
-        {
-            url = '/admin/deudas/total/' + this.deuda_id;
-            axios.get(url).then(response => {
-
-            })
-
-
         },
         obtenerDeuda()
         {
@@ -207,28 +197,12 @@ var vm = new Vue({
                 this.interes = 0;
             }
         },
-        simular()
-        {
-            var self = this;
-            var interes = parseFloat(self.interes*0.01).toFixed(2);
-            var importe_interes =interes*self.detalles_subtotal;
-
-
-            Swal({
-                type: 'info',
-                title: 'Nuevo importe: $' + this.importe_total,
-                text: 'Se refleja el importe subtotal + $' + importe_interes + ' de intereses!',
-                customClass: 'swal-wide',
-
-            });
-        }
     },
     mounted(){
             this.deuda_id = document.querySelector("#deuda_id").value;
             this.estado_real = document.querySelector("#estado_real").value;
             this.obtenerDetalles();
             this.obtenerArticulos();
-            this.actualizarSubtotal();
             this.obtenerDeuda();
 
         }

@@ -23,7 +23,7 @@
                 <td>@{{detalle.cantidad}}</td>
                 <td>$@{{detalle.subtotal}}</td>
                 <td>
-                    <button v-if="estado_real == 'INPAGO'" type="button" class="btn btn-sm btn-danger" @click="borrarArt(detalle.id)"><span class="fa fa-trash"></span></button>
+                    <button v-if="estado_real == 'INPAGO'" type="button" class="btn btn-sm btn-danger" @click="borrarArticulo(detalle.id)"><span class="fa fa-trash"></span></button>
                 </td>
             </tr>
             <tr>
@@ -34,7 +34,7 @@
                 <td></td>
                 <td></td>
                 <td><b>Subtotal:</b> </td>
-                <td><b>$@{{ importe_subtotal }}</b></td>
+                <td><b>$@{{ importe_subtotal | decimal }}</b></td>
             </tr>
             <tr>
                 <td></td>
@@ -54,7 +54,7 @@
                 <td></td>
                 <td></td>
                 <td><b>Importe total:</b> </td>
-                <td><b>$@{{ importe_total }}</b></td>
+                <td><b>$@{{ importe_total | decimal}}</b></td>
             </tr>
         </tbody>
 </table>

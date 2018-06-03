@@ -64,7 +64,5 @@ Route::resource('articulos', 'ArticuloController');
 
 Route::resource('admin/deudas', 'DeudaController');
 Route::get('admin/deudas/{deuda}/setup', 'DeudaController@setup')->name('deudas.setup');
-Route::get('/admin/deudas/subtotal/{id}', 'DeudaController@importeSubTotal')->name('deudas.importeTotal');
-Route::get('/admin/deudas/total/{id}', 'DeudaController@importeTotal')->name('deudas.importeTotal');
 Route::resource('detalleDeudas', 'DetalleDeudaController');
 Route::get('detalle_deudas/deuda/{id}', 'DetalleDeudaController@detallesByDeudaID');

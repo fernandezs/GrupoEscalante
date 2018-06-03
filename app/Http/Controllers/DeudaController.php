@@ -185,19 +185,4 @@ class DeudaController extends AppBaseController
         return view('deudas.setup', compact('deuda'));
     }
 
-
-    public function importeSubTotal($id)
-    {
-        $deuda = $this->deudaRepository->findWithoutFail($id);
-        $subtotal = $deuda->detalles()->sum('subtotal');
-        return $subtotal;
-    }
-    public function importeTotal($id)
-    {
-        $deuda = $this->deudaRepository->findWithoutFail($id);
-        $subtotal = $deuda->detalles()->sum('subtotal');
-        $total = $deuda->importe_total;
-        $deuda->interes ? $total = $subtotal + (($deuda->interes*0.01)*$subtotal) : $subtotal;
-        return $total;
-    }
 }

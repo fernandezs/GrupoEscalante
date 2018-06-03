@@ -3,7 +3,7 @@
 <input type="hidden" value="{{ $deuda->estado }}" id="estado_real">
 <div class="row">
     <div class="col-md-4 col-sm-12">
-        <div class="box box-primary">
+        <div class="box box-primary contenedor">
             <div class="box-header">
                 <h3 class="box-title">
                    <i class="fa fa-user"></i> {{ $deuda->cliente->nombre }}
@@ -27,8 +27,8 @@
         </div>
 
     </div>
-    <div class="col-md-4 col-sm-12" v-if="estado_real == 'INPAGO'">
-        <div class="box box-primary">
+    <div class="col-md-5 col-sm-12" v-if="estado_real == 'INPAGO'">
+        <div class="box box-primary contenedor">
             <div class="box-header">
                 <h3 class="box-title">
                    <i class="fa fa-cubes"></i> Asigne todos los articulos que pertenescan
@@ -84,8 +84,8 @@
         </div>
     </div>
 
-    <div class="col-md-4 col-sm-12">
-            <div class="box box-primary">
+    <div class="col-md-3 col-sm-12">
+            <div class="box box-primary contenedor">
                 <div class="box-header">
                     <h3 class="box-title">
                        <i class="fa fa-handshake-o"></i> Estado de la deuda
@@ -102,12 +102,11 @@
                                 {!! Form::label('interes', 'Interes:') !!}
                                 <div class="input-group">
                                     <span class="input-group-btn">
-                                            <button class="btn btn-info" @click="interes-=1" type="button">-</button>
                                         </span>
                                             <input type="number" v-model="interes" class="form-control" name="interes" :onkeyup="validaInteres()">
                                             <span class="input-group-btn">
                                         <button class="btn btn-info" @click="interes+=1" type="button">+</button>
-                                                <button class="btn btn-info" type="button" @click="simular()">Simular</button>
+                                                
                                     </span>
                                 </div>
 
@@ -121,26 +120,29 @@
                 </div>
             </div>
         </div>
-</div>
 
-<div class="row">
-    <div class="clearfix"></div>
-    <div class="col-sm-12">
-        <div class="box box-primary">
-            <div class="box-header">
+
+
+    <div class="col-md-12">
+        
+<div class="box box-info">
+                <div class="box-header">
                 <h3 class="box-title">
                     <i class="fa fa-cubes"></i> Lista de articulos adeudados
                 </h3>
             </div>
 
             <div class="box-body">
-                    @include('deudas.table_articulos')
+                    <div class="table table-responsive">
+                        @include('deudas.table_articulos')
+                    </div>
             </div>
-        </div>
+</div>
+        
         
     </div>
-</div>
 
+</div>
 
 
 
@@ -157,12 +159,15 @@
 <script>
     $(document).ready(function()
     {
-        var heights = $('.box').map(function()
+        if($(window).width() > 650)
         {
-            return $(this).height();
-        }).get();
-        maxHeight = Math.max.apply(null, heights);
-        $('.box').height(maxHeight);
+            var heights = $('.contenedor').map(function()
+            {
+                 return $(this).height();
+            }).get();
+            maxHeight = Math.max.apply(null, heights);
+            $('.contenedor').height(maxHeight);
+        }
 
     })
 </script>
