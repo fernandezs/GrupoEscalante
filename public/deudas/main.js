@@ -1,4 +1,4 @@
-new Vue({
+var vm = new Vue({
     el : '#deudas',
     data: {
         deuda : { },
@@ -11,7 +11,6 @@ new Vue({
         estado : null,
         estado_real : null,
         detalles_subtotal : 0,
-        importe_total : 0,
         articulos : [],
         detalles: [],
         detalle : { deuda_id : '',
@@ -21,6 +20,18 @@ new Vue({
                     cantidad : '',
                     descuento : '', 
                     subtotal : ''}
+    },
+    computed : {
+      importe_total() {
+          interes = parseFloat(this.interes*0.01).toFixed(2)
+          importe_interes = interes * this.importe_subtotal;
+          return this.importe_subtotal + importe_interes;
+      },
+      importe_subtotal() {
+          return this.detalles.reduce(function(total, detalle){
+              return total + parseFloat(detalle.subtotal);
+          }, 0);
+        }
     },
     methods : {
 
@@ -138,7 +149,7 @@ new Vue({
         {
             url = '/admin/deudas/total/' + this.deuda_id;
             axios.get(url).then(response => {
-                this.importe_total = response.data;
+
             })
 
 
@@ -149,7 +160,6 @@ new Vue({
             axios.get(url).then(response => {
                 this.estado = response.data.data.estado;
                 response.data.data.interes ? this.interes = response.data.data.interes : 0 ;
-                this.importe_total = response.data.data.importe_total;
                 this.deuda = response.data.data;
             });
         },
@@ -202,11 +212,11 @@ new Vue({
             var self = this;
             var interes = parseFloat(self.interes*0.01).toFixed(2);
             var importe_interes =interes*self.detalles_subtotal;
-            var importe_total = importe_interes + self.detalles_subtotal;
+
 
             Swal({
                 type: 'info',
-                title: 'Nuevo importe: $' + importe_total,
+                title: 'Nuevo importe: $' + this.importe_total,
                 text: 'Se refleja el importe subtotal + $' + importe_interes + ' de intereses!',
                 customClass: 'swal-wide',
 

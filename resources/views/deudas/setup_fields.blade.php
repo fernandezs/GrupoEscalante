@@ -1,7 +1,6 @@
 <input type="hidden" value="{{ $deuda->id }}" id="deuda_id">
 <input type="hidden" value="{{ $deuda->cliente_id}}" name="cliente_id">
 <input type="hidden" value="{{ $deuda->estado }}" id="estado_real">
-<input type="hidden" :value="importe_total" name="importe_total">
 <div class="row">
     <div class="col-md-4 col-sm-12">
         <div class="box box-primary">

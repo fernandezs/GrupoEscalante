@@ -34,7 +34,7 @@
                 <td></td>
                 <td></td>
                 <td><b>Subtotal:</b> </td>
-                <td><b>$@{{ detalles_subtotal}}</b></td>
+                <td><b>$@{{ importe_subtotal }}</b></td>
             </tr>
             <tr>
                 <td></td>
@@ -54,7 +54,7 @@
                 <td></td>
                 <td></td>
                 <td><b>Importe total:</b> </td>
-                <td><b>$@{{ importe_total ? importe_total : 0 }}</b></td>
+                <td><b>$@{{ importe_total }}</b></td>
             </tr>
         </tbody>
 </table>

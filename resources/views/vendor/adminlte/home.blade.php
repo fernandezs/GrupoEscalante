@@ -18,7 +18,7 @@
 							Bienvenido
 							<b class="text-primary">{{Auth::user()->name}}</b>
 							<main>
-								
+
 							</main>
 							@usernoops
 							<small>No tiene ninguna opción asignada, pida a un administrador que le asigne</small>
