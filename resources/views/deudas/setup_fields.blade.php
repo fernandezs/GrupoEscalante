@@ -17,9 +17,9 @@
 
 
     <div class="col-md-12">
-        
-<div class="box box-info">
-                <div class="box-header">
+
+        <div class="box box-info">
+            <div class="box-header">
                 <h3 class="box-title">
                     <i class="fa fa-cubes"></i> Lista de articulos adeudados
                 </h3>
@@ -30,20 +30,12 @@
                         @include('deudas.table_articulos')
                     </div>
             </div>
-</div>
-        
-        
+        </div>
+
+
     </div>
 
 </div>
-
-
-
-
-
-
-
-
 
 
 

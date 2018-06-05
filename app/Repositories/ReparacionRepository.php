@@ -40,4 +40,8 @@ class ReparacionRepository extends BaseRepository
     {
         return Reparacion::class;
     }
+    public function withTrashed()
+    {
+        return $this->model->withTrashed();
+    }
 }

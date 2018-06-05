@@ -134,6 +134,9 @@ class DetalleDeudaAPIController extends AppBaseController
         }
 
         $detalleDeuda->delete();
+        $articulo = $this->articuloRepository->findWithoutFail($detalleDeuda->articulo_id);
+        $articulo->cantidad = $articulo->cantidad + $detalleDeuda->cantidad;
+        $articulo->save();
 
         return $this->sendResponse($id, 'Detalle Deuda eliminado exitosamente');
     }

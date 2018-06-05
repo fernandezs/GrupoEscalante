@@ -32,7 +32,8 @@ var vm = new Vue({
           return this.importe_subtotal + importe_interes;
       },
       importe_subtotal() {
-          return this.detalles.reduce(function(total, detalle){
+          let self = this;
+          return self.detalles.reduce(function(total, detalle){
               return total + parseFloat(detalle.subtotal);
           }, 0);
         }
@@ -49,6 +50,7 @@ var vm = new Vue({
 
         borrarArticulo(index)
         {
+            let self = this;
             Swal({
                 title: 'Estas segudo de eliminar este articulo?',
                 text: 'Este articulo ya no se volvera a recuperar!',
@@ -60,7 +62,7 @@ var vm = new Vue({
                 if (result.value) {
                     url = '/api/detalle_deudas/' + index;
                     axios.delete(url).then(response => {
-                        this.detalles = this.obtenerDetalles();
+                        self.obtenerDetalles();
                         Swal(
                             'Eliminado!',
                             'El articulo fue eliminado.',
@@ -104,8 +106,8 @@ var vm = new Vue({
                 this.detalle.subtotal = this.subtotal(this.articulo.precio_venta, this.descuento, this.cantidad);
                 axios.post(url, this.detalle).then(response => {
                     this.articulo = {marca: {}};
+                    this.obtenerDetalles();
                     this.selected = 0;
-                    this.detalles = this.obtenerDetalles();
                     this.descuento = 0,
                     this.cantidad = 1,
                     swal({
