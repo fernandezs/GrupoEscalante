@@ -20,6 +20,20 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::resource('empleados', 'EmpleadoController');
+    Route::resource('categorias', 'CategoriaController');
+    Route::resource('marcas', 'MarcaController');
+    Route::resource('proveedores', 'ProveedorController');
+    Route::resource('clientes', 'ClienteController');
+    Route::resource('articulos', 'ArticuloController');
+    Route::resource('admin/deudas', 'DeudaController');
+    Route::get('admin/deudas/{deuda}/setup', 'DeudaController@setup')->name('deudas.setup');
+    Route::resource('detalleDeudas', 'DetalleDeudaController');
+    Route::get('detalle_deudas/deuda/{id}', 'DetalleDeudaController@detallesByDeudaID');
+    Route::resource('estados', 'EstadoController');
+    Route::resource('reparaciones', 'ReparacionController');
+    Route::get('reparaciones/{id}/revision', 'ReparacionController@revision')->name('reparaciones.revision');
+    Route::resource('estadoReparacion', 'EstadoReparacionController');
     //    Route::get('/link1', function ()    {
 //        // Uses Auth Middleware
 //    });
@@ -50,24 +64,3 @@ Route::get('prueba/pdf', function (\App\Extensiones\Fpdf $fpdf) {
     exit();
 });
 
-Route::resource('categorias', 'CategoriaController');
-
-Route::resource('marcas', 'MarcaController');
-
-Route::resource('proveedores', 'ProveedorController');
-
-Route::resource('empleados', 'EmpleadoController');
-
-Route::resource('clientes', 'ClienteController');
-
-Route::resource('articulos', 'ArticuloController');
-
-Route::resource('admin/deudas', 'DeudaController');
-Route::get('admin/deudas/{deuda}/setup', 'DeudaController@setup')->name('deudas.setup');
-Route::resource('detalleDeudas', 'DetalleDeudaController');
-Route::get('detalle_deudas/deuda/{id}', 'DetalleDeudaController@detallesByDeudaID');
-
-Route::resource('estados', 'EstadoController');
-
-Route::resource('reparaciones', 'ReparacionController');
-Route::get('reparaciones/{id}/revision', 'ReparacionController@revision')->name('reparaciones.revision');

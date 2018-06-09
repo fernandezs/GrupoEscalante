@@ -45,3 +45,5 @@ Route::resource('detalle_deudas', 'DetalleDeudaAPIController');
 Route::resource('estados', 'EstadoAPIController');
 
 Route::resource('reparaciones', 'ReparacionAPIController');
+
+Route::resource('estado_reparacion', 'EstadoReparacionAPIController');

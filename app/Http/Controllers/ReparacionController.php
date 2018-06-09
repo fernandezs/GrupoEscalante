@@ -10,10 +10,11 @@ use App\Repositories\ReparacionRepository;
 use App\Repositories\ClienteRepository;
 use App\Repositories\ArticuloRepository;
 use App\Repositories\EstadoRepository;
+use App\Repositories\EmpleadoRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
-
+use App\Models\EstadoReparacion;
 class ReparacionController extends AppBaseController
 {
     /** @var  ReparacionRepository */
@@ -21,16 +22,18 @@ class ReparacionController extends AppBaseController
     private $clienteRepository;
     private $articuloRepository;
     private $estadoRepository;
-
+    private $empleadoRepository;
     public function __construct(ReparacionRepository $reparacionRepo,
                                 ClienteRepository $clienteRepository,
                                 ArticuloRepository $articuloRepository,
-                                EstadoRepository $estadoRepository)
+                                EstadoRepository $estadoRepository,
+                                EmpleadoRepository $empleadoRepository)
     {
         $this->reparacionRepository = $reparacionRepo;
         $this->clienteRepository = $clienteRepository;
         $this->articuloRepository = $articuloRepository;
         $this->estadoRepository = $estadoRepository;
+        $this->empleadoRepository = $empleadoRepository;
         $this->middleware('auth');
     }
 
@@ -168,13 +171,15 @@ class ReparacionController extends AppBaseController
 
     public function revision($id)
     {
-        $reparacion = $this->reparacionRepository->with('articulo','cliente')->findWithoutFail($id);
+        $reparacion = $this->reparacionRepository->with('articulo.marca','cliente','estados.estado')->findWithoutFail($id);
+        $estadosReparacion = EstadoReparacion::with('estado','user','empleado')->where('reparacion_id','=', $reparacion->id)->get();
         if (empty($reparacion)) {
             Flash::error('Reparacion no encontrado');
 
             return redirect(route('reparaciones.index'));
         }
-        $estados = $this->estadoRepository->pluck('estado','id');
-        return view('reparaciones.revision.create', compact('reparacion','estados'));
+        $estados = $this->estadoRepository->all();
+        $empleados = $this->empleadoRepository->all();
+        return view('reparaciones.revision.create', compact('reparacion','estados', 'empleados','estadosReparacion'));
     }
 }

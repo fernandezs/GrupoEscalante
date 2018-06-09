@@ -6,17 +6,30 @@
  */
 
 require('./bootstrap');
-
+import moment from 'moment'
+moment.locale('es');
 window.Vue = require('vue');
-
+window.EventBus = new Vue();
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.filter('fecha-local', function(date){
+    return moment(date).format("DD/MM/YYYY")
+});
+
+Vue.filter('timeago', function(date){
+    return moment(date,"YYYYMMDD").fromNow()
+});
+
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('cliente', require('./components/Cliente.vue'));
+Vue.component('maquina', require('./components/Maquina.vue'));
+Vue.component('reparacion-estados', require('./components/ReparacionEstados.vue'));
+Vue.component('reparacion-estados-tabla', require('./components/EstadosReparacionTabla.vue'));
+
 
 const app = new Vue({
     el: '#app'

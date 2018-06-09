@@ -53,6 +53,7 @@ class ReparacionAPIController extends AppBaseController
      */
     public function store(CreateReparacionAPIRequest $request)
     {
+        return $this->sendResponse([], 'Ebtri che');
         $input = $request->all();
 
         $reparaciones = $this->reparacionRepository->create($input);

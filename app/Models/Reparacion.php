@@ -96,6 +96,11 @@ class Reparacion extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function estados()
+    {
+        return $this->hasMany(EstadoReparacion::class);
+    }
+
 
     
 }
