@@ -10,6 +10,7 @@ use App\Http\Requests\StoreSetupDeudaRequest;
 use App\Repositories\DeudaRepository;
 use App\Repositories\ClienteRepository;
 use App\Repositories\ArticuloRepository;
+use App\Models\DetalleDeuda;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -178,11 +179,15 @@ class DeudaController extends AppBaseController
         Flash::success('Deuda eliminado exitosamente.');
 
         return redirect(route('deudas.index'));
+
     }
 
     public function setup(Deuda $deuda)
     {
-        return view('deudas.setup', compact('deuda'));
+        $articulos = $this->articuloRepository->with('marca')->get();
+        $detalles = DetalleDeuda::with('articulo','articulo.marca')->where('deuda_id', '=', $deuda->id)->get();
+        //return $detalles;
+        return view('deudas.setup', compact('deuda','articulos','detalles'));
     }
 
 }

@@ -1,27 +1,30 @@
 <input type="hidden" value="{{ $reparacion->id }}" id="reparacion_id
 ">
 <div class="row">
-    <div class="col-md-3 col-sm-12">
-        <cliente :cliente="{{json_encode($reparacion->cliente)}}"
-                 :descripcion="{{json_encode($reparacion->descripcion)}}">
-        </cliente>
+    <div class="col-md-4">
+        <div class="col-sm-12">
+        <cliente :_cliente=" {{ json_encode($reparacion->cliente)}}" :descripcion="{{ json_encode($reparacion->detalle)}}"></cliente>
 
     </div>
-    <div class="col-md-3 col-sm-12">
+    <div class="col-sm-12">
         <maquina :maquina="{{ json_encode($reparacion->articulo) }}">
 
         </maquina>
     </div>
+    </div>
 
-    <div class="col-md-3 col-sm-12">
+    <div class="col-md-8">
+        <div class="col-md-6 col-sm-12">
         <reparacion-estados :reparacion_id  ="{{ json_encode($reparacion->id) }}"
                             :listaestados   ="{{ json_encode($estados) }}"
                             :listaempleados ="{{ json_encode($empleados) }}">
         </reparacion-estados>
     </div>
 
-    <div class="col-md-3 col-sm-12">
-
+    <div class="col-md-6 col-sm-12">
+        <articulos-reparacion :reparacion_id="{{ json_encode($reparacion->id)}}"
+                              :listaarticulos=" {{ json_encode($articulos)}}"></articulos-reparacion>
+    </div>
     </div>
 
 
@@ -36,7 +39,7 @@
 
                 <div class="box-body">
                     <div class="table table-responsive">
-
+                        <tabla-reparacion-articulos :listadetalles=" {{ json_encode($detalles)}}"></tabla-reparacion-articulos>
                     </div>
                 </div>
             </div>

@@ -27,16 +27,19 @@
             <div class="form-group">
                 <label>Detalle:</label>
                 <textarea name="detalle" id="detalle" cols="3" rows="6" v-model="detalle" class="form-control"></textarea>
+                
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-info btn-block" :disabled="isDisabled" @click="store()" v-if="">Agregar estado</button>
-                <button type="button" class="btn btn-info btn-block" :disabled="isDisabled" @click="update()">Guardar estado</button>
+                <button type="button" class="btn" @click="resetInputs()" v-show="isEditing">Cancelar</button>
+                <button type="button" class="btn btn-info" :disabled="isDisabled" @click="store()" v-if="!isEditing">Agregar estado</button>
+                <button type="button" class="btn btn-info" :disabled="isDisabled" @click="update()" v-if="isEditing">Guardar estado</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    
     export default {
         props : ['reparacion_id', 'listaestados', 'listaempleados'],
         data() {
@@ -45,7 +48,9 @@
               empleados : [],
               estado : null,
               empleado : null,
-              detalle: null
+              detalle: null,
+              isEditing : false,
+              estado_id : null
           }
         },
         created() {
@@ -53,7 +58,10 @@
             this.empleados = this.listaempleados
             EventBus.$on('showEstado', function (estado) {
                 this.show(estado)
-            }.bind(this))
+            }.bind(this));
+            EventBus.$on('edit', function(estado) {
+                this.edit(estado);
+            }.bind(this));
         },
         computed : {
             isDisabled() {
@@ -73,6 +81,7 @@
                     this.resetInputs()
                     /*Emite el evento agregaEstado y es escuchado en el componente EstadoReparacionTabla*/
                     EventBus.$emit('agregaEstado', response.data.data);
+                    console.log(response.data.data)
                 }).catch(error => {
                     console.log(error.message)
                 });
@@ -80,11 +89,36 @@
             show(estado) {
 
             },
+            edit(estado) {
+                this.resetInputs();
+                this.isEditing = true;
+                this.estado = estado.estado_id;
+                this.empleado = estado.empleado_id;
+                this.detalle = estado.detalle;
+                this.estado_id = estado.id;
+            },
+            update() {
+                axios.put('/estadoReparacion/' + this.estado_id, {
+                    estado_id : this.estado,
+                    empleado_id : this.empleado,
+                    detalle : this.detalle
+                }).then(response => {
+                    toastr.success(response.data.message)
+                    this.resetInputs()
+                    /*Emite el evento editEstado y es escuchado en el componente EstadoReparacionTabla*/
+                    EventBus.$emit('editEstado', response.data.data);
+                }).catch(error => {
+                    console.log(error.message)
+                });
+
+            },
             resetInputs()
             {
-                this.estado = null
-                this.empleado = null
-                this.detalle = null
+                this.estado = null;
+                this.empleado = null;
+                this.detalle = null;
+                this.isEditing = false;
+                this.estado_id = null;
             }
 
         },

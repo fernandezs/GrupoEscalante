@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateDetalleDeudaAPIRequest;
 use App\Http\Requests\API\UpdateDetalleDeudaAPIRequest;
 use App\Models\DetalleDeuda;
+use App\Models\Deuda;
 use App\Repositories\ArticuloRepository;
 use App\Repositories\DetalleDeudaRepository;
 use Illuminate\Http\Request;
@@ -65,9 +66,16 @@ class DetalleDeudaAPIController extends AppBaseController
         $input = $request->all();
 
         $detalleDeudas = $this->detalleDeudaRepository->create($input);
-        $articulo = $this->articuloRepository->findWithoutFail($detalleDeudas->articulo_id);
+        $articulo = $this->articuloRepository->with('marca')->findWithoutFail($detalleDeudas->articulo_id);
         $articulo->cantidad = $articulo->cantidad - $detalleDeudas->cantidad;
         $articulo->save();
+        $detalleDeudas['articulo'] = $articulo;
+
+        $deuda = $detalleDeudas->deuda;
+        $subtotal = $detalleDeudas->sum('subtotal');
+        $deuda->interes ? $importe_interes = ($deuda->interes*0.01) * $subtotal : $importe_interes= 0;
+        $deuda->importe_total = $subtotal + $importe_interes;
+        $deuda->save();
         return $this->sendResponse($detalleDeudas->toArray(), 'Detalle Deuda guardado exitosamente');
     }
 
@@ -137,7 +145,13 @@ class DetalleDeudaAPIController extends AppBaseController
         $articulo = $this->articuloRepository->findWithoutFail($detalleDeuda->articulo_id);
         $articulo->cantidad = $articulo->cantidad + $detalleDeuda->cantidad;
         $articulo->save();
+        $articulo['marca'] = $articulo->marca;
+        $deuda = $detalleDeuda->deuda;
+        $subtotal = $detalleDeuda->sum('subtotal');
+        $deuda->interes ? $importe_interes = ($deuda->interes*0.01) * $subtotal : $importe_interes= 0;
+        $deuda->importe_total = $subtotal + $importe_interes;
+        $deuda->save();
 
-        return $this->sendResponse($id, 'Detalle Deuda eliminado exitosamente');
+        return $this->sendResponse($articulo->toArray(), 'Detalle Deuda eliminado exitosamente');
     }
 }

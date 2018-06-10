@@ -2,9 +2,6 @@
 @include('layouts.axios')
 @include('layouts.plugins.select2')
 @include('layouts.plugins.sweetalert2')
-@push('vue-app')
-    <script src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
-@endpush
 @section('htmlheader_title')
 	Revision de la reparacion
 @endsection

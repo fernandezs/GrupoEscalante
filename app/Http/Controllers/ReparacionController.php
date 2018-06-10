@@ -12,6 +12,7 @@ use App\Repositories\ArticuloRepository;
 use App\Repositories\EstadoRepository;
 use App\Repositories\EmpleadoRepository;
 use Flash;
+use App\Models\DetalleReparacion;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use App\Models\EstadoReparacion;
@@ -77,7 +78,7 @@ class ReparacionController extends AppBaseController
 
         Flash::success('Reparacion guardado exitosamente.');
 
-        return redirect(route('reparaciones.index'));
+        return redirect(route('reparaciones.revision', $reparacion->id));
     }
 
     /**
@@ -180,6 +181,8 @@ class ReparacionController extends AppBaseController
         }
         $estados = $this->estadoRepository->all();
         $empleados = $this->empleadoRepository->all();
-        return view('reparaciones.revision.create', compact('reparacion','estados', 'empleados','estadosReparacion'));
+        $articulos = $this->articuloRepository->with('marca')->get();
+        $detalles = DetalleReparacion::with('articulo.marca')->where('reparacion_id', '=', $id)->get();
+        return view('reparaciones.revision.create', compact('reparacion','estados', 'empleados','estadosReparacion','articulos','detalles'));
     }
 }

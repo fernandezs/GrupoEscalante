@@ -71,7 +71,6 @@ class Deuda extends Model
         'cliente_id' => 'required|exists:clientes,id'
     ];
 
-
     public function detalles()
     {
         return $this->hasMany(DetalleDeuda::class);

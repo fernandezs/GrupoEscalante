@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('estados', 'EstadoController');
     Route::resource('reparaciones', 'ReparacionController');
     Route::get('reparaciones/{id}/revision', 'ReparacionController@revision')->name('reparaciones.revision');
-    Route::resource('estadoReparacion', 'EstadoReparacionController');
+    
     //    Route::get('/link1', function ()    {
 //        // Uses Auth Middleware
 //    });
@@ -41,6 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
 });
+
+Route::resource('estadoReparacion', 'EstadoReparacionController');
 
 Route::get('user/profile/{user}', 'UserController@editProfile')->name('user.edit.profile');;
 Route::patch('user/profile/{user}', 'UserController@updateProfile')->name('user.update.profile');;
@@ -64,3 +66,6 @@ Route::get('prueba/pdf', function (\App\Extensiones\Fpdf $fpdf) {
     exit();
 });
 
+
+
+Route::resource('detalleReparacion', 'DetalleReparacionController');

@@ -7,7 +7,8 @@
         </div>
 
         <div class="box-body">
-            <table class="table table-responsive table-striped table-bordered">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Usuario</th>
@@ -25,12 +26,12 @@
                         <td>{{ estado.fecha | fecha-local}}</td>
                         <td>
                             <a href="#" class="btn btn-default btn-sm" title="Ver estado" @click="showEstado(estado)"><i class="fa fa-eye"></i></a>
-                            <a href="#" class="btn btn-primary btn-sm" title="Editar estado"><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm" title="Eliminar estado"><i class="fa fa-trash"></i></a>
+                            <button type="button" class="btn btn-primary btn-sm" title="Editar estado"><i class="fa fa-edit" @click="editarEstado(estado)"></i></button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 </template>
@@ -48,7 +49,11 @@
             /*Escucha el evento agregaEstado en el componente ReparacionEstado.Vue*/
             EventBus.$on('agregaEstado', function(estado){
                 this.addEstado(estado)
-            }.bind(this))
+            }.bind(this));
+            /*Escucha el evento editEstado en el componente ReparacionEstado.Vue*/
+            EventBus.$on('editEstado', function(estado) {
+                this.actualizarEstadoEnTabla(estado);
+            }.bind(this));
         },
         methods : {
             addEstado(estado) {
@@ -56,6 +61,14 @@
             },
             showEstado(estado) {
                 EventBus.$emit('showEstado', estado)
+            },
+            editarEstado(estado) {
+                EventBus.$emit('edit', estado);
+            },
+            /*Cuando se actualiza un estado, se actualiza la tabla*/
+            actualizarEstadoEnTabla(estado) {
+                var index = this.estados.findIndex(i => i.id === estado.id);
+                this.estados.splice(index,1,estado);
             }
         },
         mounted() {

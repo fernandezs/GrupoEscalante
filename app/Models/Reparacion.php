@@ -48,7 +48,7 @@ class Reparacion extends Model
         'estado',
         'tipo_garantia',
         'fecha_egreso',
-        'descripcion',
+        'detalle',
         'dias_garantia'
     ];
 
@@ -67,7 +67,7 @@ class Reparacion extends Model
         'estado' => 'string',
         'tipo_garantia' => 'string',
         'fecha_egreso' => 'datetime:d/m/Y',
-        'descripcion' => 'string',
+        'detalle' => 'string',
         'dias_garantia' => 'integer'
     ];
 
@@ -99,6 +99,10 @@ class Reparacion extends Model
     public function estados()
     {
         return $this->hasMany(EstadoReparacion::class);
+    }
+    public function detalles() 
+    {
+        return $this->hasMany(DetalleReparacion::class);
     }
 
 

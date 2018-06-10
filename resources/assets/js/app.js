@@ -29,6 +29,11 @@ Vue.component('cliente', require('./components/Cliente.vue'));
 Vue.component('maquina', require('./components/Maquina.vue'));
 Vue.component('reparacion-estados', require('./components/ReparacionEstados.vue'));
 Vue.component('reparacion-estados-tabla', require('./components/EstadosReparacionTabla.vue'));
+Vue.component('articulos', require('./components/deudas/Articulos.vue'));
+Vue.component('tabla-deuda-articulos', require('./components/deudas/Tabla.vue'));
+Vue.component('facturacion', require('./components/deudas/Facturacion.vue'));
+Vue.component('articulos-reparacion', require('./components/reparaciones/Articulos.vue'));
+Vue.component('tabla-reparacion-articulos', require('./components/reparaciones/TablaArticulos.vue'));
 
 
 const app = new Vue({

@@ -21,10 +21,10 @@ class CreateReparacionesTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->decimal('costo_reparacion')->nullable();
             $table->date('fecha_ingreso')->nullable();
-            $table->string('estado')->nullable();
+            $table->string('estado')->nullable()->default('INICIADO');
             $table->enum('tipo_garantia',['GRUPO ESCALANTE', 'FABRICANTE'])->default('GRUPO ESCALANTE');
             $table->date('fecha_egreso')->nullable();
-            $table->text('descripcion')->nullable();
+            $table->text('detalle')->nullable();
             $table->integer('dias_garantia')->nullable();
             $table->timestamps();
             $table->softDeletes();

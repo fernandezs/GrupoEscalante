@@ -61,7 +61,7 @@ class EstadoReparacionController extends AppBaseController
             $input['fecha'] = Carbon::now();
             $input['user_id'] = auth()->user()->id;
             $estadoReparacion = $this->estadoReparacionRepository->create($input);
-            $reparacion = Reparacion::find($request->reparacion_id);
+            $reparacion = $estadoReparacion->reparacion;
             $estado = Estado::find($request->estado_id);
             $reparacion->estado = $estado->estado;
             $reparacion->save();
@@ -134,10 +134,17 @@ class EstadoReparacionController extends AppBaseController
 
             return redirect(route('estadoReparacions.index'));
         }
+        if($request->ajax()) {
+            $estadoReparacion = $this->estadoReparacionRepository->update($request->all(), $id);
+            $estadoReparacion['user'] = $estadoReparacion->user;
+            $estadoReparacion['estado'] = $estadoReparacion->estado;
+            $estadoReparacion['empleado'] = $estadoReparacion->empleado;
+            return $this->sendResponse($estadoReparacion->toArray(), 'Estado Reparacion actualizado exitosamente!');
+        }
 
-        $estadoReparacion = $this->estadoReparacionRepository->update($request->all(), $id);
+       
 
-        Flash::success('Estado Reparacion actualizado exitosamente.');
+        Flash::success('');
 
         return redirect(route('estadoReparacions.index'));
     }
