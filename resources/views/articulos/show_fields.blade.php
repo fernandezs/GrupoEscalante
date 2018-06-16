@@ -1,85 +1,118 @@
-<!-- Id Field -->
-{!! Form::label('id', 'Id:') !!}
-{!! $articulo->id !!}<br>
 
 
-<!-- Cod Articulo Field -->
-{!! Form::label('cod_articulo', 'Cod Articulo:') !!}
-{!! $articulo->cod_articulo !!}<br>
+
+<div class="form-group col-md-6">
+    <!-- Cod Articulo Field -->
+    {!! Form::label('cod_articulo', 'Codigo Articulo:') !!}
+    {!! $articulo->cod_articulo !!}
+</div>
+
+<div class="form-group col-md-6">
+    <!-- Categoria Id Field -->
+    {!! Form::label('categoria_id', 'Categoria:') !!}
+    {!! $articulo->categoria->nombre !!}
+</div>
 
 
-<!-- Categoria Id Field -->
-{!! Form::label('categoria_id', 'Categoria:') !!}
-{!! $articulo->categoria_id !!}<br>
+
+<div class="form-group col-md-6">
+    <!-- Nombre Field -->
+    {!! Form::label('nombre', 'Nombre:') !!}
+    {!! $articulo->nombre !!}
+
+</div>
 
 
-<!-- Nombre Field -->
-{!! Form::label('nombre', 'Nombre:') !!}
-{!! $articulo->nombre !!}<br>
 
 
-<!-- Descripcion Field -->
-{!! Form::label('descripcion', 'Descripcion:') !!}
-{!! $articulo->descripcion !!}<br>
+<div class="form-group col-md-6">
+    <!-- Marca Id Field -->
+    {!! Form::label('marca_id', 'Marca:') !!}
+    {!! $articulo->marca->nombre !!}
+</div>
+
+<div class="form-group col-md-6">
+    <!-- Proveedores Field -->
+    {!! Form::label('proveedores', 'Proveedores:') !!}
+    <ul class="list-group">
+        @foreach($articulo->proveedores as $proveedor)
+            <a href="{{ route('proveedores.show', $proveedor->id) }}" class="badge badge-secondary">{{ $proveedor->nombre }}</a>
+        @endforeach
+    </ul>
+
+</div>
+
+<div class="form-group col-sm-6">
+    <!-- Precio Costo Field -->
+    {!! Form::label('precio_costo', 'Precio Costo:') !!}
+    {!! $articulo->precio_costo !!}
+
+</div>
 
 
-<!-- Marca Id Field -->
-{!! Form::label('marca_id', 'Marca:') !!}
-{!! $articulo->marca_id !!}<br>
-
-<!-- Proveedores Field -->
-{!! Form::label('proveedores', 'Proveedores:') !!}
-@foreach($articulo->proveedores as $proveedor)
-    {{ $proveedor->nombre}}
-@endforeach
-<br>
-
-<!-- Precio Costo Field -->
-{!! Form::label('precio_costo', 'Precio Costo:') !!}
-{!! $articulo->precio_costo !!}<br>
+<div class="form-group col-md-6">
+    {!! Form::label('precio_venta', 'Precio Venta:') !!}
+    {!! $articulo->precio_venta !!}
+</div>
 
 
-<!-- Precio Venta Field -->
-{!! Form::label('precio_venta', 'Precio Venta:') !!}
-{!! $articulo->precio_venta !!}<br>
+<div class="form-group col-md-6">
+    <!-- Cantidad Field -->
+    {!! Form::label('cantidad', 'Cantidad:') !!}
+    {!! $articulo->cantidad !!}
 
+</div>
 
-<!-- Cantidad Field -->
-{!! Form::label('cantidad', 'Cantidad:') !!}
-{!! $articulo->cantidad !!}<br>
-
-
-<!-- Cantidad Minima Field -->
-{!! Form::label('cantidad_minima', 'Cantidad Minima:') !!}
-{!! $articulo->cantidad_minima !!}<br>
+<div class="form-group col-md-6">
+    <!-- Cantidad Minima Field -->
+    {!! Form::label('cantidad_minima', 'Cantidad Minima:') !!}
+    {!! $articulo->cantidad_minima !!}
+</div>
 
 
 <!-- Foto Field -->
-{!! Form::label('foto', 'Foto:') !!}
-<img src="{{ Storage::url($articulo->foto)}}" alt="" height =100px> <br>
+
+<div class="form-group col-md-12">
+    <img class="img img-responsive img-thumbnail" src="{{ Storage::url($articulo->foto)}}" alt="" height =100px>
+</div>
+<div class="form-group col-md-12">
+    <!-- Descripcion Field -->
+    {!! Form::label('descripcion', 'Descripcion:') !!}
+    <p>{!! $articulo->descripcion !!}</p>
+</div>
 
 <!-- Nro Cabezal Field -->
-{!! Form::label('nro_cabezal', 'Nro Cabezal:') !!}
-{!! $articulo->nro_cabezal !!}<br>
+<div class="form-group col-md-6">
+    <div class="form-group">
+        {!! Form::label('nro_cabezal', 'Nro Cabezal:') !!}
+        {!! $articulo->nro_cabezal !!}
+    </div>
+</div>
 
 
-<!-- Estado Field -->
-{!! Form::label('estado', 'Estado:') !!}
-{!! $articulo->estado !!}<br>
+<div class="form-group col-md-6">
+    <!-- Estado Field -->
+    <div class="form-group">
+        {!! Form::label('estado', 'Estado:') !!}
+        {!! $articulo->estado !!}
+    </div>
+</div>
 
 
-<!-- Created At Field -->
-{!! Form::label('created_at', 'Createdo:') !!}
-{!! $articulo->created_at->format('d-m-Y')  !!}<br>
+<div class="form-group col-md-6">
+    <!-- Created At Field -->
+    <div class="form-group">
+        {!! Form::label('created_at', 'Createdo:') !!}
+        {!! $articulo->created_at->format('d-m-Y')  !!}
+    </div>
 
+</div>
 
-<!-- Updated At Field -->
-{!! Form::label('updated_at', 'Actualizado:') !!}
-{!! $articulo->updated_at->format('d-m-Y') !!}<br>
+<div class="form-group col-md-6">
+        <!-- Updated At Field -->
+    {!! Form::label('updated_at', 'Actualizado:') !!}
+    {!! $articulo->updated_at->format('d-m-Y') !!}
+</div>
 
-
-<!-- Deleted At Field -->
-{!! Form::label('deleted_at', 'Deleted At:') !!}
-{!! $articulo->deleted_at !!}<br>
 
 

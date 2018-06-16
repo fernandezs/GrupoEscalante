@@ -6,10 +6,7 @@
         <div class="box-body">
             <div class="form-group">
                 <label>Seleccione un articulo:</label>
-                <select class="form-control" v-model="selected">
-                    <option value="null">Seleccione..</option>
-                    <option v-for="articulo in articulos" :value="articulo.id">{{ articulo.nombre }}</option>
-                </select>
+                <v-select v-model="selected"  :options="lista" placeholder="Seleccione un articulo..."></v-select>
             </div>
             <div class="form-group col-md-6">
                 <label for="">Valor de venta:</label>
@@ -51,6 +48,7 @@
 </template>
 
 <script>
+
     export default {
         props : ['listaarticulos', 'reparacion_id'],
         data() {
@@ -62,6 +60,13 @@
                 articulos : [],
 
             }
+        },
+        computed : {
+          lista() {
+              return  this.articulos.map(function (key) {
+                  return { label : key.nombre, value : key.id }
+              });
+          }
         },
         methods : {
             resetInputs() {
@@ -108,8 +113,8 @@
         },
         watch : {
             
-            selected(id) {
-                var self = this.articulos.find( articulo => articulo.id === id);
+            selected(key) {
+                var self = this.articulos.find( articulo => articulo.id === key.value);
                 self === undefined ? this.articulo = { marca : {}} : this.articulo = self;
 
             }

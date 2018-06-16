@@ -26,8 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('proveedores', 'ProveedorController');
     Route::resource('clientes', 'ClienteController');
     Route::resource('articulos', 'ArticuloController');
-    Route::resource('admin/deudas', 'DeudaController');
-    Route::get('admin/deudas/{deuda}/setup', 'DeudaController@setup')->name('deudas.setup');
+    Route::resource('deudas', 'DeudaController');
+    Route::get('deudas/{deuda}/revision', 'DeudaController@revision')->name('deudas.revision');
     Route::resource('detalleDeudas', 'DetalleDeudaController');
     Route::get('detalle_deudas/deuda/{id}', 'DetalleDeudaController@detallesByDeudaID');
     Route::resource('estados', 'EstadoController');
@@ -69,3 +69,4 @@ Route::get('prueba/pdf', function (\App\Extensiones\Fpdf $fpdf) {
 
 
 Route::resource('detalleReparacion', 'DetalleReparacionController');
+Route::get('deuda/pdf/{id}', 'PdfController@invoice')->name('pdf.invoice');

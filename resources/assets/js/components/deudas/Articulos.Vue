@@ -6,10 +6,7 @@
         <div class="box-body">
             <div class="form-group">
                 <label>Seleccione un articulo:</label>
-                <select class="form-control" v-model="selected">
-                    <option value="null">Seleccione..</option>
-                    <option v-for="articulo in articulos" :value="articulo.id">{{ articulo.nombre }}</option>
-                </select>
+                <v-select v-model="selected"  :options="lista" placeholder="Seleccione un articulo..."></v-select>
             </div>
             <div class="form-group col-md-4">
                 <label for="">Cantidad en stock:</label>
@@ -68,6 +65,13 @@
                 articulo  : { marca: {} },
                 articulos : [],
 
+            }
+        },
+        computed : {
+            lista() {
+                return  this.articulos.map(function (key) {
+                    return { label : key.nombre, value : key.id }
+                });
             }
         },
         methods : {
@@ -167,11 +171,15 @@
                     toastr.info('El descuento no puede ser inferior a 0')
                 }
             },
-            selected(id) {
-                var self = this.articulos.find( articulo => articulo.id === id);
-                self === undefined ? this.articulo = { marca : {}} : this.articulo = self;
-                if(this.articulo.cantidad < this.cantidad && this.articulo.cantidad != 0) {
-                    this.cantidad = this.articulo.cantidad;
+            selected(key) {
+                if(key != null) {
+                    this.articulo = this.articulos.find( articulo => articulo.id === key.value);
+                    if(this.articulo.cantidad < this.cantidad && this.articulo.cantidad != 0) {
+                        this.cantidad = this.articulo.cantidad;
+                    }
+                }
+                else {
+                    this.articulo = { marca: {}}
                 }
             }
         }

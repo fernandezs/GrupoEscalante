@@ -17,12 +17,7 @@
             </div>
             <div class="form-group">
                 <label>Empleado:</label>
-                <select name="empleado_id" id="empleado_id" class="form-control" v-model="empleado">
-                    <option value="null">Seleccione un empleado...</option>
-                    <option v-for="empleado in empleados" :value="empleado.id">
-                        {{ empleado.nombre}}
-                    </option>
-                </select>
+                <v-select v-model="empleado"  :options="lista" placeholder="Seleccione un empleado..."></v-select>
             </div>
             <div class="form-group">
                 <label>Detalle:</label>
@@ -66,6 +61,11 @@
         computed : {
             isDisabled() {
                 return this.estado == null || this.empleado == null;
+            },
+            lista() {
+                return  this.empleados.map(function (key) {
+                    return { label : key.nombre, value : key.id }
+                });
             }
         },
 

@@ -14,7 +14,7 @@
             @include('adminlte-templates::common.errors')            
                 {!! Form::model($deuda, ['route' => ['deudas.update', $deuda->id], 'method' => 'patch']) !!}
                     
-                    @include('deudas.setup_fields')
+                    @include('deudas.revision_fields')
                 
                 {!! Form::close() !!}
     </div>

@@ -7,7 +7,8 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Deuda
+            Factura
+            <small>#007612</small>
         </h1>
     </section>
     <div class="content">
@@ -20,10 +21,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-sm-12">
-            <a href="{!! route('deudas.index') !!}" class="btn btn-default">Regresar</a>
-            </div>
-        </div>
+
     </div>
 @endsection

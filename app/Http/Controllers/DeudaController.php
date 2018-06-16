@@ -84,7 +84,7 @@ class DeudaController extends AppBaseController
      */
     public function show($id)
     {
-        $deuda = $this->deudaRepository->findWithoutFail($id);
+        $deuda = $this->deudaRepository->with('detalles')->findWithoutFail($id);
 
         if (empty($deuda)) {
             Flash::error('Deuda no encontrado');
@@ -182,12 +182,12 @@ class DeudaController extends AppBaseController
 
     }
 
-    public function setup(Deuda $deuda)
+    public function revision(Deuda $deuda)
     {
         $articulos = $this->articuloRepository->with('marca')->get();
         $detalles = DetalleDeuda::with('articulo','articulo.marca')->where('deuda_id', '=', $deuda->id)->get();
         //return $detalles;
-        return view('deudas.setup', compact('deuda','articulos','detalles'));
+        return view('deudas.revision', compact('deuda','articulos','detalles'));
     }
 
 }

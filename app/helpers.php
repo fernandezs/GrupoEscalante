@@ -195,3 +195,19 @@ function licenciaEsPrueba(){
 
     return is_null($licencia) ? false : $licencia->prueba;
 }
+
+function reparacionNro($f) {
+    $type = 'R';
+    if($f < 10) {
+        return $type.'000'.$f;
+    }
+    elseif($f >= 10) {
+        return $type.'00'.$f;
+    }
+    elseif($f >= 100) {
+        return $type.'0'.$f;
+    }
+    else {
+        return $type+$f;
+    }
+}

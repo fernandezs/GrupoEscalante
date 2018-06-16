@@ -6,25 +6,17 @@
         </div>
         <div class="form-group">
             <div class="table-responsive">
-            <table>
-                <thead>
+                <table class="table">
                     <tr>
-                        <th>Subtotal:</th>
-                        <th>Total</th>
+                        <th style="width:50%">Subtotal:</th>
+                        <td>${{ subtotal }}</td>
                     </tr>
-                </thead>
-                <tbody>
                     <tr>
-                        <td>
-                            {{ subtotal}}
-                        </td>
-                        <td>
-                            {{ importe_total }}
-                        </td>
+                        <th>Total:</th>
+                        <td>${{ importe_total }}</td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
+                </table>
+            </div>
         </div>
 
     </div>

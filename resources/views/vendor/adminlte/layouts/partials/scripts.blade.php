@@ -16,7 +16,7 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset("bower/jquery-ui/jquery-ui.min.js")}}"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="{{ asset('bower/bootstrap/dist/js/bootstrap.min.js') }}" type="text/javascript"></script>
+<!-- <script src="{{ asset('bower/bootstrap/dist/js/bootstrap.min.js') }}" type="text/javascript"></script> -->
 {{--<script src="bootstrap/js/bootstrap.min.js"></script>--}}
 
 <!-- AdminLTE App -->

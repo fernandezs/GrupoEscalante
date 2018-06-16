@@ -3,8 +3,8 @@
     <i class="glyphicon glyphicon-eye-open"></i>
 </a>
 
-<a href="{{ route('deudas.setup',$id) }}" class="btn btn-xs btn-info">
-    <span class="glyphicon glyphicon-list-alt" data-toggle="tooltip" title="Setup"></span>
+<a href="{{ route('deudas.revision',$id) }}" class="btn btn-xs btn-info">
+    <span class="glyphicon glyphicon-list-alt" data-toggle="tooltip" title="Revision"></span>
 </a>
 
 <span data-toggle="tooltip" title="Eliminar">

@@ -56,7 +56,8 @@ class Deuda extends Model
         'detalle' => 'string',
         'estado' => 'string',
         'fecha_cobro' => 'date',
-        'interes' => 'decimal'
+        'interes' => 'decimal',
+        'created_at' => 'date:d/m/Y'
     ];
 
 
