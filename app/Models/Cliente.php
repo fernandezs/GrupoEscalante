@@ -69,6 +69,7 @@ class Cliente extends Model
      */
     public static $rules = [
         'num_cliente' => 'required|unique:clientes,num_cliente',
+        'telefono' => 'required|unique:clientes,telefono',
         'nombre' => 'required'  
     ];
 

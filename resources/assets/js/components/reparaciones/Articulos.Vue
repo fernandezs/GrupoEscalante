@@ -114,9 +114,13 @@
         watch : {
             
             selected(key) {
-                var self = this.articulos.find( articulo => articulo.id === key.value);
-                self === undefined ? this.articulo = { marca : {}} : this.articulo = self;
-
+                if(key != null) {
+                    this.articulo = this.articulos.find( articulo => articulo.id === key.value);
+                }
+                else {
+                    this.articulo = { marca : {}}
+                }
+                
             }
         }
 

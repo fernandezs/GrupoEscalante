@@ -74,14 +74,13 @@
                 axios.post('/estadoReparacion', {
                     reparacion_id : this.reparacion_id,
                     estado_id : this.estado,
-                    empleado_id : this.empleado,
+                    empleado_id : this.empleado.value,
                     detalle : this.detalle
                 }).then(response => {
                     toastr.success(response.data.message)
                     this.resetInputs()
                     /*Emite el evento agregaEstado y es escuchado en el componente EstadoReparacionTabla*/
                     EventBus.$emit('agregaEstado', response.data.data);
-                    console.log(response.data.data)
                 }).catch(error => {
                     console.log(error.message)
                 });
@@ -93,7 +92,7 @@
                 this.resetInputs();
                 this.isEditing = true;
                 this.estado = estado.estado_id;
-                this.empleado = estado.empleado_id;
+                this.empleado = this.lista.findIndex(i => i.id === estado.empleado_id);;
                 this.detalle = estado.detalle;
                 this.estado_id = estado.id;
             },

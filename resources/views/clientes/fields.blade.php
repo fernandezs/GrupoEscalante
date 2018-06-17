@@ -23,13 +23,13 @@
 </div>
 
 <!-- Doc Tipo Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-6 col-md-2">
     {!! Form::label('doc_tipo', 'Doc Tipo:') !!}
     {!! Form::select('doc_tipo',[ 'DNI' => 'DNI', 'CUIT' => 'CUIT', 'CEDULA' => 'CEDULA'], null, ['class' => 'form-control', 'id' => 'doc_tipo']) !!}
 </div>
 
 <!-- Doc Numero Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-6 col-md-4">
     {!! Form::label('doc_numero', 'Doc Numero:') !!}
     {!! Form::text('doc_numero', null, ['class' => 'form-control']) !!}
 </div>
@@ -41,7 +41,7 @@
 </div>
 
 <!-- Direccion Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-12">
     {!! Form::label('direccion', 'Direccion:') !!}
     {!! Form::text('direccion', null, ['class' => 'form-control']) !!}
 </div>

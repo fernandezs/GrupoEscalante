@@ -70,11 +70,11 @@ class EstadoReparacionController extends AppBaseController
             $estadoReparacion['empleado'] = $estadoReparacion->empleado;
             return $this->sendResponse($estadoReparacion->toArray(),'Estado agregado correctamente!');
         }
-        $estadoReparacion = $this->estadoReparacionRepository->create($input);
+        /*$estadoReparacion = $this->estadoReparacionRepository->create($input);
 
         Flash::success('Estado Reparacion guardado exitosamente.');
 
-        return redirect(route('estadoReparacions.index'));
+        return redirect(route('estadoReparacions.index'));*/
     }
 
     /**

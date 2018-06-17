@@ -9,7 +9,7 @@
                 <v-select v-model="selected"  :options="lista" placeholder="Seleccione un articulo..."></v-select>
             </div>
             <div class="form-group col-md-4">
-                <label for="">Cantidad en stock:</label>
+                <label for="">Stock:</label>
                 <input type="text" disabled="true" v-model="articulo.cantidad" class="form-control">
             </div>
             <div class="form-group col-md-4">

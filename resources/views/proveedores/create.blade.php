@@ -1,5 +1,4 @@
 @extends('adminlte::layouts.app')
-
 @section('htmlheader_title')
 	Crear Proveedor
 @endsection
@@ -21,6 +20,7 @@
                         @include('proveedores.fields')
 
                     {!! Form::close() !!}
+                    
                 </div>
             </div>
         </div>

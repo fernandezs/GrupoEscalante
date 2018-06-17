@@ -1,12 +1,12 @@
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
-	Proveedors
+	Proveedores
 @endsection
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Proveedors</h1>
+        <h1 class="pull-left">Proveedores</h1>
         <h1 class="pull-right">
            <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('proveedores.create') !!}">
               <i class="fa fa-plus"></i>

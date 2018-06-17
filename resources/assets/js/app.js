@@ -38,5 +38,9 @@ Vue.component('tabla-reparacion-articulos', require('./components/reparaciones/T
 
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data : {
+    	togle_menu_user : 'open'
+	},
+
 });

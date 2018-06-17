@@ -1,5 +1,7 @@
 @extends('adminlte::layouts.app')
-@include('layouts.plugins.select2')
+@push('vue-app')
+<script src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
+@endpush
 @section('htmlheader_title')
 	Crear Deuda
 @endsection

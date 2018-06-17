@@ -34,22 +34,18 @@
 
 
 <!-- Cod Postal Field -->
-{!! Form::label('cod_postal', 'Cod Postal:') !!}
+{!! Form::label('cod_postal', 'Codigo Postal:') !!}
 {!! $proveedor->cod_postal !!}<br>
 
 
 <!-- Created At Field -->
-{!! Form::label('created_at', 'Created At:') !!}
-{!! $proveedor->created_at !!}<br>
+{!! Form::label('created_at', 'Creado:') !!}
+{!! $proveedor->created_at->format('d/m/Y') !!}<br>
 
 
 <!-- Updated At Field -->
-{!! Form::label('updated_at', 'Updated At:') !!}
-{!! $proveedor->updated_at !!}<br>
+{!! Form::label('updated_at', 'Actualizado:') !!}
+{!! $proveedor->updated_at->format('d/m/Y') !!}<br>
 
-
-<!-- Deleted At Field -->
-{!! Form::label('deleted_at', 'Deleted At:') !!}
-{!! $proveedor->deleted_at !!}<br>
 
 

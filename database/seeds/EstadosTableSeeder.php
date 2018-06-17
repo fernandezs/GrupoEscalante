@@ -2,26 +2,23 @@
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
-class ConfigurationsTableSeeder extends Seeder
-{
 
+class EstadosTableSeeder extends Seeder
+{
     /**
-     * Auto generated seed file
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
+        \DB::table('estados')->delete();
         
-
-        \DB::table('configurations')->delete();
-        
-        \DB::table('configurations')->insert(array (
+        \DB::table('estados')->insert(array (
             0 => 
             array (
                 'id' => 1,
-                'key' => 'app.name',
-                'value' => 'Grupo Escalante',
+                'estado' => 'INICIADO',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'deleted_at' => NULL,
@@ -29,8 +26,7 @@ class ConfigurationsTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'key' => 'direccion',
-                'value' => 'Ingrese la direccion del local desde el menu configuraciones',
+                'estado' => 'EN TALLER',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'deleted_at' => NULL,
@@ -38,8 +34,7 @@ class ConfigurationsTableSeeder extends Seeder
             2 => 
             array (
                 'id' => 3,
-                'key' => 'localidad',
-                'value' => 'Ingrese la localidad del local desde el menu configuraciones',
+                'estado' => 'EN GARANTIA OFICIAL',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'deleted_at' => NULL,
@@ -47,8 +42,7 @@ class ConfigurationsTableSeeder extends Seeder
             3 => 
             array (
                 'id' => 4,
-                'key' => 'telefono',
-                'value' => 'Ingrese el numero de telefono del local desde el menu configuraciones',
+                'estado' => 'CON FALTANTES',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'deleted_at' => NULL,
@@ -56,15 +50,11 @@ class ConfigurationsTableSeeder extends Seeder
             4 => 
             array (
                 'id' => 5,
-                'key' => 'email',
-                'value' => 'Ingrese el email del local desde el menu configuraciones',
+                'estado' => 'ENTREGADO',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'deleted_at' => NULL,
             )
-
         ));
-        
-        
     }
 }

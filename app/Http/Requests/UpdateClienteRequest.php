@@ -27,6 +27,7 @@ class UpdateClienteRequest extends FormRequest
         $id = $this->cliente;
         $rules = Cliente::$rules;
         $rules['num_cliente'] = $rules['num_cliente'] .','. $id;
+        $rules['telefono'] = $rules['telefono'] .','. $id;
         return $rules;
     }
 }

@@ -27,7 +27,6 @@ class UpdateArticuloRequest extends FormRequest
         $id = $this->articulo;
         $rules = Articulo::$rules;
         $rules['cod_articulo'] = $rules['cod_articulo'] .','. $id;
-
         return $rules;
     }
 }

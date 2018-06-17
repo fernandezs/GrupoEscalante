@@ -1,36 +1,26 @@
+<!-- Nombre Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('nombre', 'Nombre:') !!}
+    {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Ingrese un nombre']) !!}
+</div>
+
 <!-- Cod Articulo Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('cod_articulo', 'Cod Articulo:') !!}
+    {!! Form::label('cod_articulo', 'Código de Articulo:') !!}
     {!! Form::number('cod_articulo', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Categoria Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('categoria_id', 'Categoria Id:') !!}
-    {!! Form::select('categoria_id', $categorias, null, ['class' => 'form-control', 'id' => 'categorias']) !!}
+    {!! Form::label('categoria_id', 'Categoria:') !!}
+    {!! Form::select('categoria_id', $categorias, null, ['class' => 'form-control', 'id' => 'categorias', 'placeholder' => '']) !!}
 </div>
 
-<!-- Nombre Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('nombre', 'Nombre:') !!}
-    {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Descripcion Field -->
-<div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('descripcion', 'Descripcion:') !!}
-    {!! Form::textarea('descripcion', null, ['class' => 'form-control']) !!}
-</div>
 
 <!-- Marca Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('marca_id', 'Marca:') !!}
-    {!! Form::select('marca_id',$marcas, null, ['class' => 'form-control', 'id' => 'marcas']) !!}
-</div>
-
-<div class="form-group col-sm-6">
-    {!! Form::label('proveedores', 'Proveedores:') !!}
-    {!! Form::select('proveedores[]', $proveedores, null, ['class' => 'form-control', 'multiple']) !!}
+    {!! Form::select('marca_id',$marcas, null, ['class' => 'form-control', 'id' => 'marcas', 'placeholder' => '']) !!}
 </div>
 
 <!-- Precio Costo Field -->
@@ -47,14 +37,19 @@
 
 <!-- Cantidad Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('cantidad', 'Cantidad:') !!}
+    {!! Form::label('cantidad', 'Cantidad en stock:') !!}
     {!! Form::number('cantidad', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Cantidad Minima Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('cantidad_minima', 'Cantidad Minima:') !!}
+    {!! Form::label('cantidad_minima', 'Stock Minimo:') !!}
     {!! Form::number('cantidad_minima', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group col-sm-12">
+    {!! Form::label('proveedores', 'Proveedores:') !!}
+    {!! Form::select('proveedores[]', $proveedores, null, ['class' => 'form-control', 'multiple', 'id' => 'proveedores']) !!}
 </div>
 
 <!-- Foto Field -->
@@ -75,6 +70,12 @@
     {!! Form::select('estado', ['DISPONIBLE' => 'DISPONIBLE', 'NO DISPONIBLE' => 'NO DISPONIBLE'], null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Descripcion Field -->
+<div class="form-group col-sm-12 col-lg-12">
+    {!! Form::label('descripcion', 'Descripcion:') !!}
+    {!! Form::textarea('descripcion', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Guardar', ['class' => 'btn btn-success']) !!}
@@ -89,14 +90,22 @@
 <script>
     $(function () {
         $("#rols").select2();
-        $("#categorias").select2();
-        $("#marcas").select2();
+        $("#categorias").select2({
+            placeholder : 'Seleccione una categoria'
+        });
+        $("#marcas").select2({
+            placeholder : 'Seleccione una marca...'
+        });
+        $("#proveedores").select2({
+            placeholder : 'Ingrese uno o mas proveedores...'
+        });
         var $input = $("#files");
         $input.fileinput({
             {{--uploadUrl: "{{route('api.temp_files.multi_store',Auth::user()->id)}}", // server upload action--}}
             //            uploadAsync: false,
             showUpload: false, // hide upload button
             showRemove: false, // hide remove button
+            language: 'es',
 //            minFileCount: 1,
 //            maxFileCount: 5,
             allowedFileExtensions: ["png","bmp","gif","jpg","pdf",'jpeg']

@@ -47,12 +47,13 @@
             }.bind(this));
             EventBus.$on('quitarDeLaLista', function(index) {
                 this.detalles.splice(index,1);
+                EventBus.$emit('actualizarImportes', (this.subtotal()));
             }.bind(this));
         },
         methods : {
             borrar(id, index) {
+                /*Emite evento delete al archivo Articulos.Vue*/
                 EventBus.$emit('delete', [id,index]);
-                EventBus.$emit('actualizarImportes', this.subtotal());
             },
             subtotal() {
                 return this.detalles.reduce(function(total, detalle) {

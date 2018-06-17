@@ -16,6 +16,7 @@ use App\Models\DetalleReparacion;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use App\Models\EstadoReparacion;
+use Carbon\Carbon;
 class ReparacionController extends AppBaseController
 {
     /** @var  ReparacionRepository */
@@ -75,9 +76,14 @@ class ReparacionController extends AppBaseController
         $input = $request->all();
         $input['user_id'] = auth()->user()->id;
         $reparacion = $this->reparacionRepository->create($input);
-
-        Flash::success('Reparacion guardado exitosamente.');
-
+        $estado = new EstadoReparacion();
+        $estado->reparacion_id = $reparacion->id;
+        $estado->estado_id = 1;
+        $estado->user_id = auth()->user()->id;
+        $estado->fecha = Carbon::now();
+        $estado->detalle = 'Estado Inicial en la reparacion';
+        $estado->empleado_id = 1;
+        $estado->save();
         return redirect(route('reparaciones.revision', $reparacion->id));
     }
 

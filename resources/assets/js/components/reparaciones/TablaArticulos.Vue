@@ -39,9 +39,7 @@
         },
         created() {
             this.detalles = this.listadetalles;
-            console.log(this.listadetalles);
             EventBus.$on('addDetalle', function(detalle) {
-                console.log(detalle);
                 this.detalles.push(detalle);
             }.bind(this));
         },

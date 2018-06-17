@@ -26,8 +26,7 @@ class UpdateProveedorRequest extends FormRequest
     public function rules(){
         $id = $this->proveedor;
         $rules = Proveedor::$rules;
-        //$rules['campo'] = $rules['campo'] . ',campo,' . $id;
-
+        //$rules['telefono'] = $rules['telefono'] .','. $id;
         return $rules;
     }
 }

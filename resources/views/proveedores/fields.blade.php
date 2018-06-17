@@ -29,13 +29,13 @@
 </div>
 
 <!-- Domicilio Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-6 col-md-4">
     {!! Form::label('domicilio', 'Domicilio:') !!}
     {!! Form::text('domicilio', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Cod Postal Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-6 col-md-2">
     {!! Form::label('cod_postal', 'Cod Postal:') !!}
     {!! Form::number('cod_postal', null, ['class' => 'form-control']) !!}
 </div>
@@ -45,3 +45,4 @@
     {!! Form::submit('Guardar', ['class' => 'btn btn-success']) !!}
     <a href="{!! route('proveedores.index') !!}" class="btn btn-default">Cancelar</a>
 </div>
+

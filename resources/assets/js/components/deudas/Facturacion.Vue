@@ -53,6 +53,7 @@
         methods : {
             actualizarImportes(subtotal) {
                 this.subtotal = subtotal;
+                console.log(this.subtotal)
             }
 
             

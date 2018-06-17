@@ -57,7 +57,7 @@ Route::get('/admin/option/create/{padre}', 'OptionMenuController@create');
 Route::get('/admin/option/orden', 'OptionMenuController@updateOrden');
 Route::post('/admin/option/orden', 'OptionMenuController@updateOrden');
 Route::resource('/admin/option',"OptionMenuController");
-
+Route::resource('/catalogos', 'CatalogoController')->except('edit','update');
 Route::get('prueba/pdf', function (\App\Extensiones\Fpdf $fpdf) {
     $fpdf->AddPage();
     $fpdf->SetFont('Courier', 'B', 18);
@@ -66,7 +66,7 @@ Route::get('prueba/pdf', function (\App\Extensiones\Fpdf $fpdf) {
     exit();
 });
 
-
+Route::get('proveedores/catalogos/{id}', 'ProveedorController@catalogos')->name('proveedores.catalogos');
 
 Route::resource('detalleReparacion', 'DetalleReparacionController');
 Route::get('deuda/pdf/{id}', 'PdfController@invoice')->name('pdf.invoice');

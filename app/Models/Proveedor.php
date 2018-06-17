@@ -65,13 +65,16 @@ class Proveedor extends Model
      * @var array
      */
     public static $rules = [
-        'nombre' => 'required',
-        'telefono' => 'required|unique:proveedores,telefono'
+        'nombre' => 'required'  
     ];
-
     public function articulos()
     {
         return $this->belongsToMany(Articulo::class);
+    }
+
+    public function catalogos()
+    {
+        return $this->hasMany(Catalogo::class);
     }
 
     

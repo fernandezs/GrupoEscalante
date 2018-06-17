@@ -149,4 +149,16 @@ class ProveedorController extends AppBaseController
 
         return redirect(route('proveedores.index'));
     }
+
+    public function catalogos($id)
+    {
+        $proveedor = $this->proveedorRepository->findWithoutFail($id);
+
+        if (empty($proveedor)) {
+            Flash::error('Proveedor no encontrado');
+
+            return redirect(route('proveedores.index'));
+        }
+        return view('proveedores.catalogos.lista', compact('proveedor'));
+    }
 }

@@ -42,7 +42,7 @@ class ProveedorDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '80px','printable' => false])
+            ->addAction(['width' => '100px','printable' => false])
             ->parameters([
                 'dom'     => 'Bfrtip',
                 'order'   => [[0, 'desc']],
@@ -68,9 +68,9 @@ class ProveedorDataTable extends DataTable
     {
         return [
             'nombre',
-            'nombre_contacto',
-            'telefono',
+            'nombre_contacto' => ['width' => '200px'],
             'email',
+            'telefono' => ['width' => '110px']
 
         ];
     }
