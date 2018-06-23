@@ -1,13 +1,13 @@
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
-	Crear Empleado
+	Crear Nota
 @endsection
 
 @section('content')
     <section class="content-header">
         <h1>
-            Crear Empleado
+            Crear Nota
         </h1>
     </section>
     <div class="content">
@@ -16,9 +16,9 @@
 
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'empleados.store']) !!}
+                    {!! Form::open(['route' => 'notas.store']) !!}
 
-                        @include('empleados.fields')
+                        @include('notas.fields')
 
                     {!! Form::close() !!}
                 </div>

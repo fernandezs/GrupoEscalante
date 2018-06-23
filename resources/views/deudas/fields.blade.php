@@ -1,6 +1,11 @@
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-9">
     {!! Form::label('cliente_id', 'Cliente:') !!}
     {!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group col-sm-3">
+    {!! Form::label('remito_nro', 'Nro de Remito:') !!}
+    {!! Form::number('remito_nro', $ultimo_cod_remito, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Detalle Field -->

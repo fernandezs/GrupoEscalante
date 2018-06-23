@@ -54,7 +54,7 @@ class OptionsTableSeeder extends Seeder
                 'descripcion' => 'Administración de las opciones del menu',
                 'icono_l' => 'fa-circle-o',
                 'icono_r' => '',
-                'orden' => 3,
+                'orden' => 4,
                 'created_at' => '2017-07-09 10:35:37',
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
@@ -68,7 +68,7 @@ class OptionsTableSeeder extends Seeder
                 'descripcion' => 'Administración de los roles de los usuarios',
                 'icono_l' => 'fa-expeditedssl',
                 'icono_r' => '',
-                'orden' => 4,
+                'orden' => 5,
                 'created_at' => '2017-07-09 10:35:37',
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
@@ -76,34 +76,6 @@ class OptionsTableSeeder extends Seeder
             4 => 
             array (
                 'id' => 5,
-                'padre' => NULL,
-                'nombre' => 'Ayuda',
-                'ruta' => NULL,
-                'descripcion' => 'Manual de usuario y tutoriales',
-                'icono_l' => 'fa-plus-square',
-                'icono_r' => '',
-                'orden' => 6,
-                'created_at' => '2017-07-09 10:35:37',
-                'updated_at' => '2017-11-07 16:42:44',
-                'deleted_at' => NULL,
-            ),
-            5 => 
-            array (
-                'id' => 6,
-                'padre' => NULL,
-                'nombre' => 'Acerca De...',
-                'ruta' => NULL,
-                'descripcion' => '',
-                'icono_l' => 'fa-info-circle',
-                'icono_r' => '',
-                'orden' => 7,
-                'created_at' => '2017-07-09 10:35:37',
-                'updated_at' => '2017-11-07 16:42:44',
-                'deleted_at' => NULL,
-            ),
-            6 => 
-            array (
-                'id' => 7,
                 'padre' => 1,
                 'nombre' => 'Configuraciones',
                 'ruta' => 'admin/configurations',
@@ -115,9 +87,9 @@ class OptionsTableSeeder extends Seeder
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
             ),
-            7 => 
+            5 => 
             array (
-                'id' => 8,
+                'id' => 6,
                 'padre' => NULL,
                 'nombre' => 'Notas',
                 'ruta' => 'notas',
@@ -129,9 +101,9 @@ class OptionsTableSeeder extends Seeder
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
             ),
-            8 => 
+            6 => 
             array (
-                'id' => 9,
+                'id' => 7,
                 'padre' => NULL,
                 'nombre' => 'Articulos',
                 'ruta' => NULL,
@@ -143,10 +115,10 @@ class OptionsTableSeeder extends Seeder
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
             ),
-            9 => 
+            7 => 
             array (
-                'id' => 10,
-                'padre' => 9,
+                'id' => 8,
+                'padre' => 7,
                 'nombre' => 'Listar todos los articulos',
                 'ruta' => 'articulos',
                 'descripcion' => 'Administración de usuarios',
@@ -157,10 +129,10 @@ class OptionsTableSeeder extends Seeder
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
             ),
-            10 => 
+            8 => 
             array (
-                'id' => 11,
-                'padre' => 9,
+                'id' => 9,
+                'padre' => 7,
                 'nombre' => 'Categorías',
                 'ruta' => 'categorias',
                 'descripcion' => 'Administración de las categorias',
@@ -171,10 +143,10 @@ class OptionsTableSeeder extends Seeder
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
             ),
-            11 => 
+            9 => 
             array (
-                'id' => 12,
-                'padre' => 9,
+                'id' => 10,
+                'padre' => 7,
                 'nombre' => 'Marcas',
                 'ruta' => 'marcas',
                 'descripcion' => 'Administración de las marcas',
@@ -185,9 +157,9 @@ class OptionsTableSeeder extends Seeder
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
             ),
-            12 => 
+            10 => 
             array (
-                'id' => 13,
+                'id' => 11,
                 'padre' => NULL,
                 'nombre' => 'Proveedores',
                 'ruta' => 'proveedores',
@@ -199,9 +171,9 @@ class OptionsTableSeeder extends Seeder
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
             ),
-            13 => 
+            11 => 
             array (
-                'id' => 14,
+                'id' => 12,
                 'padre' => NULL,
                 'nombre' => 'Reparaciones',
                 'ruta' => NULL,
@@ -213,10 +185,10 @@ class OptionsTableSeeder extends Seeder
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
             ),
-            14 => 
+            12 => 
             array (
-                'id' => 15,
-                'padre' => 14,
+                'id' => 13,
+                'padre' => 12,
                 'nombre' => 'Listar todas',
                 'ruta' => 'reparaciones',
                 'descripcion' => 'Administración de las reparaciones',
@@ -227,10 +199,10 @@ class OptionsTableSeeder extends Seeder
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
             ),
-            15 => 
+            13 => 
             array (
-                'id' => 16,
-                'padre' => 14,
+                'id' => 14,
+                'padre' => 12,
                 'nombre' => 'Estados',
                 'ruta' => 'estados',
                 'descripcion' => 'Administración de los estados',
@@ -241,23 +213,23 @@ class OptionsTableSeeder extends Seeder
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
             ),
-            16 => 
+            14 => 
             array (
-                'id' => 17,
+                'id' => 15,
                 'padre' => NULL,
                 'nombre' => 'Deudas',
                 'ruta' => 'deudas',
                 'descripcion' => 'Administración de las deudas de los clientes',
-                'icono_l' => 'fa-eye-slash',
+                'icono_l' => 'fa-handshake-o',
                 'icono_r' => '',
                 'orden' => 0,
                 'created_at' => '2017-07-09 10:35:37',
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
             ),
-            17 => 
+            15 => 
             array (
-                'id' => 18,
+                'id' => 16,
                 'padre' => NULL,
                 'nombre' => 'Clientes',
                 'ruta' => 'clientes',
@@ -269,10 +241,10 @@ class OptionsTableSeeder extends Seeder
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
             ),
-            18 => 
+            16 => 
             array (
-                'id' => 19,
-                'padre' => 18,
+                'id' => 17,
+                'padre' => 16,
                 'nombre' => 'Listar todos',
                 'ruta' => 'clientes',
                 'descripcion' => 'Lista los clientes del negocio',
@@ -283,10 +255,10 @@ class OptionsTableSeeder extends Seeder
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
             ),
-            19 => 
+            17 => 
             array (
-                'id' => 20,
-                'padre' => 18,
+                'id' => 18,
+                'padre' => 16,
                 'nombre' => 'Nuevo cliente',
                 'ruta' => 'clientes/create',
                 'descripcion' => 'Agrega un nuevo cliente',
@@ -296,7 +268,21 @@ class OptionsTableSeeder extends Seeder
                 'created_at' => '2017-07-09 10:35:37',
                 'updated_at' => '2017-11-07 16:42:44',
                 'deleted_at' => NULL,
-            )
+            ),
+            18 => 
+            array (
+                'id' => 19,
+                'padre' => 1,
+                'nombre' => 'Empleados',
+                'ruta' => 'admin/empleados',
+                'descripcion' => 'Administración de usuarios',
+                'icono_l' => 'fa-user',
+                'icono_r' => '',
+                'orden' => 3,
+                'created_at' => '2017-07-09 10:35:37',
+                'updated_at' => '2017-11-07 16:42:44',
+                'deleted_at' => NULL,
+            ),
         ));
         
         

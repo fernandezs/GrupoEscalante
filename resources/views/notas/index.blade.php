@@ -1,17 +1,14 @@
 @extends('adminlte::layouts.app')
 
-@section('header-content')
-  asijp
-@endsection
 @section('htmlheader_title')
-	Articulos
+	Notas
 @endsection
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Articulos</h1>
+        <h1 class="pull-left">Notas</h1>
         <h1 class="pull-right">
-           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('articulos.create') !!}">
+           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('notas.create') !!}">
               <i class="fa fa-plus"></i>
               <span class="hidden-xs hidden-sm">Agregar Nuev@</span>
            </a>
@@ -25,7 +22,7 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
-                    @include('articulos.table')
+                    @include('notas.table')
             </div>
         </div>
     </div>

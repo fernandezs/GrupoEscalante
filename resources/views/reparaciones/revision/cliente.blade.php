@@ -16,7 +16,7 @@
         {!! $reparacion->cliente->direccion !!}<br>
         <div class="form-group">
             <i class="fa fa-file"></i> {!! Form::label('descripcion', 'Breve descripcion:') !!}
-            {!! Form::textarea('descripcion', null, ['class' => 'form-control', 'rows' => '3']) !!}
+            {!! Form::textarea('descripcion', $reparacion->descripcion, ['class' => 'form-control', 'rows' => '3']) !!}
         </div>
     </div>
 </div>

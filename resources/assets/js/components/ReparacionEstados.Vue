@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label for="add">Agregar un repuesto:</label>  <button type="button" class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#modalArticulo"><i class="fa fa-plus"></i></button>
+        <label for="add">Agregar un estado:</label>  <button type="button" class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#modalArticulo"><i class="fa fa-plus"></i></button>
         <div class="modal fade" role="dialog" id="modalArticulo" data-backdrop="false">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -39,10 +39,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn" @click="resetInputs()" v-show="isEditing">Cancelar</button>
                         <button type="button" class="btn btn-info" :disabled="isDisabled" @click="store()" v-if="!isEditing">Agregar estado</button>
                         <button type="button" class="btn btn-info" :disabled="isDisabled" @click="update()" v-if="isEditing">Guardar estado</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"  id="closeModalEstados">Cerrar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -107,7 +106,7 @@
                     this.resetInputs()
                     /*Emite el evento agregaEstado y es escuchado en el componente EstadoReparacionTabla*/
                     EventBus.$emit('agregaEstado', response.data.data);
-                    $('#closeModalEstados').click();
+                    $("#modalArticulo").modal('hide');
                     toastr.success(response.data.message)
                 }).catch(error => {
                     console.log(error.message)
@@ -117,23 +116,25 @@
 
             },
             edit(estado) {
+                $("#modalArticulo").modal('show');
                 this.resetInputs();
                 this.isEditing = true;
                 this.estado = estado.estado_id;
-                this.empleado = this.lista.findIndex(i => i.id === estado.empleado_id);;
+                this.empleado = this.lista.find(i => i.value === estado.empleado_id);
                 this.detalle = estado.detalle;
                 this.estado_id = estado.id;
             },
             update() {
                 axios.put('/estadoReparacion/' + this.estado_id, {
                     estado_id : this.estado,
-                    empleado_id : this.empleado,
+                    empleado_id : this.empleado.value,
                     detalle : this.detalle
                 }).then(response => {
                     toastr.success(response.data.message)
                     this.resetInputs()
                     /*Emite el evento editEstado y es escuchado en el componente EstadoReparacionTabla*/
                     EventBus.$emit('editEstado', response.data.data);
+                    $("#modalArticulo").modal('hide');
                 }).catch(error => {
                     console.log(error.message)
                 });

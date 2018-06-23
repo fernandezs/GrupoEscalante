@@ -41,10 +41,11 @@ class HomeController extends Controller
         $articulos = Articulo::count();
         $reparaciones = Reparacion::count();
         $clientes = Cliente::count();
-        $users = User::count();
+        $deudas = Deuda::where('estado', 'INPAGO')->count();
         $listaArticulos = Articulo::orderBy('created_at')->take(10)->get();
+        $listaDeudas = Deuda::orderBy('created_at')->take(10)->get();
         $listaReparaciones = Reparacion::orderBy('created_at')->take(10)->get();
-        return view('dashboard.home');
+        return view('dashboard.home', compact('articulos','deudas','clientes','reparaciones','listaArticulos','listaReparaciones','listaDeudas'));
         //return view('adminlte::home', compact('articulos','users','clientes','reparaciones','listaArticulos','listaReparaciones'));
     }
 }

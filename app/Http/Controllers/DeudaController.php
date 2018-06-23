@@ -54,7 +54,11 @@ class DeudaController extends AppBaseController
     {
         $articulos = $this->articuloRepository->pluck('nombre','id');
         $clientes = $this->clienteRepository->pluck('nombre','id');
-        return view('deudas.create', compact('clientes','articulos'));
+
+        $ultimo_registro = $this->deudaRepository->withTrashed()->orderBy('remito_nro','DESC')->first();
+        $ultimo_cod_remito = ($ultimo_registro != null) ? ($ultimo_registro->remito_nro + 1) : 1;
+
+        return view('deudas.create', compact('clientes','articulos', 'ultimo_cod_remito'));
     }
 
     /**

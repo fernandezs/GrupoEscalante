@@ -40,6 +40,7 @@ class Articulo extends Model
 
     public $fillable = [
         'cod_articulo',
+        'modelo',
         'categoria_id',
         'nombre',
         'descripcion',

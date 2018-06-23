@@ -2,12 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\Articulo;
+use App\Models\Nota;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
-use Illuminate\Support\Facades\Storage;
 
-class ArticuloDataTable extends DataTable
+class NotaDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -19,11 +18,7 @@ class ArticuloDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'articulos.datatables_actions')
-        ->editColumn('foto', function (Articulo $art) { 
-            $url= Storage::url($art->foto); 
-            return '<img src='.$url.' border="0" width="40" class="img-rounded" align="center" />'; 
-     })->rawColumns(['foto','action']);
+        return $dataTable->addColumn('action', 'notas.datatables_actions');
     }
 
     /**
@@ -32,9 +27,9 @@ class ArticuloDataTable extends DataTable
      * @param \App\Models\Post $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Articulo $model)
+    public function query(Nota $model)
     {
-        return $model->with('categoria','marca')->select('articulos.*');
+        return $model->newQuery();
     }
 
     /**
@@ -72,12 +67,8 @@ class ArticuloDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'cod_articulo' => ['title' => 'Codigo', 'width' => '10%'],
-            'foto',
-            'modelo',
-            'nombre',
-            'categoria_id' => ['data'=> 'categoria.nombre','title' => 'Categoria', 'name' => 'categoria.nombre'],
-            'marca_id' => ['data'=> 'marca.nombre','title' => 'Marca', 'name' => 'marca.nombre'] 
+            'titulo',
+            'descripcion'
         ];
     }
 
@@ -88,6 +79,6 @@ class ArticuloDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'articulosdatatable_' . time();
+        return 'notasdatatable_' . time();
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label for="add">Agregar un estado:</label>  <button type="button" class="btn btn-info btn-circle btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
+        <label for="add">Agregar un repuesto:</label>  <button type="button" class="btn btn-info btn-circle btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
         <div class="modal fade" role="dialog" id="myModal" data-backdrop="false">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -52,6 +52,7 @@
                     </div>
                     <div class="modal-footer">
                         <button
+                               type="button"
                                value="Agregar"
                                class="btn btn-success"
                                @click="store()"

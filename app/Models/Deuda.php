@@ -35,6 +35,7 @@ class Deuda extends Model
 
 
     public $fillable = [
+        'remito_nro',
         'user_id',
         'cliente_id',
         'detalle',
@@ -69,7 +70,8 @@ class Deuda extends Model
      * @var array
      */
     public static $rules = [
-        'cliente_id' => 'required|exists:clientes,id'
+        'cliente_id' => 'required|exists:clientes,id',
+        'remito_nro' => 'unique:deudas,remito_nro'
     ];
 
     public function detalles()

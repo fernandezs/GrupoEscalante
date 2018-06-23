@@ -3,7 +3,7 @@
 <input type="hidden" value="{{ $reparacion->cod_factura }}" name="cod_factura">
 <div class="row">
     <div class="col-md-4">
-        <cliente :_cliente=" {{ json_encode($reparacion->cliente)}}" :detalle="{{ json_encode($reparacion->detalle)}}"></cliente>
+        @include('reparaciones.revision.cliente')
     </div>
 
     <div class="col-md-4">
@@ -30,9 +30,6 @@
                     <articulos-reparacion :reparacion_id="{{ json_encode($reparacion->id)}}"
                                           :listaarticulos=" {{ json_encode($articulos)}}"></articulos-reparacion>
 
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-default"><i class="fa fa-check"></i> Terminar y generar factura</button>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-success" value="Guardar">

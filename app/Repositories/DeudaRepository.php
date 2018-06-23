@@ -36,4 +36,9 @@ class DeudaRepository extends BaseRepository
     {
         return Deuda::class;
     }
+
+    public function withTrashed()
+    {
+        return $this->model->withTrashed();
+    }
 }

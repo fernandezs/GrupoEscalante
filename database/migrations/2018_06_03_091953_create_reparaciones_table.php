@@ -24,7 +24,7 @@ class CreateReparacionesTable extends Migration
             $table->string('estado')->nullable()->default('INICIADO');
             $table->enum('tipo_garantia',['GRUPO ESCALANTE', 'FABRICANTE'])->default('GRUPO ESCALANTE');
             $table->date('fecha_egreso')->nullable();
-            $table->text('detalle')->nullable();
+            $table->text('descripcion')->nullable();
             $table->integer('dias_garantia')->nullable();
             $table->timestamps();
             $table->softDeletes();

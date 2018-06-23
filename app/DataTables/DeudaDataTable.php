@@ -86,6 +86,7 @@ class DeudaDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'remito_nro',
             'user_id' => ['data' => 'user.username','name' => 'user.username', 'title' => 'Usuario', ],
             'cliente_id'=> ['data' => 'cliente.nombre','name' => 'cliente.nombre', 'title' => 'Cliente', ],
             'estado',

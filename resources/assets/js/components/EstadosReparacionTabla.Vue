@@ -26,7 +26,7 @@
                         <td>{{ estado.fecha | fecha-local}}</td>
                         <td>
                             <a href="#" class="btn btn-default btn-sm" title="Ver estado" @click="showEstado(estado)"><i class="fa fa-eye"></i></a>
-                            <button type="button" class="btn btn-primary btn-sm" title="Editar estado"><i class="fa fa-edit" @click="editarEstado(estado)"></i></button>
+                            <button type="button" class="btn btn-primary btn-sm" title="Editar estado" @click="editarEstado(estado)"><i class="fa fa-edit"></i></button>
                         </td>
                     </tr>
                 </tbody>

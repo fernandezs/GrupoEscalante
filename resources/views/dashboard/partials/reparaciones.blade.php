@@ -1,7 +1,8 @@
-<div class="col-md-7 col-sm-12">
+<div class="col-md-8">
+    <div class="box box-primary">
 
     <div class="box-header with-border">
-        <h3 class="box-title">Ultimos clientes con pedidos</h3>
+        <h3 class="box-title">Ultimas reparaciones</h3>
 
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -11,6 +12,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
+        @if(count($listaReparaciones) > 0)
         <div class="table-responsive">
             <table class="table no-margin">
                 <thead>
@@ -45,13 +47,18 @@
                 </tbody>
             </table>
         </div>
+        @else
+        <h3>No hay ninguna reparacion registrada!</h3>
+        <small>Crea una desde el munú</small>
+        @endif
         <!-- /.table-responsive -->
     </div>
     <!-- /.box-body -->
     <div class="box-footer clearfix">
-        <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-        <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
+        <a href="{{ route('reparaciones.create')}}" class="btn btn-sm btn-default btn-flat pull-left">Nueva reparacion</a>
+        <a href="{{ route('reparaciones.index')}}" class="btn btn-sm btn-default btn-flat pull-right">Ver todas</a>
     </div>
     <!-- /.box-footer -->
 
+</div>
 </div>

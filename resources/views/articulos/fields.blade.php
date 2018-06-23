@@ -5,9 +5,14 @@
 </div>
 
 <!-- Cod Articulo Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-3">
     {!! Form::label('cod_articulo', 'Código de Articulo:') !!}
     {!! Form::number('cod_articulo', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group col-sm-3">
+    {!! Form::label('modelo', 'Modelo:') !!}
+    {!! Form::text('modelo', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Categoria Id Field -->

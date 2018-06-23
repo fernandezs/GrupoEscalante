@@ -15,6 +15,7 @@ class CreateDeudasTable extends Migration
     {
         Schema::create('deudas', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('remito_nro')->unique();
             $table->integer('user_id')->unsigned();
             $table->integer('cliente_id')->unsigned();
             $table->string('detalle')->nullable();

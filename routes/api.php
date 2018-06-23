@@ -47,3 +47,7 @@ Route::resource('estados', 'EstadoAPIController');
 Route::resource('reparaciones', 'ReparacionAPIController');
 
 Route::resource('estado_reparacion', 'EstadoReparacionAPIController');
+
+Route::resource('notas', 'NotaAPIController');
+
+Route::resource('notas', 'NotaAPIController');

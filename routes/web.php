@@ -20,7 +20,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('empleados', 'EmpleadoController');
+    Route::resource('admin/empleados', 'EmpleadoController');
     Route::resource('categorias', 'CategoriaController');
     Route::resource('marcas', 'MarcaController');
     Route::resource('proveedores', 'ProveedorController');
@@ -70,3 +70,7 @@ Route::get('proveedores/catalogos/{id}', 'ProveedorController@catalogos')->name(
 
 Route::resource('detalleReparacion', 'DetalleReparacionController');
 Route::get('deuda/pdf/{id}', 'PdfController@invoice')->name('pdf.invoice');
+
+Route::resource('notas', 'NotaController');
+
+Route::resource('notas', 'NotaController');

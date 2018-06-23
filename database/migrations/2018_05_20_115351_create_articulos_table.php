@@ -16,6 +16,7 @@ class CreateArticulosTable extends Migration
         Schema::create('articulos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cod_articulo')->unique();
+            $table->string('modelo')->nullable();
             $table->integer('categoria_id')->unsigned();
             $table->string('nombre');
             $table->text('descripcion')->nullable();

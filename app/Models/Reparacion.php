@@ -48,7 +48,7 @@ class Reparacion extends Model
         'estado',
         'tipo_garantia',
         'fecha_egreso',
-        'detalle',
+        'descripcion',
         'dias_garantia'
     ];
 
@@ -67,7 +67,6 @@ class Reparacion extends Model
         'estado' => 'string',
         'tipo_garantia' => 'string',
         'fecha_egreso' => 'datetime:d/m/Y',
-        'detalle' => 'string',
         'dias_garantia' => 'integer'
     ];
 

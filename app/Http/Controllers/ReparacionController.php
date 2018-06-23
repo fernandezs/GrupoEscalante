@@ -137,7 +137,7 @@ class ReparacionController extends AppBaseController
      * @return Response
      */
     public function update($id, Request $request)
-    {   return $request->all();
+    {   
         $reparacion = $this->reparacionRepository->findWithoutFail($id);
 
         if (empty($reparacion)) {
