@@ -1,51 +1,81 @@
 <template>
-    <div class="box box-primary contenedor">
-        <div class="box-header with-border">
-            <h3 class="box-title"><i class="fa fa-cubes"></i> Argregar articulos</h3>
-        </div>
-        <div class="box-body">
-            <div class="form-group">
-                <label>Seleccione un articulo:</label>
-                <v-select v-model="selected"  :options="lista" placeholder="Seleccione un articulo..."></v-select>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="">Valor de venta:</label>
-                <input type="text" disabled="true" v-model="articulo.precio_venta" class="form-control">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="">Marca:</label>
-                <input type="text" disabled="true" v-model="articulo.marca.nombre" class="form-control" >
-            </div>
-            
-                <div class="form-group col-md-6">
-                    <label for="">Cantidad:</label>
-                    <div class="input-group">
-                        <input type="number" v-model.number="cantidad" class="form-control">
-                        <span class="input-group-btn">
+    <div>
+        <label for="add">Agregar un estado:</label>  <button type="button" class="btn btn-info btn-circle btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
+        <div class="modal fade" role="dialog" id="myModal" data-backdrop="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="box-header with-border">
+                            <h4 class="box-title"><i class="fa fa-cubes"></i> Argregar articulos</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box box-primary">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label>Seleccione un articulo:</label>
+                                    <v-select v-model="selected"  :options="lista" placeholder="Seleccione un articulo..."></v-select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="">Valor de venta:</label>
+                                    <input type="text" disabled="true" v-model="articulo.precio_venta" class="form-control">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="">Marca:</label>
+                                    <input type="text" disabled="true" v-model="articulo.marca.nombre" class="form-control" >
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="">Cantidad:</label>
+                                    <div class="input-group">
+                                        <input type="number" v-model.number="cantidad" class="form-control">
+                                        <span class="input-group-btn">
                             <button class="btn btn-default" @click="cantidad+=1" type="button" >+</button>
                         </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="">Origen:</label>
+                                    <select class="form-control" v-model="origen">
+                                        <option value='null'>Seleccione..</option>
+                                        <option >INTERNO</option>
+                                        <option >EXTERNO</option>
+                                    </select>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                               value="Agregar"
+                               class="btn btn-success"
+                               @click="store()"
+                               :disabled="isDisabled()"> Agregar articulo
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"  id="closeModal">Cancelar</button>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="">Origen:</label>
-                    <select class="form-control" v-model="origen">
-                        <option value='null'>Seleccione..</option>
-                        <option >INTERNO</option>
-                        <option >EXTERNO</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="">Enviar a la lista</label>
-                    <input type="button"
-                           value="Agregar"
-                           class="btn btn-success btn-block"
-                           @click="store()"
-                           :disabled="isDisabled()">
-                </div>
-            
+            </div>
         </div>
     </div>
 </template>
+
+<style>
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+    }
+</style>
 
 <script>
 
@@ -91,11 +121,12 @@
                     cantidad        : this.cantidad,
                     subtotal        : this.getSubtotal(this.articulo.precio_venta,
                                                     this.cantidad)
-                }).then(response => { 
-                    toastr.success(response.data.message)
+                }).then(response => {
                     /*emite un evento al componente tabla para que agregue un articulo*/
                     EventBus.$emit('addDetalle', response.data.data);
                     this.resetInputs();
+                    $('#closeModal').click();
+                    toastr.success(response.data.message)
                   });
             },
             delete(id) {

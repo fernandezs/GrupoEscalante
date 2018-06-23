@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 260);
+/******/ 	return __webpack_require__(__webpack_require__.s = 264);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2654,19 +2654,19 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(7)))
 
 /***/ }),
 
-/***/ 260:
+/***/ 264:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(261);
+module.exports = __webpack_require__(265);
 
 
 /***/ }),
 
-/***/ 261:
+/***/ 265:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2675,13 +2675,13 @@ module.exports = __webpack_require__(261);
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-window.$ = window.jQuery = __webpack_require__(7);
+window.$ = window.jQuery = __webpack_require__(8);
 
-__webpack_require__(262);
+__webpack_require__(266);
 
 __webpack_require__(11);
 
-window.Vue = __webpack_require__(8);
+window.Vue = __webpack_require__(9);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -2696,7 +2696,7 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 262:
+/***/ 266:
 /***/ (function(module, exports) {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -2847,7 +2847,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 5:
+/***/ 7:
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -3038,7 +3038,7 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ 7:
+/***/ 8:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13410,7 +13410,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 8:
+/***/ 9:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

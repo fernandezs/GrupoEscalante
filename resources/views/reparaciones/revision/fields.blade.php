@@ -1,30 +1,45 @@
 <input type="hidden" value="{{ $reparacion->id }}" id="reparacion_id
 ">
+<input type="hidden" value="{{ $reparacion->cod_factura }}" name="cod_factura">
 <div class="row">
     <div class="col-md-4">
-        <div class="col-sm-12">
-        <cliente :_cliente=" {{ json_encode($reparacion->cliente)}}" :descripcion="{{ json_encode($reparacion->detalle)}}"></cliente>
-
+        <cliente :_cliente=" {{ json_encode($reparacion->cliente)}}" :detalle="{{ json_encode($reparacion->detalle)}}"></cliente>
     </div>
-    <div class="col-sm-12">
-        <maquina :maquina="{{ json_encode($reparacion->articulo) }}">
+
+    <div class="col-md-4">
+        <maquina :articulo="{{ json_encode($reparacion->articulo) }}">
 
         </maquina>
     </div>
-    </div>
 
-    <div class="col-md-8">
-        <div class="col-md-6 col-sm-12">
-        <reparacion-estados :reparacion_id  ="{{ json_encode($reparacion->id) }}"
-                            :listaestados   ="{{ json_encode($estados) }}"
-                            :listaempleados ="{{ json_encode($empleados) }}">
-        </reparacion-estados>
-    </div>
 
-    <div class="col-md-6 col-sm-12">
-        <articulos-reparacion :reparacion_id="{{ json_encode($reparacion->id)}}"
-                              :listaarticulos=" {{ json_encode($articulos)}}"></articulos-reparacion>
-    </div>
+
+    <div class="col-md-4 col-sm-12">
+        <div class="box box-primary contenedor">
+            <div class="box-header">
+                <h3 class="box-title"><i class="fa fa-calendar-check-o"></i> Revision General</h3>
+            </div>
+            <div class="box-body">
+                <div class="form-group">
+                    <reparacion-estados :reparacion_id  ="{{ json_encode($reparacion->id) }}"
+                                        :listaestados   ="{{ json_encode($estados) }}"
+                                        :listaempleados ="{{ json_encode($empleados) }}">
+                    </reparacion-estados>
+                </div>
+                <div class="form-group">
+                    <articulos-reparacion :reparacion_id="{{ json_encode($reparacion->id)}}"
+                                          :listaarticulos=" {{ json_encode($articulos)}}"></articulos-reparacion>
+
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-default"><i class="fa fa-check"></i> Terminar y generar factura</button>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Guardar">
+                    <a href="{{ route('reparaciones.index') }}" class="btn btn-default">Cancelar</a>
+                </div>
+            </div>
+        </div>
     </div>
 
 

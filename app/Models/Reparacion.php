@@ -77,7 +77,7 @@ class Reparacion extends Model
      * @var array
      */
     public static $rules = [
-        'cod_factura' => 'required|unique:reparaciones,cod_factura|numeric',
+        'cod_factura' => 'required|unique:reparaciones,cod_factura',
         'articulo_id' => 'required|exists:articulos,id',
         'cliente_id'  => 'required|exists:clientes,id'
     ];

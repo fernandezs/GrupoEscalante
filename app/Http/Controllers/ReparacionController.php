@@ -14,6 +14,7 @@ use App\Repositories\EmpleadoRepository;
 use Flash;
 use App\Models\DetalleReparacion;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Http\Request;
 use Response;
 use App\Models\EstadoReparacion;
 use Carbon\Carbon;
@@ -135,8 +136,8 @@ class ReparacionController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateReparacionRequest $request)
-    {
+    public function update($id, Request $request)
+    {   return $request->all();
         $reparacion = $this->reparacionRepository->findWithoutFail($id);
 
         if (empty($reparacion)) {

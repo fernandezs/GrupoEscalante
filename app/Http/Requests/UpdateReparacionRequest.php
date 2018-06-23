@@ -25,8 +25,9 @@ class UpdateReparacionRequest extends FormRequest
      */
     public function rules(){
         $id = $this->reparacion;
+        dd($id);
         $rules = Reparacion::$rules;
-        //$rules['campo'] = $rules['campo'] . ',campo,' . $id;
+        $rules['cod_factura'] = $rules['cod_factura'] .','. $id;
 
         return $rules;
     }

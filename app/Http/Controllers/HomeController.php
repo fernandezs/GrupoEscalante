@@ -44,6 +44,7 @@ class HomeController extends Controller
         $users = User::count();
         $listaArticulos = Articulo::orderBy('created_at')->take(10)->get();
         $listaReparaciones = Reparacion::orderBy('created_at')->take(10)->get();
-        return view('adminlte::home', compact('articulos','users','clientes','reparaciones','listaArticulos','listaReparaciones'));
+        return view('dashboard.home');
+        //return view('adminlte::home', compact('articulos','users','clientes','reparaciones','listaArticulos','listaReparaciones'));
     }
 }

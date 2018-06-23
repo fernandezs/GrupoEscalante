@@ -72,7 +72,7 @@ class DeudaController extends AppBaseController
 
         Flash::success('Deuda guardado exitosamente.');
 
-        return redirect(route('deudas.setup', $deuda->id));
+        return redirect(route('deudas.revision', $deuda->id));
     }
 
     /**

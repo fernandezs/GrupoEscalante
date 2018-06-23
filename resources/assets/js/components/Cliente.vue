@@ -18,7 +18,7 @@
         {{ cliente.direccion }}<br> 
         <div class="form-group">
             <i class="fa fa-file"></i> <label>Breve descripcion:</label>
-            <textarea class="form-control" name="descripcion" id="descripcion" :value="descripcion">
+            <textarea class="form-control" name="detalle" id="detalle" :value="detalle">
            	</textarea>
         </div>
     </div>
@@ -27,7 +27,7 @@
 
 <script>
     export default {
-    	props : ['_cliente', 'descripcion'],
+    	props : ['_cliente', 'detalle'],
         data() {
             return {
                 cliente : null

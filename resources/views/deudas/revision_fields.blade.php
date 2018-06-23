@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-4 col-sm-12">
-        <cliente :_cliente=" {{ json_encode($deuda->cliente )}}"></cliente>
+        <cliente :_cliente=" {{ json_encode($deuda->cliente )}}" :detalle="{{ json_encode($deuda->detalle) }}"></cliente>
 
     </div>
     <div class="col-md-5 col-sm-12">

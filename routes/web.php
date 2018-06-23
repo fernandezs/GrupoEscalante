@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('detalle_deudas/deuda/{id}', 'DetalleDeudaController@detallesByDeudaID');
     Route::resource('estados', 'EstadoController');
     Route::resource('reparaciones', 'ReparacionController');
-    Route::get('reparaciones/{id}/revision', 'ReparacionController@revision')->name('reparaciones.revision');
+    Route::get('reparaciones/revision/{id}', 'ReparacionController@revision')->name('reparaciones.revision');
     
     //    Route::get('/link1', function ()    {
 //        // Uses Auth Middleware

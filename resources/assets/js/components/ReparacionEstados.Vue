@@ -1,38 +1,65 @@
 <template>
-    <div class="box box-primary contenedor">
-        <div class="box-header">
-            <h3 class="box-title">
-                <i class="fa fa-sitemap"></i> Asignar un estado
-            </h3>
-        </div>
-        <div class="box-body">
-            <div class="form-group">
-                <label>Estado:</label>
-                <select name="estado_id" id="estado_id" class="form-control" v-model="estado">
-                    <option value="null">Seleccione un estado...</option>
-                    <option v-for="estado in estados" :value="estado.id">
-                        {{ estado.estado}}
-                    </option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Empleado:</label>
-                <v-select v-model="empleado"  :options="lista" placeholder="Seleccione un empleado..."></v-select>
-            </div>
-            <div class="form-group">
-                <label>Detalle:</label>
-                <textarea name="detalle" id="detalle" cols="3" rows="6" v-model="detalle" class="form-control"></textarea>
-                
-            </div>
-            <div class="form-group">
-                <button type="button" class="btn" @click="resetInputs()" v-show="isEditing">Cancelar</button>
-                <button type="button" class="btn btn-info" :disabled="isDisabled" @click="store()" v-if="!isEditing">Agregar estado</button>
-                <button type="button" class="btn btn-info" :disabled="isDisabled" @click="update()" v-if="isEditing">Guardar estado</button>
+    <div>
+        <label for="add">Agregar un repuesto:</label>  <button type="button" class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#modalArticulo"><i class="fa fa-plus"></i></button>
+        <div class="modal fade" role="dialog" id="modalArticulo" data-backdrop="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="box-header">
+                            <h3 class="box-title">
+                                <i class="fa fa-sitemap"></i> Asignar un estado
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box box-primary">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label>Estado:</label>
+                                    <select name="estado_id" id="estado_id" class="form-control" v-model="estado">
+                                        <option value="null">Seleccione un estado...</option>
+                                        <option v-for="estado in estados" :value="estado.id">
+                                            {{ estado.estado}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Empleado:</label>
+                                    <v-select v-model="empleado"  :options="lista" placeholder="Seleccione un empleado..."></v-select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Detalle:</label>
+                                    <textarea name="detalle" id="detalle" cols="3" rows="6" v-model="detalle" class="form-control"></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" @click="resetInputs()" v-show="isEditing">Cancelar</button>
+                        <button type="button" class="btn btn-info" :disabled="isDisabled" @click="store()" v-if="!isEditing">Agregar estado</button>
+                        <button type="button" class="btn btn-info" :disabled="isDisabled" @click="update()" v-if="isEditing">Guardar estado</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"  id="closeModalEstados">Cerrar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
-
+<style>
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+    }
+</style>
 <script>
     
     export default {
@@ -77,10 +104,11 @@
                     empleado_id : this.empleado.value,
                     detalle : this.detalle
                 }).then(response => {
-                    toastr.success(response.data.message)
                     this.resetInputs()
                     /*Emite el evento agregaEstado y es escuchado en el componente EstadoReparacionTabla*/
                     EventBus.$emit('agregaEstado', response.data.data);
+                    $('#closeModalEstados').click();
+                    toastr.success(response.data.message)
                 }).catch(error => {
                     console.log(error.message)
                 });
