@@ -8,7 +8,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Crear Articulo
+            <i class="fa fa-edit"></i> Crear nuevo articulo
         </h1>
     </section>
     <div class="content">

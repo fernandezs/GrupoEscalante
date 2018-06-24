@@ -15,20 +15,25 @@
         <!-- Articulo Id Field -->
         <div class="form-group col-sm-12">
             {!! Form::label('articulo_id', 'Articulo:') !!}
-            {!! Form::select('articulo_id',$articulos, null, ['class' => 'form-control']) !!}
+            {!! Form::select('articulo_id',$articulos, null, ['class' => 'form-control', 'id' => 'articulos', 'placeholder' => '']) !!}
         </div>
 
         <!-- Cliente Id Field -->
         <div class="form-group col-sm-12">
             {!! Form::label('cliente_id', 'Cliente:') !!}
-            {!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control']) !!}
+            {!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control', 'id' => 'clientes', 'placeholder' => '']) !!}
         </div>
 
 
         <!-- Fecha Ingreso Field -->
         <div class="form-group col-sm-12">
             {!! Form::label('fecha_ingreso', 'Fecha Ingreso:') !!}
-            {!! Form::date('fecha_ingreso', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+            <div class="input-group">
+                {!! Form::date('fecha_ingreso', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar-check-o"></i>
+                </span>
+            </div>
         </div>
        </div>
         
@@ -83,6 +88,23 @@
             maxHeight = Math.max.apply(null, heights);
             $('.contenedor').height(maxHeight);
         }
+
+        $("#articulos").select2({
+            placeholder : 'Seleccione una articulo',
+            language : {
+                "noResults" : function() {
+                    return "No se han encontrar articulos!";
+                }
+            }
+        });
+        $("#clientes").select2({
+            placeholder : 'Seleccione un cliente',
+            language : {
+                "noResults" : function() {
+                    return "No se han encontrar clientes!";
+                }
+            }
+        });
 
     })
 </script>

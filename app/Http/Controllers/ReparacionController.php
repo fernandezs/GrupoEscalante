@@ -83,7 +83,6 @@ class ReparacionController extends AppBaseController
         $estado->user_id = auth()->user()->id;
         $estado->fecha = Carbon::now();
         $estado->detalle = 'Estado Inicial en la reparacion';
-        $estado->empleado_id = 1;
         $estado->save();
         return redirect(route('reparaciones.revision', $reparacion->id));
     }

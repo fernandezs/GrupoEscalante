@@ -1,25 +1,45 @@
 <!-- Num Cliente Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('num_cliente', 'Num Cliente:') !!}
-    {!! Form::number('num_cliente', null, ['class' => 'form-control']) !!}
+    {!! Form::label('num_cliente', 'Num Cliente:') !!} 
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="fa fa-address-card"></i>
+        </span>
+        {!! Form::number('num_cliente', $ult_num_cliente, ['class' => 'form-control', 'readonly']) !!}
+    </div>
 </div>
 
 <!-- Nombre Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('nombre', 'Nombre:') !!}
-    {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="fa fa-user"></i>
+        </span>
+        {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Telefono Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('telefono', 'Telefono:') !!}
-    {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="fa fa-phone"></i>
+        </span>
+        {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Email Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('email', 'Email:') !!}
-    {!! Form::email('email', null, ['class' => 'form-control']) !!}
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="fa fa-envelope"></i>
+        </span>
+        {!! Form::email('email', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Doc Tipo Field -->
@@ -37,7 +57,12 @@
 <!-- Tipo Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('tipo', 'Tipo:') !!}
-    {!! Form::select('tipo', ['Consumidor Final' => 'Consumidor Final', 'Empleado' => 'Empleado', 'Monotributista' => 'Monotributista', 'Responsable Inscripto' => 'Responsable Inscripto', 'Revendedor' => 'Revendedor', 'Comerciante' => 'Comerciante', 'Gremio' => 'Gremio'], null, ['class' => 'form-control', 'id' => 'tipo']) !!}
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="fa fa-address-book"></i>
+        </span>
+        {!! Form::select('tipo', ['Consumidor Final' => 'Consumidor Final', 'Empleado' => 'Empleado', 'Monotributista' => 'Monotributista', 'Responsable Inscripto' => 'Responsable Inscripto', 'Revendedor' => 'Revendedor', 'Comerciante' => 'Comerciante', 'Gremio' => 'Gremio'], null, ['class' => 'form-control', 'id' => 'tipo']) !!}
+    </div>
 </div>
 
 <!-- Direccion Field -->

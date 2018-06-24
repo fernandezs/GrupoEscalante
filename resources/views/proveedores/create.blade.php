@@ -6,7 +6,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Crear Proveedor
+           <i class="fa fa-edit"></i>  Crear Proveedor
         </h1>
     </section>
     <div class="content">

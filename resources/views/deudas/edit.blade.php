@@ -1,5 +1,5 @@
 @extends('adminlte::layouts.app')
-
+@include('layouts.plugins.select2')
 @section('htmlheader_title')
 	Editar Deuda
 @endsection

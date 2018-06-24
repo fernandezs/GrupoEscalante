@@ -21,7 +21,7 @@
                 <tbody>
                     <tr v-for="estado in estados">
                         <td>{{ estado.user.username }}</td>
-                        <td>{{ estado.empleado.nombre }}</td>
+                        <td>{{ estado.empleado == null ? 'SISTEMA' : 'estado.empleado.nombre'  }}</td>
                         <td>{{ estado.estado.estado }}</td>
                         <td>{{ estado.fecha | fecha-local}}</td>
                         <td>

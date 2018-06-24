@@ -1,6 +1,5 @@
 @extends('adminlte::layouts.app')
-@include('layouts.vue')
-@include('layouts.axios')
+@include('layouts.plugins.select2')
 @section('htmlheader_title')
 	Crear Deuda
 @endsection
@@ -8,7 +7,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Crear un nuevo deudor
+          <i class="fa fa-edit"></i>  Crear un nuevo deudor
         </h1>
     </section>
     <div class="content" id="deudas">
@@ -16,7 +15,7 @@
         <div class="box box-primary">
             <div class="box-header">
                 <h3 class="box-title">
-                    Primero asigna el clientes
+                    Primero asigna el cliente
                 </h3>
             </div>
 

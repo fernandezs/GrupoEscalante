@@ -13,7 +13,6 @@
     </div>
 
 
-
     <div class="col-md-4 col-sm-12">
         <div class="box box-primary contenedor">
             <div class="box-header">
@@ -39,30 +38,26 @@
         </div>
     </div>
 
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="box box-info">
+            <div class="box-header">
+                <h3 class="box-title">
+                    <i class="fa fa-cubes"></i> Lista de repuestos
+                </h3>
+            </div>
 
-    <div class="col-md-12">
-        <div class="col-md-6">
-            <div class="box box-info">
-                <div class="box-header">
-                    <h3 class="box-title">
-                        <i class="fa fa-cubes"></i> Lista de repuestos
-                    </h3>
-                </div>
-
-                <div class="box-body">
-                    <div class="table table-responsive">
-                        <tabla-reparacion-articulos :listadetalles=" {{ json_encode($detalles)}}"></tabla-reparacion-articulos>
-                    </div>
+            <div class="box-body">
+                <div class="table table-responsive">
+                    <tabla-reparacion-articulos :listadetalles=" {{ json_encode($detalles)}}"></tabla-reparacion-articulos>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <reparacion-estados-tabla :reparacion_id="{{ json_encode($reparacion->id) }}" :listaestados="{{ json_encode($estadosReparacion) }}"></reparacion-estados-tabla>
-        </div>
-        
-        
     </div>
-
+    <div class="col-md-6">
+        <reparacion-estados-tabla :reparacion_id="{{ json_encode($reparacion->id) }}" :listaestados="{{ json_encode($estadosReparacion) }}"></reparacion-estados-tabla>
+    </div>
 </div>
 
 

@@ -18,7 +18,7 @@ class CreateEstadoReparacionTable extends Migration
             $table->integer('reparacion_id')->unsigned();
             $table->integer('estado_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->integer('empleado_id')->unsigned();
+            $table->integer('empleado_id')->nullable()->unsigned();
             $table->date('fecha');
             $table->string('detalle');
             $table->timestamps();

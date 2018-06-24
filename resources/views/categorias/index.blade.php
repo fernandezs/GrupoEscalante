@@ -8,9 +8,9 @@
     <section class="content-header">
         <h1 class="pull-left">Categorias</h1>
         <h1 class="pull-right">
-           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('categorias.create') !!}">
+           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" href="#myModal">
               <i class="fa fa-plus"></i>
-              <span class="hidden-xs hidden-sm">Agregar Nuev@</span>
+              <span class="hidden-xs hidden-sm">Nuevo</span>
            </a>
         </h1>
     </section>
@@ -26,5 +26,8 @@
             </div>
         </div>
     </div>
+
+      @include('categorias.formModal')
+
 @endsection
 

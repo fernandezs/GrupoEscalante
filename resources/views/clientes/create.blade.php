@@ -27,11 +27,3 @@
     </div>
 @endsection
 
-@push('scripts')
-<script>
-    $(document).ready(function(){
-        $("#tipo").select2();
-        $("#doc_tipo").select2();
-    });
-</script>
-@endpush

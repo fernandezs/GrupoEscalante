@@ -77981,6 +77981,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['articulo'],
@@ -78028,6 +78030,12 @@ var render = function() {
       _vm._v(" "),
       _c("label", [_vm._v("Marca:")]),
       _vm._v("\n        " + _vm._s(_vm.maquina.marca.nombre)),
+      _c("br"),
+      _vm._v(" "),
+      _c("i", { staticClass: "fa fa-barcode-alt" }),
+      _vm._v(" "),
+      _c("label", [_vm._v("Modelo:")]),
+      _vm._v("\n        " + _vm._s(_vm.maquina.modelo)),
       _c("br"),
       _vm._v(" "),
       _c("i", { staticClass: "fa fa-microchip" }),
@@ -78707,7 +78715,15 @@ var render = function() {
               return _c("tr", [
                 _c("td", [_vm._v(_vm._s(estado.user.username))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(estado.empleado.nombre))]),
+                _c("td", [
+                  _vm._v(
+                    _vm._s(
+                      estado.empleado == null
+                        ? "SISTEMA"
+                        : "estado.empleado.nombre"
+                    )
+                  )
+                ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(estado.estado.estado))]),
                 _vm._v(" "),

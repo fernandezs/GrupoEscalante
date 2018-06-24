@@ -40,7 +40,9 @@ class ClienteController extends AppBaseController
      */
     public function create()
     {
-        return view('clientes.create');
+        $ultimo_registro = $this->clienteRepository->orderBy('num_cliente','DESC')->first();
+        $ult_num_cliente = ($ultimo_registro != null) ? ($ultimo_registro->num_cliente + 1) : 1;
+        return view('clientes.create', compact('ult_num_cliente'));
     }
 
     /**

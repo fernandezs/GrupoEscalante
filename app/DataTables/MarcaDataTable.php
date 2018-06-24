@@ -50,11 +50,8 @@ class MarcaDataTable extends DataTable
                 'scrollX' => false,
                 'responsive' => true,
                 'buttons' => [
-                    'create',
                     'export',
-                    'print',
-                    'reset',
-                    'reload',
+                    'print'
                 ],
             ]);
     }

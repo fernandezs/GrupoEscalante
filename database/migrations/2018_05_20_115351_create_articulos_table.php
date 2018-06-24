@@ -25,7 +25,7 @@ class CreateArticulosTable extends Migration
             $table->decimal('precio_venta', 8,2);
             $table->integer('cantidad');
             $table->integer('cantidad_minima');
-            $table->string('foto')->nullable();
+            $table->string('foto')->default('/images/product/product.png')->nullable();
             $table->integer('nro_cabezal')->nullable();
             $table->enum('estado', ['DISPONIBLE', 'NO DISPONIBLE'])->default('DISPONIBLE');
             $table->timestamps();

@@ -12,6 +12,8 @@
             {{ maquina.cod_articulo }}<br>
             <i class="fa fa-bars"></i> <label>Marca:</label>
             {{ maquina.marca.nombre}}<br>
+            <i class="fa fa-barcode-alt"></i> <label>Modelo:</label>
+            {{ maquina.modelo}}<br>
             <i class="fa fa-microchip"></i> <label>Nro de cabezal:</label>
             {{ maquina.nro_cabezal }}<br>
             <div class="form-group">
