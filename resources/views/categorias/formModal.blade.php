@@ -1,4 +1,4 @@
-<div class="modal fade" role="dialog" id="myModal" data-backdrop="false">
+<div class="modal fade" role="dialog" id="modalCategoria" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -12,11 +12,11 @@
 
             <div class="form-group">
               {!! Form::label('nombre', 'Nombre') !!}
-              {!! Form::text('nombre', null, ['class' => 'form-control', 'required'])!!}
+              {!! Form::text('nombre', null, ['class' => 'form-control', 'required', 'v-model' => 'categoria'])!!}
             </div>
           </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Guardar</button>
+              <button type="submit" class="btn btn-primary" @click="storeCategoria()">Guardar</button>
               <button class="btn" data-dismiss ="modal">Cancelar</button>
               {!! Form::close() !!}
             </div>

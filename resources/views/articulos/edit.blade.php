@@ -1,5 +1,7 @@
 @extends('adminlte::layouts.app')
 @include('layouts.plugins.select2')
+@include('layouts.vue')
+@include('layouts.axios')
 @include('layouts.plugins.bootstrap_fileinput')
 @section('htmlheader_title')
 	Editar Articulo

@@ -23,14 +23,32 @@
 <!-- Categoria Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('categoria_id', 'Categoria:') !!}
-    {!! Form::select('categoria_id', $categorias, null, ['class' => 'form-control', 'id' => 'categorias', 'placeholder' => '', 'style' => 'width: 100%;']) !!}
+    <div class="input-group select2-bootstrap-prepend">
+        <select name="categoria_id" id="categorias" v-model="categoria" placeholder="" class="form-control" style="width: 100%;">
+            <option :value="categoria.id" v-for="categoria in categorias">@{{ categoria.nombre }}</option>
+        </select>
+        <span class="input-group-btn">
+				<a class="btn btn-default" href="#modalCategoria" data-toggle="modal">
+				<span class="glyphicon glyphicon-plus"></span> Agregar
+      </a>
+      </span>
+    </div>
 </div>
 
 
 <!-- Marca Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('marca_id', 'Marca:') !!}
-    {!! Form::select('marca_id',$marcas, null, ['class' => 'form-control', 'id' => 'marcas', 'placeholder' => '', 'style' => 'width: 100%;']) !!}
+    <div class="input-group select2-bootstrap-prepend">
+        <select name="marca_id" id="marcas" v-model="marca" placeholder="" class="form-control" style="width: 100%;">
+            <option :value="marca.id" v-for="marca in marcas">@{{ marca.nombre }}</option>
+        </select>
+        <span class="input-group-btn">
+				<a class="btn btn-default" data-toggle="modal" href="#modalMarca">
+				    <span class="glyphicon glyphicon-plus"></span> Agregar
+                </a>
+      </span>
+    </div>
 </div>
 
 <!-- Descripcion Field -->
@@ -48,7 +66,7 @@
         </span>
         {!! Form::number('precio_costo', null, ['class' => 'form-control', 'step' => '0.01']) !!}
     </div>
-    
+
 </div>
 
 <!-- Precio Venta Field -->
@@ -86,7 +104,9 @@
 
 <div class="form-group col-sm-12">
     {!! Form::label('proveedores', 'Proveedores:') !!}
+    <div class="input-group select2-bootstrap-prepend">
     {!! Form::select('proveedores[]', $proveedores, null, ['class' => 'form-control', 'multiple', 'id' => 'proveedores', 'style' => 'width: 100%;']) !!}
+    </div>
 </div>
 
 <!-- Nro Cabezal Field -->
@@ -113,37 +133,67 @@
     <a href="{!! route('articulos.index') !!}" class="btn btn-default">Cancelar</a>
 </div>
 
+<div class="modal fade" role="dialog" id="modalMarca" data-backdrop="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fa fa-edit"></i> Nueva marca</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    {!! Form::label('nombre', 'Nombre') !!}
+                    <input type="text" name="marca" class="form-control" v-model="modalM" id="modalM">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" @click="storeMarca()">Guardar</button>
+                <button class="btn" data-dismiss ="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-
+<div class="modal fade" role="dialog" id="modalCategoria" data-backdrop="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fa fa-edit"></i> Nueva categoría</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <div class="form-group">
+                        {!! Form::label('nombre', 'Nombre') !!}
+                        <input type="text" class="form-control" name="categoria" v-model="modalC" id="modalC">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" @click="storeCategoria()">Guardar</button>
+                <button class="btn" data-dismiss ="modal">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @push('scripts')
 <script>
     $(function () {
-        $("#rols").select2();
-        $("#categorias").select2({
-            placeholder : 'Seleccione una categoria',
-            language : {
-                "noResults" : function() {
-                    return "No se han encontrar resultados!";
-                }
-            }
-        });
-        $("#marcas").select2({
-            placeholder : 'Seleccione una marca...',
-            language : {
-                "noResults" : function() {
-                    return "No se han encontrar resultados!";
-                }
-            }
-        });
+
         $("#proveedores").select2({
             placeholder : 'Ingrese uno o mas proveedores...',
             language : {
                 "noResults" : function() {
                     return "No se han encontrar resultados!";
                 }
-            }
+            },
+            theme : 'bootstrap',
+            width : '100%'
         });
         var $input = $("#files");
         $input.fileinput({
@@ -154,6 +204,119 @@
 //            maxFileCount: 5,
             allowedFileExtensions: ["png","bmp","gif","jpg","pdf",'jpeg']
         });
+    })
+</script>
+<script type="text/javascript">
+
+    var vm = new Vue({
+        el : "#app",
+        data : {
+            marca : null,
+            categoria : null,
+            marcas : [],
+            categorias : null,
+            modalC : null,
+            modalM : null
+        },
+        methods : {
+            //metodo para guardar una marca
+            storeMarca() {
+                if(this.modalM == null) {
+                    alert('Completa este campo!')
+                }
+                else {
+                    axios.post('/api/marcas', { nombre : this.modalM }).then(response => {
+                        $('#modalMarca').modal('hide');
+                        this.modalM = null;
+                        toastr.info(response.data.message);
+                        this.marcas.push(response.data.data);
+                        this.marca = response.data.data.id;
+                    }).catch(error => {
+                        $('#modalM').focus();
+                        alert('La Marca "' + this.modalM + '" ya existe, ingrese otra!');
+                    });
+                }
+            },
+            //metodo para guardar una categoria
+            storeCategoria() {
+                if(this.modalC == null) {
+                    alert('Completa este campo!')
+                }
+                else {
+                    axios.post('/api/categorias', { nombre : this.modalC }).then(response => {
+                        //escondo el modal
+                        $('#modalCategoria').modal('hide');
+                        this.modalC = null;
+                        //respuesta del servidor
+                        toastr.info(response.data.message);
+                        //se agrega una categoria a la lista de categorias
+                        this.categorias.push(response.data.data);
+                        //seteo una categoria
+                        this.categoria = response.data.data.id;
+                        this.categoriaModal = null;
+                    }).catch(error => {
+                        $('#modalC').focus();
+                        alert('La Categoria "'+ this.modalC + '" ya existe, ingrese otra!');
+                    });
+                }
+            }
+        },
+        mounted() {
+            console.log(this.marca);
+            let self = this; // ámbito de vue
+
+            //seteo las categorias
+            axios.get('/api/categorias').then(response => {
+                self.categorias = response.data.data;
+            });
+            //seteo las marcas
+            axios.get('/api/marcas').then(response => {
+                self.marcas = response.data.data;
+
+            });
+
+
+            // inicializas select2
+            $('#marcas')
+                .select2({
+                    placeholder: 'Seleccione una marca...',
+                    data: self.marcas, // cargas los datos en vez de usar el loop
+                    theme : 'bootstrap',
+                    language : {
+                        noResults : function() {
+                            return 'No se han encontrado resultados!'
+                        }
+                    }
+                })
+                // nos hookeamos en el evento tal y como puedes leer en su documentación
+                .on('select2:select', function () {
+                    var value = $("#marcas").select2('data');
+                    // nos devuelve un array
+
+                    // ahora simplemente asignamos el valor a tu variable selected de VUE
+                    self.marca = value[0].id
+                })
+
+            $('#categorias')
+                .select2({
+                    placeholder: 'Seleccione una categoría...',
+                    data: self.categorias, // cargas los datos en vez de usar el loop
+                    theme : 'bootstrap',
+                    language : {
+                        noResults : function () {
+                            return 'No se han encontrado resultados!'
+                        }
+                    }
+                })
+                // nos hookeamos en el evento tal y como puedes leer en su documentación
+                .on('select2:select', function () {
+                    var value = $("#categorias").select2('data');
+                    // nos devuelve un array
+
+                    // ahora simplemente asignamos el valor a tu variable selected de VUE
+                    self.categoria = value[0].id;
+                })
+        }
     })
 </script>
 @endpush

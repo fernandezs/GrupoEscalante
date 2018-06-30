@@ -52,6 +52,12 @@ class CategoriaController extends AppBaseController
      */
     public function store(CreateCategoriaRequest $request)
     {
+        if($request->ajax())
+        {
+            $input = $request->all();
+            $categoria = $this->categoriaRepository->create($input);
+            return $this->sendResponse($categoria->toArray(), 'Categoria guardada exitosamente!');
+        }
         $input = $request->all();
 
         $categoria = $this->categoriaRepository->create($input);

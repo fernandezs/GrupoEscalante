@@ -8,7 +8,7 @@
     <section class="content-header">
         <h1 class="pull-left">Marcas</h1>
         <h1 class="pull-right">
-           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" href="#myModal">
+           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" href="#modalMarca">
               <i class="fa fa-plus"></i>
               <span class="hidden-xs hidden-sm">Nueva</span>
            </a>

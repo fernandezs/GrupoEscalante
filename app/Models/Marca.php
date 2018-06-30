@@ -56,5 +56,10 @@ class Marca extends Model
         return $this->hasMany(Articulo::class);
     }
 
+    public function scopeNombre($query, $param)
+    {
+        return $query->where('nombre', 'like','%' .$param. '%');
+    }
+
     
 }

@@ -1,4 +1,4 @@
-<div class="modal fade" role="dialog" id="myModal" data-backdrop="false">
+<div class="modal fade" role="dialog" id="modalMarca" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -16,7 +16,7 @@
             </div>
           </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Guardar</button>
+              <button type="submit" class="btn btn-primary" @click="storeMarca()">Guardar</button>
               <button class="btn" data-dismiss ="modal">Cancelar</button>
               {!! Form::close() !!}
             </div>

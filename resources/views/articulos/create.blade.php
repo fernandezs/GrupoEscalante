@@ -1,6 +1,8 @@
 @extends('adminlte::layouts.app')
 @include('layouts.plugins.select2')
 @include('layouts.plugins.bootstrap_fileinput')
+@include('layouts.vue')
+@include('layouts.axios')
 @section('htmlheader_title')
 	Crear Articulo
 @endsection
@@ -11,7 +13,7 @@
             <i class="fa fa-edit"></i> Crear nuevo articulo
         </h1>
     </section>
-    <div class="content">
+    <div class="content" id="articulo">
         @include('adminlte-templates::common.errors')
         <div class="box box-primary">
 
