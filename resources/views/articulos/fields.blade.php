@@ -70,9 +70,9 @@
     {!! Form::label('precio_costo', 'Precio Costo:') !!}
     <div class="input-group">
         <span class="input-group-addon">
-            <i class="fa fa-dollar"></i>
+            usd <i class="fa fa-dollar"></i>
         </span>
-        {!! Form::number('precio_costo', null, ['class' => 'form-control', 'step' => '0.01']) !!}
+        {!! Form::number('precio_costo', null, ['class' => 'form-control', 'step' => '0.01', 'placeholder' => 'dólares']) !!}
     </div>
 
 </div>
@@ -84,7 +84,7 @@
         <span class="input-group-addon">
             <i class="fa fa-dollar"></i>
         </span>
-        {!! Form::number('precio_venta', null, ['class' => 'form-control', 'step' => '0.01']) !!}
+        {!! Form::number('precio_venta', null, ['class' => 'form-control', 'step' => '0.01', 'placeholder' => 'en pesos']) !!}
     </div>
 </div>
 
