@@ -16,7 +16,6 @@
     <div class="content" id="articulo">
         @include('adminlte-templates::common.errors')
         <div class="box box-primary">
-
             <div class="box-body">
                 <div class="row">
                     {!! Form::open(['route' => 'articulos.store','enctype' => "multipart/form-data"]) !!}
@@ -24,6 +23,10 @@
                         @include('articulos.fields')
 
                     {!! Form::close() !!}
+
+                    @include('articulos.modalCategoria')
+                    @include('articulos.modalMarca')
+
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     {!! Form::label('nombre', 'Nombre') !!}
-                    {!! Form::text('nombre', null, ['class' => 'form-control', 'required', 'v-model' => 'marca'])!!}
+                    <input type="text" @keyUp.enter="storeMarca()" name="marca" class="form-control" v-model="modalM" id="modalM">
                 </div>
             </div>
             <div class="modal-footer">

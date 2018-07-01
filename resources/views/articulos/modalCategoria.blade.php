@@ -8,17 +8,14 @@
                 </button>
             </div>
             <div class="modal-body">
-
-                <form >
-                <div class="form-group">
-                    {!! Form::label('nombre', 'Nombre') !!}
-                    {!! Form::text('nombre', null, ['class' => 'form-control', 'required', 'v-model' => 'categoria'])!!}
-                </div>
+                    <div class="form-group">
+                        {!! Form::label('nombre', 'Nombre') !!}
+                        <input type="text" class="form-control" name="categoria" @keyUp.enter="storeCategoria()" v-model="modalC" id="modalC">
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" @click="storeCategoria()">Guardar</button>
                 <button class="btn" data-dismiss ="modal">Cancelar</button>
-                </form>
             </div>
         </div>
     </div>

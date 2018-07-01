@@ -23,6 +23,10 @@
                         @include('articulos.fields')
 
                    {!! Form::close() !!}
+
+                   @include('articulos.modalCategoria')
+                   @include('articulos.modalMarca')
+
                </div>
            </div>
        </div>

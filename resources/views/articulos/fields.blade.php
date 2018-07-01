@@ -1,7 +1,15 @@
-<!-- Nombre Field -->
+<div class="col-md-4 foto" id="foto">
+    <!-- Foto Field -->
+    <div class="form-group">
+        {!! Form::label('foto', 'Foto:') !!}
+        <input id="files" name="foto" type="file">
+    </div>
+</div>
+<div class="col-md-8">
+    <!-- Nombre Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('nombre', 'Nombre:') !!}
-    {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Ingrese un nombre']) !!}
+    {!! Form::text('nombre', null, ['class' => 'form-control', 'id' => 'nombre', 'placeholder' => 'Ingrese un nombre']) !!}
 </div>
 
 <!-- Cod Articulo Field -->
@@ -28,9 +36,9 @@
             <option :value="categoria.id" v-for="categoria in categorias">@{{ categoria.nombre }}</option>
         </select>
         <span class="input-group-btn">
-				<a class="btn btn-default" href="#modalCategoria" data-toggle="modal">
-				<span class="glyphicon glyphicon-plus"></span> Agregar
-      </a>
+            <button type="button" class="btn btn-default" @click="createCategoria()">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
       </span>
     </div>
 </div>
@@ -44,9 +52,9 @@
             <option :value="marca.id" v-for="marca in marcas">@{{ marca.nombre }}</option>
         </select>
         <span class="input-group-btn">
-				<a class="btn btn-default" data-toggle="modal" href="#modalMarca">
-				    <span class="glyphicon glyphicon-plus"></span> Agregar
-                </a>
+                <button type="button" class="btn btn-default" @click="createMarca()">
+                    <span class="glyphicon glyphicon-plus"></span> Agregar
+                </button>
       </span>
     </div>
 </div>
@@ -121,69 +129,27 @@
     {!! Form::select('estado', ['DISPONIBLE' => 'DISPONIBLE', 'NO DISPONIBLE' => 'NO DISPONIBLE'], null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Foto Field -->
-<div class="form-group col-sm-12 col-md-12">
-    {!! Form::label('foto', 'Foto:') !!}
-    <input id="files" name="foto" type="file">
-</div>
-
 <!-- Submit Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-12 pull-right">
     {!! Form::submit('Guardar', ['class' => 'btn btn-success']) !!}
     <a href="{!! route('articulos.index') !!}" class="btn btn-default">Cancelar</a>
 </div>
-
-<div class="modal fade" role="dialog" id="modalMarca" data-backdrop="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title"><i class="fa fa-edit"></i> Nueva marca</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    {!! Form::label('nombre', 'Nombre') !!}
-                    <input type="text" name="marca" class="form-control" v-model="modalM" id="modalM">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" @click="storeMarca()">Guardar</button>
-                <button class="btn" data-dismiss ="modal">Cancelar</button>
-            </div>
-        </div>
-    </div>
 </div>
 
-<div class="modal fade" role="dialog" id="modalCategoria" data-backdrop="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title"><i class="fa fa-edit"></i> Nueva categoría</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                    <div class="form-group">
-                        {!! Form::label('nombre', 'Nombre') !!}
-                        <input type="text" class="form-control" name="categoria" v-model="modalC" id="modalC">
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" @click="storeCategoria()">Guardar</button>
-                <button class="btn" data-dismiss ="modal">Cancelar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
+
+@if(isset($articulo))
+<input type="hidden" id="categoria_id" value="{{$articulo->categoria_id}}">
+<input type="hidden" id="marca_id" value="{{$articulo->marca_id}}">
+<input type="hidden" id="foto_url" value="{{Storage::url($articulo->foto)}}">
+@endif
 
 @push('scripts')
 <script>
-    $(function () {
+    $(document).ready(function () {
+        if($(window).width() > 650) {
+            $(".foto").height(300);
+        }
 
         $("#proveedores").select2({
             placeholder : 'Ingrese uno o mas proveedores...',
@@ -196,10 +162,27 @@
             width : '100%'
         });
         var $input = $("#files");
+        var baseUrl = {!! json_encode(url('/')) !!};
+        var url = $("#foto_url").val();
+        if(url == null) {
+             fullUrl = baseUrl + '/storage/product.png';
+             foto_nombre = "default.png"
+        }
+        else {
+            fullUrl = baseUrl + url;
+            foto_nombre = $("#nombre").val();
+        }
+        
         $input.fileinput({
             showUpload: false, // hide upload button
-            showRemove: false, // hide remove button
+            showRemove: true, // hide remove button
             language: 'es',
+            initialPreview : [
+            '<img class="file-preview-image kv-preview-data" src="'+ fullUrl +'">'],
+            initialPreviewFileType : 'image',
+            initialPreviewConfig : [
+                { caption : foto_nombre }
+            ],
 //            minFileCount: 1,
 //            maxFileCount: 5,
             allowedFileExtensions: ["png","bmp","gif","jpg","pdf",'jpeg']
@@ -219,10 +202,17 @@
             modalM : null
         },
         methods : {
+
+            //llama al modal para guardar una marca
+            createMarca() {
+                $("#modalMarca").modal('show');
+                $("#modalM").focus();
+            },
             //metodo para guardar una marca
             storeMarca() {
                 if(this.modalM == null) {
                     alert('Completa este campo!')
+                    $("#modalM").focus();
                 }
                 else {
                     axios.post('/api/marcas', { nombre : this.modalM }).then(response => {
@@ -237,10 +227,17 @@
                     });
                 }
             },
+
+            createCategoria() {
+                $("#modalCategoria").modal('show');
+                $("#modalC").focus();
+            },
             //metodo para guardar una categoria
             storeCategoria() {
                 if(this.modalC == null) {
+                    $("modalC").focus();
                     alert('Completa este campo!')
+                    
                 }
                 else {
                     axios.post('/api/categorias', { nombre : this.modalC }).then(response => {
@@ -262,7 +259,6 @@
             }
         },
         mounted() {
-            console.log(this.marca);
             let self = this; // ámbito de vue
 
             //seteo las categorias
@@ -274,7 +270,8 @@
                 self.marcas = response.data.data;
 
             });
-
+            self.categoria = $('#categoria_id').val();
+            self.marca = $('#marca_id').val();
 
             // inicializas select2
             $('#marcas')
