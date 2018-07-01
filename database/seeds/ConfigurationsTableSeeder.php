@@ -61,6 +61,15 @@ class ConfigurationsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'deleted_at' => NULL,
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'key' => 'dolar',
+                'value' => '29',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => NULL,
             )
 
         ));

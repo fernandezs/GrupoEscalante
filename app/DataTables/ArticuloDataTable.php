@@ -20,7 +20,11 @@ class ArticuloDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable->addColumn('action', 'articulos.datatables_actions')
-        ->editColumn('foto', function (Articulo $art) { 
+        ->addColumn('precio_calculado', function(Articulo $articulo) {
+            $dolar = config('dolar');
+            $valor_pesos = $articulo->precio_costo * $dolar;
+            return number_format($valor_pesos, 2);
+        })->editColumn('foto', function (Articulo $art) { 
             $url= Storage::url($art->foto); 
             return '<img src='.$url.' border="0" width="40" class="img-rounded" align="center" />'; 
      })->rawColumns(['foto','action']);
@@ -77,7 +81,10 @@ class ArticuloDataTable extends DataTable
             'modelo',
             'nombre',
             'categoria_id' => ['data'=> 'categoria.nombre','title' => 'Categoria', 'name' => 'categoria.nombre'],
-            'marca_id' => ['data'=> 'marca.nombre','title' => 'Marca', 'name' => 'marca.nombre'] 
+            'marca_id' => ['data'=> 'marca.nombre','title' => 'Marca', 'name' => 'marca.nombre'],
+            'precio_costo' => ['title' => 'Costo usd$'],
+            'precio_calculado' => ['title' => 'Costo $'],
+            'precio_venta' => ['title' => 'Venta $'] 
         ];
     }
 
