@@ -5,7 +5,8 @@
     </div>
     <div class="col-md-5 col-sm-12">
         <articulos :listaarticulos="{{ json_encode($articulos)}}"
-                   :deuda_id=" {{json_encode($deuda->id)}}">
+                   :deuda_id=" {{json_encode($deuda->id)}}"
+                   :estado="{{ json_encode($deuda->estado) }}">
             
         </articulos>
     </div>
@@ -24,9 +25,9 @@
                 </div>
                 <facturacion :valor_interes =" {{ json_encode($deuda->interes)}}"
                             :imp_subtotal  =" {{ json_encode($deuda->detalles->sum('subtotal'))}}"
-                            :imp_total     =" {{ json_encode($deuda->importe_total)}}">
+                            :imp_total     =" {{ json_encode($deuda->importe_total)}}"
+                            :estado="{{ json_encode($deuda->estado)}}">
                 </facturacion>
-                
             </div>
             <div class="box-footer">
                 {!! Form::submit('Guardar', ['class' => 'btn btn-success']) !!}
@@ -44,7 +45,8 @@
 
     <div class="panel-body">
         <div class="table table-responsive">
-            <tabla-deuda-articulos :listadetalles=" {{ json_encode($detalles)}}">
+            <tabla-deuda-articulos :listadetalles=" {{ json_encode($detalles)}}"
+                                   :estado="{{ json_encode($deuda->estado)}}">
                 
             </tabla-deuda-articulos>
         </div>

@@ -1,7 +1,7 @@
 <template>
     <div>
-        <label for="add">Agregar un repuesto:</label>  <button type="button" class="btn btn-info btn-circle btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
-        <div class="modal fade" role="dialog" id="myModal" data-backdrop="false">
+        <label for="add">Agregar un repuesto:</label>  <button type="button" class="btn btn-info btn-circle btn-sm" @click="openForm()"><i class="fa fa-plus"></i></button>
+        <div class="modal fade" role="dialog" id="articuloFormModal" data-backdrop="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="">Valor de venta:</label>
-                                    <input type="text" disabled="true" v-model="articulo.precio_venta" class="form-control">
+                                    <input type="text" v-model="articulo.precio_venta" class="form-control">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="">Marca:</label>
@@ -100,6 +100,10 @@
           }
         },
         methods : {
+            openForm() {
+                $("#articuloFormModal").modal('show');
+
+            },
             resetInputs() {
                 this.selected = null;
                 this.cantidad = 1;
@@ -126,7 +130,7 @@
                     /*emite un evento al componente tabla para que agregue un articulo*/
                     EventBus.$emit('addDetalle', response.data.data);
                     this.resetInputs();
-                    $('#closeModal').click();
+                    $("#articuloFormModal").modal('hide');
                     toastr.success(response.data.message)
                   });
             },

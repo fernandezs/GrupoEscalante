@@ -1,6 +1,11 @@
 <div class="form-group col-sm-9">
     {!! Form::label('cliente_id', 'Cliente:') !!}
-    {!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control', 'id' => 'clientes', 'style' => 'width: 100%;', 'placeholder' => '']) !!}
+    <div class="input-group">
+    	<span class="input-group-addon">
+    		<i class="fa fa-user"></i>
+    	</span>
+    	{!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control', 'id' => 'clientes', 'style' => 'width: 100%;', 'placeholder' => '']) !!}
+    </div>
 </div>
 
 <div class="form-group col-sm-3">
@@ -28,7 +33,8 @@
 				noResults : function() {
 					return "No se han encontrado clientes!"
 				}
-			}
+			},
+			theme : 'bootstrap'
 		});
 	});
 </script>

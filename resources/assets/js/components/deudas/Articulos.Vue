@@ -6,7 +6,7 @@
         <div class="box-body">
             <div class="form-group">
                 <label>Seleccione un articulo:</label>
-                <v-select v-model="selected"  :options="lista" placeholder="Seleccione un articulo..."></v-select>
+                <v-select v-model="selected" :disabled="pagado" :options="lista" placeholder="Seleccione un articulo..."></v-select>
             </div>
             <div class="form-group col-md-4">
                 <label for="">Stock:</label>
@@ -56,7 +56,7 @@
     import VueSweetalert2 from 'vue-sweetalert2';
     Vue.use(VueSweetalert2);
     export default {
-        props : ['listaarticulos', 'deuda_id'],
+        props : ['listaarticulos', 'deuda_id', 'estado'],
         data() {
             return {
                 selected  : null,
@@ -69,9 +69,13 @@
         },
         computed : {
             lista() {
+                //necesario para el plugin vselect2
                 return  this.articulos.map(function (key) {
                     return { label : key.nombre, value : key.id }
                 });
+            },
+            pagado() {
+                return this.estado == 'PAGADO';
             }
         },
         methods : {

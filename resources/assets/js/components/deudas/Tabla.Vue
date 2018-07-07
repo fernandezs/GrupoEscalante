@@ -23,7 +23,7 @@
                 <td>{{detalle.descuento}}%</td>
                 <td>{{detalle.cantidad}}</td>
                 <td>${{detalle.subtotal}}</td>
-                <td width="10px">
+                <td width="10px" v-if="inpago">
                     <a><span class="fa fa-trash" @click="borrar(detalle.id, index)"></span></a>
                 </td>
             </tr>
@@ -33,7 +33,7 @@
 
 <script>
     export default {
-        props : ['listadetalles'],
+        props : ['listadetalles','estado'],
         data() {
             return {
                 detalles : []
@@ -49,6 +49,11 @@
                 this.detalles.splice(index,1);
                 EventBus.$emit('actualizarImportes', (this.subtotal()));
             }.bind(this));
+        },
+        computed: {
+            inpago() {
+                return this.estado == 'INPAGO'
+            }
         },
         methods : {
             borrar(id, index) {

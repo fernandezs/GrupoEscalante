@@ -138,14 +138,14 @@ class ReparacionController extends AppBaseController
     public function update($id, Request $request)
     {   
         $reparacion = $this->reparacionRepository->findWithoutFail($id);
-
         if (empty($reparacion)) {
             Flash::error('Reparacion no encontrado');
 
             return redirect(route('reparaciones.index'));
         }
-
-        $reparacion = $this->reparacionRepository->update($request->all(), $id);
+        $input = $request->all();
+        $input['costo_reparacion'] = $reparacion->detalles->sum('subtotal');
+        $reparacion = $this->reparacionRepository->update($input, $id);
 
         Flash::success('Reparacion actualizado exitosamente.');
 

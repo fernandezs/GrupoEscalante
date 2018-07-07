@@ -5,7 +5,7 @@
         <span class="input-group-addon">
             <i class="fa fa-address-card"></i>
         </span>
-        {!! Form::number('num_cliente', $ult_num_cliente, ['class' => 'form-control', 'readonly']) !!}
+        {!! Form::number('num_cliente', isset($ult_num_cliente) ? $ult_num_cliente : $cliente->num_cliente, ['class' => 'form-control', 'readonly']) !!}
     </div>
 </div>
 

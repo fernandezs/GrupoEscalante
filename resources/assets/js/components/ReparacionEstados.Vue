@@ -1,7 +1,7 @@
 <template>
     <div>
-        <label for="add">Agregar un estado:</label>  <button type="button" class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#modalArticulo"><i class="fa fa-plus"></i></button>
-        <div class="modal fade" role="dialog" id="modalArticulo" data-backdrop="false">
+        <label for="add">Agregar un estado:</label>  <button type="button" class="btn btn-primary btn-circle btn-sm" @click="openForm()"><i class="fa fa-plus"></i></button>
+        <div class="modal fade" role="dialog" id="estadoFormModal" data-backdrop="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -77,9 +77,6 @@
         created() {
             this.estados   = this.listaestados
             this.empleados = this.listaempleados
-            EventBus.$on('showEstado', function (estado) {
-                this.show(estado)
-            }.bind(this));
             EventBus.$on('edit', function(estado) {
                 this.edit(estado);
             }.bind(this));
@@ -96,6 +93,12 @@
         },
 
         methods : {
+            openForm() {
+                $("#estadoFormModal").modal('show');
+            },
+            closeModal() {
+                $("#estadoFormModal").modal('hide');
+            },
             store() {
                 axios.post('/estadoReparacion', {
                     reparacion_id : this.reparacion_id,
@@ -106,7 +109,7 @@
                     this.resetInputs()
                     /*Emite el evento agregaEstado y es escuchado en el componente EstadoReparacionTabla*/
                     EventBus.$emit('agregaEstado', response.data.data);
-                    $("#modalArticulo").modal('hide');
+                    this.closeModal();
                     toastr.success(response.data.message)
                 }).catch(error => {
                     console.log(error.message)
@@ -116,7 +119,7 @@
 
             },
             edit(estado) {
-                $("#modalArticulo").modal('show');
+                this.openForm();
                 this.resetInputs();
                 this.isEditing = true;
                 this.estado = estado.estado_id;
@@ -134,7 +137,7 @@
                     this.resetInputs()
                     /*Emite el evento editEstado y es escuchado en el componente EstadoReparacionTabla*/
                     EventBus.$emit('editEstado', response.data.data);
-                    $("#modalArticulo").modal('hide');
+                    this.closeModal();
                 }).catch(error => {
                     console.log(error.message)
                 });

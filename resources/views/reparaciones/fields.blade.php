@@ -8,20 +8,30 @@
        <div class="box-body">
          <!-- Cod Factura Field -->
          <div class="form-group col-sm-12">
-            {!! Form::label('cod_factura', 'Codigo de Factura:') !!}
+            {!! Form::label('cod_factura', 'Número de orden:') !!}
             {!! Form::number('cod_factura', $ult_cod_factura, ['class' => 'form-control']) !!}
         </div>
 
         <!-- Articulo Id Field -->
         <div class="form-group col-sm-12">
             {!! Form::label('articulo_id', 'Articulo:') !!}
-            {!! Form::select('articulo_id',$articulos, null, ['class' => 'form-control', 'id' => 'articulos', 'placeholder' => '']) !!}
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-barcode"></i>
+                </span>
+                {!! Form::select('articulo_id',$articulos, null, ['class' => 'form-control', 'id' => 'articulos', 'placeholder' => '']) !!}
+            </div>
         </div>
 
         <!-- Cliente Id Field -->
         <div class="form-group col-sm-12">
             {!! Form::label('cliente_id', 'Cliente:') !!}
-            {!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control', 'id' => 'clientes', 'placeholder' => '']) !!}
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                {!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control', 'id' => 'clientes', 'placeholder' => '']) !!}
+            </div>
         </div>
 
 
@@ -90,12 +100,13 @@
         }
 
         $("#articulos").select2({
-            placeholder : 'Seleccione una articulo',
+            placeholder : 'Seleccione..',
             language : {
                 "noResults" : function() {
                     return "No se han encontrar articulos!";
                 }
-            }
+            },
+            theme : 'bootstrap'
         });
         $("#clientes").select2({
             placeholder : 'Seleccione un cliente',
@@ -103,7 +114,8 @@
                 "noResults" : function() {
                     return "No se han encontrar clientes!";
                 }
-            }
+            },
+            theme : 'bootstrap'
         });
 
     })

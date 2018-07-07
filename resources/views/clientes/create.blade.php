@@ -7,7 +7,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Crear Cliente
+           <i class="fa fa-edit"></i> Crear Cliente
         </h1>
     </section>
     <div class="content">

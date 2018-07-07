@@ -21,11 +21,10 @@
                 <tbody>
                     <tr v-for="estado in estados">
                         <td>{{ estado.user.username }}</td>
-                        <td>{{ estado.empleado == null ? 'SISTEMA' : 'estado.empleado.nombre'  }}</td>
+                        <td>{{ estado.empleado == null ? 'SISTEMA' : estado.empleado.nombre  }}</td>
                         <td>{{ estado.estado.estado }}</td>
                         <td>{{ estado.fecha | fecha-local}}</td>
                         <td>
-                            <a href="#" class="btn btn-default btn-sm" title="Ver estado" @click="showEstado(estado)"><i class="fa fa-eye"></i></a>
                             <button type="button" class="btn btn-primary btn-sm" title="Editar estado" @click="editarEstado(estado)"><i class="fa fa-edit"></i></button>
                         </td>
                     </tr>
@@ -58,9 +57,6 @@
         methods : {
             addEstado(estado) {
                 this.estados.push(estado)
-            },
-            showEstado(estado) {
-                EventBus.$emit('showEstado', estado)
             },
             editarEstado(estado) {
                 EventBus.$emit('edit', estado);

@@ -7,7 +7,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Editar Cliente
+          <i class="fa fa-edit"></i>  Editar Cliente
         </h1>
    </section>
    <div class="content">

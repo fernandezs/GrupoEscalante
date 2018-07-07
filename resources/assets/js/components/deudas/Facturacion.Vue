@@ -2,7 +2,7 @@
     <div>
         <div class="form-group">
             <label>Interes:</label>
-            <input type="text" name="interes" v-model="interes" class="form-control">
+            <input type="number" min="0" max="100" :disabled="pagado" name="interes" v-model="interes" class="form-control">
         </div>
         <div class="form-group">
             <div class="table-responsive">
@@ -10,6 +10,10 @@
                     <tr>
                         <th style="width:50%">Subtotal:</th>
                         <td>${{ subtotal }}</td>
+                    </tr>
+                    <tr>
+                        <th style="width:50%">Intereses:</th>
+                        <td>${{ interes_calculado }}</td>
                     </tr>
                     <tr>
                         <th>Total:</th>
@@ -24,7 +28,7 @@
 
 <script>
     export default {
-        props : ['valor_interes', 'imp_subtotal', 'imp_total'],
+        props : ['valor_interes', 'imp_subtotal', 'imp_total', 'estado'],
         data() {
             return {
                 interes  : 0,
@@ -48,6 +52,12 @@
                 var interes = parseFloat(this.interes*0.01).toFixed(2)
                 var importe_interes = interes * this.subtotal;
                 return this.subtotal + importe_interes;
+            },
+            interes_calculado() {
+                return (this.interes*0.01)*this.subtotal;
+            },
+            pagado() {
+                return this.estado == 'PAGADO';
             }
         },
         methods : {
