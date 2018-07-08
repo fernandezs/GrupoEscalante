@@ -72,7 +72,7 @@
         <span class="input-group-addon">
             usd <i class="fa fa-dollar"></i>
         </span>
-        {!! Form::number('precio_costo', null, ['class' => 'form-control', 'step' => '0.01', 'placeholder' => 'dólares']) !!}
+        {!! Form::number('precio_costo', null, ['class' => 'form-control', 'step' => '0.01', 'placeholder' => 'dólares', 'v-model' => 'precio_costo', '@keyUp' => 'setPrecioVenta()']) !!}
     </div>
 
 </div>
@@ -84,7 +84,7 @@
         <span class="input-group-addon">
             <i class="fa fa-dollar"></i>
         </span>
-        {!! Form::number('precio_venta', null, ['class' => 'form-control', 'step' => '0.01', 'placeholder' => 'en pesos']) !!}
+        {!! Form::number('precio_venta', null, ['class' => 'form-control', 'step' => '0.01', 'placeholder' => 'en pesos', 'v-model' => 'precio_venta']) !!}
     </div>
 </div>
 
@@ -194,6 +194,9 @@
     var vm = new Vue({
         el : "#app",
         data : {
+            dolar : null,
+            precio_costo : null,
+            precio_venta : null,
             marca : null,
             categoria : null,
             marcas : [],
@@ -228,6 +231,10 @@
                 }
             },
 
+            setPrecioVenta() {
+                this.precio_venta = this.dolar*this.precio_costo;
+            },
+
             createCategoria() {
                 $("#modalCategoria").modal('show');
                 $("#modalC").focus();
@@ -260,6 +267,10 @@
         },
         mounted() {
             let self = this; // ámbito de vue
+
+            self.dolar = {{ config('dolar')}};
+            self.precio_costo = {{ $articulo->precio_costo}};
+            self.precio_venta = {{ $articulo->precio_venta }}
 
             //seteo las categorias
             axios.get('/api/categorias').then(response => {

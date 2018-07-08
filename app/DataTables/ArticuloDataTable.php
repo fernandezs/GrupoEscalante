@@ -76,8 +76,8 @@ class ArticuloDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'cod_articulo' => ['title' => 'Codigo', 'width' => '10%'],
-            'foto',
+            'cod_articulo' => ['title' => 'Código', 'width' => '55px'],
+            'foto' => ['center'],
             'modelo',
             'nombre',
             'categoria_id' => ['data'=> 'categoria.nombre','title' => 'Categoria', 'name' => 'categoria.nombre'],

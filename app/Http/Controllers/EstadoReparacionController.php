@@ -139,6 +139,13 @@ class EstadoReparacionController extends AppBaseController
         }
         if($request->ajax()) {
             $estadoReparacion = $this->estadoReparacionRepository->update($request->all(), $id);
+            $reparacion = $estadoReparacion->reparacion;
+            $estado = Estado::find($request->estado_id);
+            $reparacion->estado = $estado->estado;
+            if($request->estado_id == 5){
+                $reparacion->fecha_egreso = Carbon::now();
+            }
+            $reparacion->save();
             $estadoReparacion['user'] = $estadoReparacion->user;
             $estadoReparacion['estado'] = $estadoReparacion->estado;
             $estadoReparacion['empleado'] = $estadoReparacion->empleado;

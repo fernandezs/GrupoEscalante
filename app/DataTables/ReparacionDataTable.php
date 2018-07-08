@@ -20,7 +20,25 @@ class ReparacionDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'reparaciones.datatables_actions');
+        return $dataTable->addColumn('action', 'reparaciones.datatables_actions')->editColumn('estado', function(Reparacion $r) {
+                $estado = $r->estado;
+                switch ($estado) {
+                    case 'INICIADO':
+                        return '<span class="label label-default">INICIADO</span>';
+                        break;
+                    case 'EN TALLER':
+                        return '<span class="label label-warning">INICIADO</span>';
+                    case 'EN GARANTIA OFICIAL':
+                        return '<span class="label label-info">EN GARANTIA</span>';
+                    case 'CON FALTANTES':
+                        return '<span class="label label-danger">CON FALTANTES</span>';
+                    case 'ENTREGADO':
+                        return '<span class="label label-success">ENTREGADO</span>';
+                    default:
+                        return '<span class="label label-default">'.$estado.'</span>';
+                        break;
+            }
+        })->rawColumns(['estado', 'action']);
     }
 
     /**
@@ -69,7 +87,7 @@ class ReparacionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'cod_factura' => ['title' => 'Codigo Factura', 'width' => '10px'],
+            'cod_factura' => ['title' => 'Orden Nro', 'width' => '60px'],
             'articulo_id' => ['data' => 'articulo.nombre','name' => 'articulo.nombre', 'title' => 'Articulo', ],
             'marca' => ['data' => 'articulo.marca.nombre', 'name' => 'articulo.marca.nombre', 'title' => 'Marca'],
             'cliente_id'=> ['data' => 'cliente.nombre','name' => 'cliente.nombre', 'title' => 'Cliente', ],
