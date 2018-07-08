@@ -52,7 +52,7 @@ desired effect
     </div>
     <!-- /.content-wrapper -->
 
-    {{--@include('adminlte::layouts.partials.controlsidebar')--}}
+    @include('adminlte::layouts.partials.controlsidebar')
 
     @include('adminlte::layouts.partials.footer')
 

@@ -110,6 +110,7 @@
                     {{--</ul>--}}
                 {{--</li>--}}
 
+
                 <!-- User Account Menu -->
                 <li class="dropdown user user-menu" id="user_menu">
                         <!-- Menu Toggle Button -->
@@ -175,10 +176,12 @@
                     </li>
 
                 {{--<!-- Control Sidebar Toggle Button -->--}}
-                {{--<li>
-                    {{--<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>--}}
-                {{--</li>--}}
+                
+                <li>
+                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                </li>
             </ul>
+            
         </div>
     </nav>
 </header>

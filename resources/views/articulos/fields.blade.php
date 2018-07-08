@@ -266,11 +266,14 @@
             }
         },
         mounted() {
+
             let self = this; // ámbito de vue
 
             self.dolar = {{ config('dolar')}};
-            self.precio_costo = {{ $articulo->precio_costo}};
-            self.precio_venta = {{ $articulo->precio_venta }}
+            var p_costo = {{ isset($articulo->precio_costo) ? $articulo->precio_costo : 0 }}
+            var p_venta = {{ isset($articulo->precio_venta) ? $articulo->precio_venta : 0  }}
+            self.precio_costo = p_costo == 0 ? null : p_costo
+            self.precio_venta = p_venta == 0 ? null : p_venta
 
             //seteo las categorias
             axios.get('/api/categorias').then(response => {
