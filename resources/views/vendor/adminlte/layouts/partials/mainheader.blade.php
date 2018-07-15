@@ -112,9 +112,9 @@
 
 
                 <!-- User Account Menu -->
-                <li class="dropdown user user-menu" id="user_menu">
+                <li class="dropdown user user-menu" :class="{ 'open' : togle_menu_user}" id="user_menu">
                         <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" @click="menu_user_togle()">
                             <!-- The user image in the navbar-->
                             @if($user->uimages->count()>0)
                                 @foreach($user->uimages as $key => $image)
@@ -178,7 +178,7 @@
                 {{--<!-- Control Sidebar Toggle Button -->--}}
                 
                 <li>
-                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    <a href="#" data-toggle="control-sidebar" @click="control_sidebar_togle()"><i class="fa fa-gears"></i></a>
                 </li>
             </ul>
             

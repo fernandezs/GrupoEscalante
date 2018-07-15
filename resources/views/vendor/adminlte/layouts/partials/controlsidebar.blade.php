@@ -1,5 +1,5 @@
 <!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
+<aside class="control-sidebar control-sidebar-dark" :class="{ 'control-sidebar-open' : togle_control_sidebar }">
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
         <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
