@@ -14,7 +14,7 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="">Valor de venta:</label>
-                <input type="text" disabled="true" v-model="articulo.precio_venta" class="form-control">
+                <input type="text" v-model="articulo.precio_venta" class="form-control">
             </div>
             <div class="form-group col-md-4">
                 <label for="">Marca:</label>
