@@ -10,6 +10,7 @@
 
 <!-- jQuery v3.2.1 -->
 <script src="{{ asset('bower/jquery/dist/jquery.min.js') }}" type="text/javascript"></script>
+<script src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
 <!-- jQuery 2.2.3 -->
 {{--<script src="plugins/jquery-2.2.3.min.js"></script>--}}
 <!-- jQuery UI 1.11.4 -->

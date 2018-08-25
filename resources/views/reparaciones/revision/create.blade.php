@@ -1,6 +1,6 @@
 @extends('adminlte::layouts.app')
 @push('vue-app')
-<script src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
+{{-- <script src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script> --}}
 @endpush
 @section('htmlheader_title')
 	Revision de la reparacion

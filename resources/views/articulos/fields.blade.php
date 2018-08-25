@@ -27,38 +27,12 @@
     {!! Form::label('modelo', 'Modelo:') !!}
     {!! Form::text('modelo', null, ['class' => 'form-control']) !!}
 </div>
-
-<!-- Categoria Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('categoria_id', 'Categoria:') !!}
-    <div class="input-group select2-bootstrap-prepend">
-        <select name="categoria_id" id="categorias" v-model="categoria" placeholder="" class="form-control" style="width: 100%;">
-            <option :value="categoria.id" v-for="categoria in categorias">@{{ categoria.nombre }}</option>
-        </select>
-        <span class="input-group-btn">
-            <button type="button" class="btn btn-default" @click="createCategoria()">
-                <span class="glyphicon glyphicon-plus"></span> Agregar
-            </button>
-      </span>
-    </div>
+<categoria :categoria_id="{{isset($articulo) ? $articulo->categoria->id : 0 }}"><categoria>
 </div>
-
-
-<!-- Marca Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('marca_id', 'Marca:') !!}
-    <div class="input-group select2-bootstrap-prepend">
-        <select name="marca_id" id="marcas" v-model="marca" placeholder="" class="form-control" style="width: 100%;">
-            <option :value="marca.id" v-for="marca in marcas">@{{ marca.nombre }}</option>
-        </select>
-        <span class="input-group-btn">
-                <button type="button" class="btn btn-default" @click="createMarca()">
-                    <span class="glyphicon glyphicon-plus"></span> Agregar
-                </button>
-      </span>
-    </div>
+    <marca :marca_id="{{isset($articulo) ? $articulo->marca->id : 0 }}"></marca>
 </div>
-
 <!-- Descripcion Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('descripcion', 'Descripcion:') !!}
@@ -72,7 +46,7 @@
         <span class="input-group-addon">
             usd <i class="fa fa-dollar"></i>
         </span>
-        {!! Form::number('precio_costo', null, ['class' => 'form-control', 'step' => '0.01', 'placeholder' => 'dólares', 'v-model' => 'precio_costo', '@keyUp' => 'setPrecioVenta()']) !!}
+        {!! Form::number('precio_costo', null, ['class' => 'form-control', 'step' => '0.01', 'placeholder' => 'dólares']) !!}
     </div>
 
 </div>
@@ -84,7 +58,7 @@
         <span class="input-group-addon">
             <i class="fa fa-dollar"></i>
         </span>
-        {!! Form::number('precio_venta', null, ['class' => 'form-control', 'step' => '0.01', 'placeholder' => 'en pesos', 'v-model' => 'precio_venta']) !!}
+        {!! Form::number('precio_venta', null, ['class' => 'form-control', 'step' => '0.01', 'placeholder' => 'en pesos']) !!}
     </div>
 </div>
 
@@ -189,145 +163,5 @@
         });
     })
 </script>
-<script type="text/javascript">
 
-    var vm = new Vue({
-        el : "#app",
-        data : {
-            dolar : null,
-            precio_costo : null,
-            precio_venta : null,
-            marca : null,
-            categoria : null,
-            marcas : [],
-            categorias : null,
-            modalC : null,
-            modalM : null
-        },
-        methods : {
-
-            //llama al modal para guardar una marca
-            createMarca() {
-                $("#modalMarca").modal('show');
-                $("#modalM").focus();
-            },
-            //metodo para guardar una marca
-            storeMarca() {
-                if(this.modalM == null) {
-                    alert('Completa este campo!')
-                    $("#modalM").focus();
-                }
-                else {
-                    axios.post('/api/marcas', { nombre : this.modalM }).then(response => {
-                        $('#modalMarca').modal('hide');
-                        this.modalM = null;
-                        toastr.info(response.data.message);
-                        this.marcas.push(response.data.data);
-                        this.marca = response.data.data.id;
-                    }).catch(error => {
-                        $('#modalM').focus();
-                        alert('La Marca "' + this.modalM + '" ya existe, ingrese otra!');
-                    });
-                }
-            },
-
-            setPrecioVenta() {
-                this.precio_venta = this.dolar*this.precio_costo;
-            },
-
-            createCategoria() {
-                $("#modalCategoria").modal('show');
-                $("#modalC").focus();
-            },
-            //metodo para guardar una categoria
-            storeCategoria() {
-                if(this.modalC == null) {
-                    $("modalC").focus();
-                    alert('Completa este campo!')
-                    
-                }
-                else {
-                    axios.post('/api/categorias', { nombre : this.modalC }).then(response => {
-                        //escondo el modal
-                        $('#modalCategoria').modal('hide');
-                        this.modalC = null;
-                        //respuesta del servidor
-                        toastr.info(response.data.message);
-                        //se agrega una categoria a la lista de categorias
-                        this.categorias.push(response.data.data);
-                        //seteo una categoria
-                        this.categoria = response.data.data.id;
-                        this.categoriaModal = null;
-                    }).catch(error => {
-                        $('#modalC').focus();
-                        alert('La Categoria "'+ this.modalC + '" ya existe, ingrese otra!');
-                    });
-                }
-            }
-        },
-        mounted() {
-
-            let self = this; // ámbito de vue
-
-            self.dolar = {{ config('dolar')}};
-            var p_costo = {{ isset($articulo->precio_costo) ? $articulo->precio_costo : 0 }}
-            var p_venta = {{ isset($articulo->precio_venta) ? $articulo->precio_venta : 0  }}
-            self.precio_costo = p_costo == 0 ? null : p_costo
-            self.precio_venta = p_venta == 0 ? null : p_venta
-
-            //seteo las categorias
-            axios.get('/api/categorias').then(response => {
-                self.categorias = response.data.data;
-            });
-            //seteo las marcas
-            axios.get('/api/marcas').then(response => {
-                self.marcas = response.data.data;
-
-            });
-            self.categoria = $('#categoria_id').val();
-            self.marca = $('#marca_id').val();
-
-            // inicializas select2
-            $('#marcas')
-                .select2({
-                    placeholder: 'Seleccione una marca...',
-                    data: self.marcas, // cargas los datos en vez de usar el loop
-                    theme : 'bootstrap',
-                    language : {
-                        noResults : function() {
-                            return 'No se han encontrado resultados!'
-                        }
-                    }
-                })
-                // nos hookeamos en el evento tal y como puedes leer en su documentación
-                .on('select2:select', function () {
-                    var value = $("#marcas").select2('data');
-                    // nos devuelve un array
-
-                    // ahora simplemente asignamos el valor a tu variable selected de VUE
-                    self.marca = value[0].id
-                })
-
-            $('#categorias')
-                .select2({
-                    placeholder: 'Seleccione una categoría...',
-                    data: self.categorias, // cargas los datos en vez de usar el loop
-                    theme : 'bootstrap',
-                    language : {
-                        noResults : function () {
-                            return 'No se han encontrado resultados!'
-                        }
-                    }
-                })
-                // nos hookeamos en el evento tal y como puedes leer en su documentación
-                .on('select2:select', function () {
-                    var value = $("#categorias").select2('data');
-                    // nos devuelve un array
-
-                    // ahora simplemente asignamos el valor a tu variable selected de VUE
-                    self.categoria = value[0].id;
-                })
-        }
-    })
-</script>
 @endpush

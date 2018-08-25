@@ -23,6 +23,8 @@
         <div class="row">
             <div class="form-group col-sm-12">
             <a href="{!! route('proveedores.index') !!}" class="btn btn-default">Regresar</a>
+            <a href="{!! route('proveedores.edit', $proveedor->id) !!}" class="btn btn-primary"><i class="fa fa-edit"></i> Editar</a>
+            <a href="{!! route('proveedores.catalogos', $proveedor->id) !!}" class="btn btn-info"><i class="fa fa-list-alt"></i> Catalogos</a>
             </div>
         </div>
     </div>

@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Response;
 use App\Models\EstadoReparacion;
 use Carbon\Carbon;
+use App\Events\ReparacionFueCreada;
 class ReparacionController extends AppBaseController
 {
     /** @var  ReparacionRepository */
@@ -77,13 +78,8 @@ class ReparacionController extends AppBaseController
         $input = $request->all();
         $input['user_id'] = auth()->user()->id;
         $reparacion = $this->reparacionRepository->create($input);
-        $estado = new EstadoReparacion();
-        $estado->reparacion_id = $reparacion->id;
-        $estado->estado_id = 1;
-        $estado->user_id = auth()->user()->id;
-        $estado->fecha = Carbon::now();
-        $estado->detalle = 'Estado Inicial en la reparacion';
-        $estado->save();
+        
+        event(new ReparacionFueCreada($reparacion));
         return redirect(route('reparaciones.revision', $reparacion->id));
     }
 

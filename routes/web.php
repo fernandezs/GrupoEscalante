@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     #adminlte_routes
 });
 
+Route::get('notificacion', 'EstadoReparacionController@prueba');
 Route::resource('estadoReparacion', 'EstadoReparacionController');
 
 Route::get('user/profile/{user}', 'UserController@editProfile')->name('user.edit.profile');;
@@ -74,3 +75,10 @@ Route::get('deuda/pdf/{id}', 'PdfController@invoice')->name('pdf.invoice');
 Route::resource('notas', 'NotaController');
 
 Route::resource('notas', 'NotaController');
+
+Route::get('notificaciones', 'NotificacionesController@index')->name('notificaciones.index');
+Route::get('admin/notificaciones', 'NotificacionesController@index')->name('notificaciones.admin');
+Route::patch('notificaciones/{id}', 'NotificacionesController@read')->name('notificaciones.read');
+Route::delete('notificaciones/{id}', 'NotificacionesController@destroy')->name('notificaciones.destroy');
+Route::post('notificaciones/destroyAll', 'NotificacionesController@destroyAll')->name('notificaciones.destroyAll');
+Route::post('notificaciones/readAll', 'NotificacionesController@readAll')->name('notificaciones.readAll');

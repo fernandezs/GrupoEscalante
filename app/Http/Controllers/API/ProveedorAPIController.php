@@ -40,7 +40,7 @@ class ProveedorAPIController extends AppBaseController
         $this->proveedorRepository->pushCriteria(new LimitOffsetCriteria($request));
         $proveedores = $this->proveedorRepository->all();
 
-        return $this->sendResponse($proveedores->toArray(), 'Proveedors recuperado con éxito');
+        return $this->sendResponse($proveedores->toArray(), 'Proveedores recuperado con éxito');
     }
 
     /**

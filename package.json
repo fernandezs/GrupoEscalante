@@ -46,7 +46,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "select2-bootstrap-css": "^1.4.6",
+    "select2-bootstrap-theme": "0.1.0-beta.10",
     "vee-validate": "^2.0.9",
+    "vue-multiselect": "^2.1.0",
     "vue-select": "^2.4.0",
     "vue-sweetalert2": "^1.4.2"
   }

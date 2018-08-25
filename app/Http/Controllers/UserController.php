@@ -292,4 +292,10 @@ class UserController extends AppBaseController
 
         return redirect()->back()->with('user',$user);
     }
+
+    public function notificaciones()
+    {
+        $notificaciones =  $this->userRepository->findWithoutFail(auth()->user()->id)->notifications;
+        return view('notificaciones.index', compact('notificaciones'));
+    }
 }

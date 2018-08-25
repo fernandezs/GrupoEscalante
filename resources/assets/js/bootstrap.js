@@ -12,6 +12,7 @@ try {
   window.$ = window.jQuery = require('jquery');
 
   //require('bootstrap-less');
+  //:class="{ 'open' : togle_menu_user}
 } catch (e) {}
 
 require('admin-lte')

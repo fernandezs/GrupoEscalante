@@ -33,6 +33,10 @@ Vue.component('reparacion-estados-tabla', require('./components/EstadosReparacio
 Vue.component('articulos', require('./components/deudas/Articulos.vue'));
 Vue.component('tabla-deuda-articulos', require('./components/deudas/Tabla.vue'));
 Vue.component('facturacion', require('./components/deudas/Facturacion.vue'));
+Vue.component('notificaciones', require('./components/notificaciones.vue'));
+Vue.component('notificacion', require('./components/notificacion.vue'));
+Vue.component('categoria', require('./components/categoria.vue'));
+Vue.component('marca', require('./components/marca.vue'));
 Vue.component('articulos-reparacion', require('./components/reparaciones/Articulos.vue'));
 Vue.component('tabla-reparacion-articulos', require('./components/reparaciones/TablaArticulos.vue'));
 
@@ -41,7 +45,13 @@ const app = new Vue({
     el: '#app',
     data : {
         togle_menu_user : false,
-        togle_control_sidebar : false
+        togle_control_sidebar : false,
+        isDropdownControlSidebarOpen : false
+    },
+    computed: {
+        dropdownSidebar() {
+            return ['control-sidebar', 'control-sidebar-dark', this.isDropdownControlSidebarOpen ? 'control-sidebar-open' : ''];
+        }
     },
     methods : {
         control_sidebar_togle() {
@@ -49,6 +59,9 @@ const app = new Vue({
         },
         menu_user_togle() {
             this.togle_menu_user = !this.togle_menu_user;
+        },
+        togleSidebar() {
+            this.isDropdownControlSidebarOpen = ! this.isDropdownControlSidebarOpen;
         }
     }
 

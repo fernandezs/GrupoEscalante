@@ -13,9 +13,15 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        'App\Events\ReparacionFueCreada' => [
+            'App\Listeners\CrearPrimerEstadoReparacion',
+            'App\Listeners\NotificarUsuariosReparacionCreada',
         ],
+        'App\Events\EstadoReparacionCreado' => [
+            'App\Listeners\ActualizarEstadoEnReparacion',
+            'App\Listeners\NotificarUsuariosEstadoReparacionCreado',
+        ]
+
     ];
 
     /**

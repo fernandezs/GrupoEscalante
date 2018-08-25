@@ -52,6 +52,10 @@ class Reparacion extends Model
         'dias_garantia'
     ];
 
+    protected $events = [
+        'created' => ReparacionFueCreada::class
+    ];
+
     /**
      * The attributes that should be casted to native types.
      *

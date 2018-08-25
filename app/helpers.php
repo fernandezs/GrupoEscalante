@@ -211,3 +211,9 @@ function reparacionNro($f) {
         return $type+$f;
     }
 }
+
+function notificaciones()
+{
+    $n = \Auth::user()->notifications();
+    return $n;
+}

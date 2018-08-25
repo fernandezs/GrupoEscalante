@@ -13,7 +13,8 @@ use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-
+use App\Models\User;
+use App\Notifications\BajoStockArticulo;
 /**
  * Class DetalleDeudaController
  * @package App\Http\Controllers\API

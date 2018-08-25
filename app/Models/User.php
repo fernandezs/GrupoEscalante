@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class User
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Model
 {
     use SoftDeletes;
+    use Notifiable;
 
     public $table = 'users';
     
@@ -68,6 +70,11 @@ class User extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      **/
+    public function scopeExceptLoggedIn($q)
+    {
+        return $q->where('id','!=', auth()->user()->id)->get();
+    }
+
     public function opciones()
     {
         return $this->belongsToMany(\App\Option::class, 'option_user');

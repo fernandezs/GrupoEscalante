@@ -14,7 +14,10 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\BajoStockArticulo;
+use App\Models\User;
 class ArticuloController extends AppBaseController
+
 {
     /** @var  ArticuloRepository */
     private $articuloRepository;
@@ -185,5 +188,14 @@ class ArticuloController extends AppBaseController
         Flash::success('Articulo eliminado exitosamente.');
 
         return redirect(route('articulos.index'));
+    }
+
+    public function notificar()
+    {
+        $art = $this->articuloRepository->find(1);
+        $u = User::where('id','!=',auth()->user()->id)->get();
+        return $u;
+        $u->notify(new BajoStockArticulo($art));
+        return $art::requireStock(1);
     }
 }

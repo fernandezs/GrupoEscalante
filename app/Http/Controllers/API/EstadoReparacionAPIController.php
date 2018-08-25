@@ -45,12 +45,13 @@ class EstadoReparacionAPIController extends AppBaseController
      */
     public function store(CreateEstadoReparacionAPIRequest $request)
     {
-        return $this->sendResponse([], Auth::id());
+        //return $this->sendResponse([], Auth::id());
         $input = $request->all();
         $input['fecha'] = Carbon::now();
         $input['user_id'] = Auth::user()->id;
         $estadoReparacion = $this->estadoReparacionRepository->create($input);
 
+        event(new EstadoReparacionCreado($estadoReparacion));
         return $this->sendResponse($estadoReparacion->toArray(), 'Estado Reparacion guardado exitosamente');
     }
 

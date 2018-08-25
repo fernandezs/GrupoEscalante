@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use App\Events\EstadoReparacionCreado;
 
 class EstadoReparacionController extends AppBaseController
 {
@@ -56,28 +57,36 @@ class EstadoReparacionController extends AppBaseController
     public function store(CreateEstadoReparacionRequest $request)
     {
         $input = $request->all();
-        if($request->ajax())
-        {
-            $input['fecha'] = Carbon::now();
-            $input['user_id'] = auth()->user()->id;
-            $estadoReparacion = $this->estadoReparacionRepository->create($input);
-            $reparacion = $estadoReparacion->reparacion;
-            $estado = Estado::find($request->estado_id);
-            $reparacion->estado = $estado->estado;
-            if($request->estado_id == 5){
-                $reparacion->fecha_egreso = Carbon::now();
-            }
-            $reparacion->save();
-            $estadoReparacion['user'] = $estadoReparacion->user;
-            $estadoReparacion['estado'] = $estadoReparacion->estado;
-            $estadoReparacion['empleado'] = $estadoReparacion->empleado;
-            return $this->sendResponse($estadoReparacion->toArray(),'Estado agregado correctamente!');
-        }
+        $input['fecha'] = Carbon::now();
+        $input['user_id'] = auth()->user()->id;
+        $estadoReparacion = $this->estadoReparacionRepository->create($input);
+        $estadoReparacion['user'] = $estadoReparacion->user;
+        $estadoReparacion['estado'] = $estadoReparacion->estado;
+        $estadoReparacion['empleado'] = $estadoReparacion->empleado;
+        
+        event(new EstadoReparacionCreado($estadoReparacion));
+            
+        return $this->sendResponse($estadoReparacion->toArray(),'Estado agregado correctamente!');
+        
         /*$estadoReparacion = $this->estadoReparacionRepository->create($input);
 
         Flash::success('Estado Reparacion guardado exitosamente.');
 
         return redirect(route('estadoReparacions.index'));*/
+    }
+
+    public function prueba()
+    {
+        $input = ['empleado_id' => '1','reparacion_id' => '1','detalle' => 'detalle','estado_id' => '5'];
+        $input['fecha'] = Carbon::now();
+        $input['user_id'] = auth()->user()->id;
+        $estadoReparacion = $this->estadoReparacionRepository->create($input);
+        $estadoReparacion['user'] = $estadoReparacion->user;
+        $estadoReparacion['estado'] = $estadoReparacion->estado;
+        $estadoReparacion['empleado'] = $estadoReparacion->empleado;
+        
+        event(new EstadoReparacionCreado($estadoReparacion));
+        
     }
 
     /**

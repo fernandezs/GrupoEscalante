@@ -109,6 +109,18 @@ class Articulo extends Model
     {
         return $this->hasMany(Reparacion::class);
     }
+
+    public static function requireStock($id) {
+        
+        $articulo = \DB::select('select cantidad_minima, cantidad from articulos where id = ?', [$id]);
+        $cantidad =$articulo[0]->cantidad;
+        $cantidad_minima = $articulo[0]->cantidad_minima;
+        if($cantidad < $cantidad_minima)
+        {
+            return 'yes';
+        }
+        return 'no';
+    }
     
 
     

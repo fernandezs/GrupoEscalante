@@ -21,8 +21,9 @@ class ArticuloDataTable extends DataTable
 
         return $dataTable->addColumn('action', 'articulos.datatables_actions')
         ->addColumn('precio_calculado', function(Articulo $articulo) {
-            $dolar = config('dolar');
+            $dolar = floatval(config('dolar'));
             $valor_pesos = $articulo->precio_costo * $dolar;
+            //return $valor_pesos;
             return number_format($valor_pesos, 2);
         })->editColumn('foto', function (Articulo $art) { 
             $url= Storage::url($art->foto); 
@@ -82,7 +83,7 @@ class ArticuloDataTable extends DataTable
             'nombre',
             'categoria_id' => ['data'=> 'categoria.nombre','title' => 'Categoria', 'name' => 'categoria.nombre'],
             'marca_id' => ['data'=> 'marca.nombre','title' => 'Marca', 'name' => 'marca.nombre'],
-            'precio_costo' => ['title' => 'Costo usd$'],
+            'precio_costo' => ['title' => 'Costo usd$', 'type' => 'float'],
             'precio_calculado' => ['title' => 'Costo $'],
             'precio_venta' => ['title' => 'Venta $'] 
         ];

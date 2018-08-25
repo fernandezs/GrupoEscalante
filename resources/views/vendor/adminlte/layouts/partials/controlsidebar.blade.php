@@ -1,5 +1,5 @@
 <!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark" :class="{ 'control-sidebar-open' : togle_control_sidebar }">
+<aside :class="dropdownSidebar">
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
         <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
@@ -16,13 +16,22 @@
                     <div class="container">
                         <iframe style="width: 100%;" width="150px" height="150px" src="https://www.dolarsi.com/cotizador/cotizadorDolarsiFull.php" frameborder="0" scrolling="0" allowfullscreen=""></iframe>
                         <!-- Inicio codigo Dolarhoy.com -->
-                    <a target="_blank" href="http://www.dolarhoy.com/" alt="DolarHoy" title="DolarHoy.com" >
-                    <img src="http://www.dolaronline.com/" style="width: 140px" height="150px" border="0" alt="DolarHoy.com">
-                    </a> 
-                <!-- Fin de Dolarhoy.com -->
+                        <!-- Inicio Codigo PrecioDolar.com.ar --> 
+                        
+                        
+                        <!-- Fin PrecioDolar.com.ar -->
+ 
+                    <!-- Fin de Dolarhoy.com -->
                 <h3 class="control-sidebar-heading">Dólar La Nación</h3>
                     <a href="https://www.lanacion.com.ar/dolar-hoy-t1369" style="color: green;" target="_blank" title="Dólar La Nación">Consultar...</a>
                     </div>
+                </li>
+                <li>
+                <div class="container">
+                <h3 class="control-sidebar-heading">preciodolar.com.ar</h3>
+                <a href="https://www.preciodolar.com.ar" title="Precio del Dolar" target="_blank">
+                        <img src="https://www.preciodolar.com.ar/imgdolar1.php" alt="Cotización del Dólar" width="140px" height="130px">
+                        </a></div>
                 </li>
                 {{--<li>
                     <a href='javascript::;'>

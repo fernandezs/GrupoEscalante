@@ -51,10 +51,10 @@
             importe_total() {
                 var interes = parseFloat(this.interes*0.01).toFixed(2)
                 var importe_interes = interes * this.subtotal;
-                return this.subtotal + importe_interes;
+                return (this.subtotal + importe_interes).toFixed(2);
             },
             interes_calculado() {
-                return (this.interes*0.01)*this.subtotal;
+                return ((this.interes*0.01)*this.subtotal).toFixed(2);
             },
             pagado() {
                 return this.estado == 'PAGADO';
