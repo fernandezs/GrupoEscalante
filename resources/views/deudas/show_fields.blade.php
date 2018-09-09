@@ -75,16 +75,7 @@
 <div class="row">
     <!-- accepted payments column -->
     <div class="col-xs-6">
-        <p class="lead">Metodos de pago:</p>
-        <img src="{{ asset('img/credit/visa.png') }}" alt="Visa">
-        <img src="{{ asset('img/credit/mastercard.png') }}" alt="Mastercard">
-        <img src="{{ asset('img/credit/american-express.png') }}" alt="American Express">
-        <img src="{{ asset('img/credit/paypal2.png') }}" alt="Paypal">
-
-        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
-            dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-        </p>
+        
     </div>
     <!-- /.col -->
     <div class="col-xs-6">
@@ -114,10 +105,9 @@
 <!-- this row will not appear when printing -->
 <div class="row no-print">
     <div class="col-xs-12">
-        <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</a>
         <a href="{!! route('deudas.index') !!}" class="btn btn-default">Regresar</a>
 
-        <a href="{{ route('pdf.invoice', $deuda->id) }}" disabled="true" class="btn btn-primary pull-right"><i class="fa fa-download"></i> Generar PDF</a>
+        <a href="{{ route('pdf.invoice', $deuda->id) }}" class="btn btn-primary pull-right"><i class="fa fa-download"></i> Generar PDF</a>
     </div>
 </div>
 

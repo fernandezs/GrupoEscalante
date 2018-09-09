@@ -34,8 +34,8 @@
         <b>Reparacion #{{ $reparacion->id }}</b><br>
         <br>
         <b>Maquina ID:</b> {{ $reparacion->articulo->nombre }}<br>
-        <b>Fecha de ingreso:</b> {{ $reparacion->fecha_ingreso }}<br>
-        <b>Fecha de egreso:</b> {{ $reparacion->fecha_egreso }}<br>
+        <b>Fecha de ingreso:</b> {{ $reparacion->created_at->format('d/m/Y') }}<br>
+        <b>Fecha de egreso:</b> {{ $reparacion->fecha_egreso != null ? $reparacion->fecha_egreso->format('d/m/Y') : "" }}<br>
         <b>Garantia:</b> {{ $reparacion->dias_garantia }}
     </div>
     <!-- /.col -->
@@ -76,16 +76,7 @@
 <div class="row">
     <!-- accepted payments column -->
     <div class="col-xs-6">
-        <p class="lead">Metodos de pago:</p>
-        <img src="{{ asset('img/credit/visa.png') }}" alt="Visa">
-        <img src="{{ asset('img/credit/mastercard.png') }}" alt="Mastercard">
-        <img src="{{ asset('img/credit/american-express.png') }}" alt="American Express">
-        <img src="{{ asset('img/credit/paypal2.png') }}" alt="Paypal">
-
-        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
-            dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-        </p>
+    
     </div>
     <!-- /.col -->
     <div class="col-xs-6">
@@ -111,12 +102,8 @@
 <!-- this row will not appear when printing -->
 <div class="row no-print">
     <div class="col-xs-12">
-        <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</a>
         <a href="{!! route('reparaciones.index') !!}" class="btn btn-default">Regresar</a>
-
-        <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class="fa fa-download"></i> Generate PDF
-        </button>
+        <a class="btn btn-primary pull-right" style="margin-right: 5px;" href="{{route('reparaciones.pdf', $reparacion->id)}}"><i class="fa fa-download"></i> Generate PDF</a>
     </div>
 </div>
 

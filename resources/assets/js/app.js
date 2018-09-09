@@ -30,6 +30,7 @@ Vue.component('cliente', require('./components/Cliente.vue'));
 Vue.component('maquina', require('./components/Maquina.vue'));
 Vue.component('reparacion-estados', require('./components/ReparacionEstados.vue'));
 Vue.component('reparacion-estados-tabla', require('./components/EstadosReparacionTabla.vue'));
+Vue.component('estados-timeline', require('./components/EstadosTimeline.vue'));
 Vue.component('articulos', require('./components/deudas/Articulos.vue'));
 Vue.component('tabla-deuda-articulos', require('./components/deudas/Tabla.vue'));
 Vue.component('facturacion', require('./components/deudas/Facturacion.vue'));

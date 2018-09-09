@@ -59,7 +59,11 @@
         <reparacion-estados-tabla :reparacion_id="{{ json_encode($reparacion->id) }}" :listaestados="{{ json_encode($estadosReparacion) }}"></reparacion-estados-tabla>
     </div>
 </div>
-
+<div class="row">
+    <div class="col-md-12">
+        <estados-timeline :estados="{{json_encode($estadosReparacion)}}"><estados-timeline/>
+    </div>
+</div>
 
 
 @push('scripts')

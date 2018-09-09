@@ -27,7 +27,7 @@ class ReparacionDataTable extends DataTable
                         return '<span class="label label-default">INICIADO</span>';
                         break;
                     case 'EN TALLER':
-                        return '<span class="label label-warning">INICIADO</span>';
+                        return '<span class="label label-warning">EN TALLER</span>';
                     case 'EN GARANTIA OFICIAL':
                         return '<span class="label label-info">EN GARANTIA</span>';
                     case 'CON FALTANTES':

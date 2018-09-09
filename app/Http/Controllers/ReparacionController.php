@@ -142,7 +142,6 @@ class ReparacionController extends AppBaseController
         $input = $request->all();
         $input['costo_reparacion'] = $reparacion->detalles->sum('subtotal');
         $reparacion = $this->reparacionRepository->update($input, $id);
-
         Flash::success('Reparacion actualizado exitosamente.');
 
         return redirect(route('reparaciones.index'));
@@ -186,5 +185,15 @@ class ReparacionController extends AppBaseController
         $articulos = $this->articuloRepository->with('marca')->get();
         $detalles = DetalleReparacion::with('articulo.marca')->where('reparacion_id', '=', $id)->get();
         return view('reparaciones.revision.create', compact('reparacion','estados', 'empleados','estadosReparacion','articulos','detalles'));
+    }
+
+    public function downloadPDF($id) {
+        $reparacion = $this->reparacionRepository->findWithoutFail($id);
+        $date = date('Y-m-d');
+        $invoice = "2222";
+        $view =  \View::make('pdf.reparacion_detalle', compact('reparacion', 'date', 'invoice'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('invoice.pdf');
     }
 }

@@ -20,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\EstadoReparacionCreado' => [
             'App\Listeners\ActualizarEstadoEnReparacion',
             'App\Listeners\NotificarUsuariosEstadoReparacionCreado',
+        ],
+        'App\Events\EstadoReparacionFueModificado' => [
+            'App\Listeners\NotificarUsuariosEstadoReparacionFueModificado',
         ]
 
     ];

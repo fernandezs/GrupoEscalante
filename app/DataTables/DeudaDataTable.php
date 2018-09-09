@@ -91,6 +91,7 @@ class DeudaDataTable extends DataTable
             'cliente_id'=> ['data' => 'cliente.nombre','name' => 'cliente.nombre', 'title' => 'Cliente', ],
             'estado',
             'importe_total',
+            'created_at' => ['title' => 'Creado'],
             'fecha_cobro' => ['title' => 'Fecha de cobro'],
             'interes'
         ];

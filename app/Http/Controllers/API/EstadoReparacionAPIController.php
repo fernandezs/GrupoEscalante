@@ -96,7 +96,7 @@ class EstadoReparacionAPIController extends AppBaseController
         }
 
         $estadoReparacion = $this->estadoReparacionRepository->update($input, $id);
-
+        event(new EstadoReparacionFueModificado($estadoReparacion));
         return $this->sendResponse($estadoReparacion->toArray(), 'EstadoReparacion actualizado exitosamente');
     }
 

@@ -20,7 +20,7 @@ class ActualizarEstadoEnReparacion
         $estado = $event->estado->estado;
         $reparacion = $event->estado->reparacion;
         $reparacion->estado = $estado->estado;
-        if( $estado == 'ENTREGADO'){
+        if( $estado->estado == 'ENTREGADO'){
             $reparacion->fecha_egreso = Carbon::now();
         }
         $reparacion->save();

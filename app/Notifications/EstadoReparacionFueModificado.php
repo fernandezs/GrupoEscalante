@@ -6,20 +6,19 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\Models\Reparacion;
-
-class ReparacionFueCreada extends Notification
+use App\Models\EstadoReparacion;
+class EstadoReparacionFueModificado extends Notification
 {
     use Queueable;
-    public $reparacion;
+    public $estado;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Reparacion $reparacion)
+    public function __construct(EstadoReparacion $estado)
     {
-        $this->reparacion = $reparacion;
+        $this->estado = $estado;
     }
 
     /**
@@ -55,16 +54,23 @@ class ReparacionFueCreada extends Notification
      */
     public function toArray($notifiable)
     {
-        $r = $this->reparacion;
+        $mensaje;
+        $e = $this->estado;
+        if($e->estado->estado == 'ENTREGADO')
+        {
+            $mensaje = 'El usuario '.$e->user->name.' entrego el articulo "'.$e->reparacion->articulo->nombre.'" en la reparacion '.$e->reparacion_id;
+        }
+        else
+        {
+            $mensaje = 'El usuario '.$e->user->name. ' modifico al estado"'.$e->estado->estado.'" en la reparacion '.$e->reparacion_id; 
+        }
         return [
-            'usuario'  => $r->user->name,
-            'cliente'  => $r->cliente->nombre,
-            'articulo' => $r->articulo->nombre,
-            'mensaje'  => 'El usuario "'.$r->user->name.'" creo una reparacion en el articulo "'.$r->articulo->name.'"',
-            'mensaje_corto' => 'Nueva reparacion creada',
-            'icono'    => 'fa-wrench',
-            'text_color'    => 'text-green',
-            'link'     => route('reparaciones.revision', $r->id)
+            'usuario'       => $e->user->name,
+            'mensaje'       => $mensaje,
+            'mensaje_corto' => 'Un Estado modificado en reparacion',
+            'icono'         => 'fa-sitemap',
+            'text_color'    => 'text-warning',
+            'link'          => route('reparaciones.revision', $e->reparacion_id)
         ];
     }
 }

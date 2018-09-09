@@ -70,6 +70,7 @@ Route::get('prueba/pdf', function (\App\Extensiones\Fpdf $fpdf) {
 Route::get('proveedores/catalogos/{id}', 'ProveedorController@catalogos')->name('proveedores.catalogos');
 
 Route::resource('detalleReparacion', 'DetalleReparacionController');
+Route::get('reparaciones/{id}/detalle/pdf', 'ReparacionController@downloadPDF')->name('reparaciones.pdf');
 Route::get('deuda/pdf/{id}', 'PdfController@invoice')->name('pdf.invoice');
 
 Route::resource('notas', 'NotaController');

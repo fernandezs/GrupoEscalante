@@ -14,6 +14,7 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use App\Events\EstadoReparacionCreado;
+use App\Events\EstadoReparacionFueModificado;
 
 class EstadoReparacionController extends AppBaseController
 {
@@ -158,6 +159,7 @@ class EstadoReparacionController extends AppBaseController
             $estadoReparacion['user'] = $estadoReparacion->user;
             $estadoReparacion['estado'] = $estadoReparacion->estado;
             $estadoReparacion['empleado'] = $estadoReparacion->empleado;
+            event(new EstadoReparacionFueModificado($estadoReparacion));
             return $this->sendResponse($estadoReparacion->toArray(), 'Estado Reparacion actualizado exitosamente!');
         }
 
@@ -191,4 +193,5 @@ class EstadoReparacionController extends AppBaseController
 
         return redirect(route('estadoReparacions.index'));
     }
+
 }
