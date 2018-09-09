@@ -16,7 +16,8 @@
         
                     <div class="timeline-footer">
                         <div class="text-muted">
-                            <i class="fa fa-user"> {{ estado.user.name }} </i>
+                            <i class="fa fa-user"> {{ estado.user.name }}, </i> <br>
+                            <i class="fa fa-male"> {{ estado.empleado == null ? 'SISTEMA' : estado.empleado.nombre  }}</i>
                         </div>
                     </div>
                 </div>
@@ -31,7 +32,12 @@
     import moment from 'moment'
     moment.locale('es');
     export default {
-        props : ['estados'],
+        props : ['_estados'],
+        data() {
+            return {
+                estados : [] 
+            }
+        },
         methods: {
             full_fecha(date) {
                 return  moment(date).format('DD MMM YYYY, h:mm a');
@@ -46,6 +52,12 @@
                     default: return '';break;
                 }
             }
-        }
+        },
+        mounted() {
+            this.estados = this._estados;
+            EventBus.$on('agregaEstado', function(estado){
+                this.estados.push(estado);
+            }.bind(this));
+        },
     }
 </script>

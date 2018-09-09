@@ -82749,11 +82749,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 __WEBPACK_IMPORTED_MODULE_0_moment___default.a.locale('es');
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['estados'],
+    props: ['_estados'],
+    data: function data() {
+        return {
+            estados: []
+        };
+    },
+
     methods: {
         full_fecha: function full_fecha(date) {
             return __WEBPACK_IMPORTED_MODULE_0_moment___default()(date).format('DD MMM YYYY, h:mm a');
@@ -82774,6 +82781,12 @@ __WEBPACK_IMPORTED_MODULE_0_moment___default.a.locale('es');
                     return '';break;
             }
         }
+    },
+    mounted: function mounted() {
+        this.estados = this._estados;
+        EventBus.$on('agregaEstado', function (estado) {
+            this.estados.push(estado);
+        }.bind(this));
     }
 });
 
@@ -82816,7 +82829,20 @@ var render = function() {
             _c("div", { staticClass: "timeline-footer" }, [
               _c("div", { staticClass: "text-muted" }, [
                 _c("i", { staticClass: "fa fa-user" }, [
-                  _vm._v(" " + _vm._s(estado.user.name) + " ")
+                  _vm._v(" " + _vm._s(estado.user.name) + ", ")
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-male" }, [
+                  _vm._v(
+                    " " +
+                      _vm._s(
+                        estado.empleado == null
+                          ? "SISTEMA"
+                          : estado.empleado.nombre
+                      )
+                  )
                 ])
               ])
             ])

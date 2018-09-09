@@ -61,7 +61,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <estados-timeline :estados="{{json_encode($estadosReparacion)}}"><estados-timeline/>
+        <estados-timeline :_estados="{{json_encode($estadosReparacion)}}"><estados-timeline/>
     </div>
 </div>
 
